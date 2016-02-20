@@ -15,7 +15,7 @@ class Footballer implements FootballerInterface {
   /**
    * Checks if the configuration array has all needed parameters.
    *
-   * @param array $config
+   * @param Array $config
    * @return boolean
    */
   private function _checkConfiguration(array $config) {
@@ -30,6 +30,10 @@ class Footballer implements FootballerInterface {
     return true;
   }
 
+  /**
+   * @param Array $config
+   * @throws Exception Missing parameter
+   */
   public function __construct(array $config) {
     if (!$this->_checkConfiguration($config)) {
       throw new Exception ("Missing parameter");

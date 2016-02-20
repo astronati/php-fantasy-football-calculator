@@ -10,4 +10,15 @@
 /**
  * Defines the interface of a Formation
  */
-interface FormationInterface {}
+interface FormationInterface {
+
+  /**
+   * TODO
+   */
+  public function getSum();
+
+  /**
+   * TODO
+   */
+  public function getDefenseBonus();
+}

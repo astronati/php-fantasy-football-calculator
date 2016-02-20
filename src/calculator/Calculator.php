@@ -26,7 +26,8 @@ class Calculator implements CalculatorInterface {
 
   /**
    * @param Array $quotations
-   * @param Array $options
+   * @param Array $options It can have following options:
+   * - defenseBonus Boolean - Default false
    */
   public function __construct(array $quotations, array $options = array()) {
     for ($i = 0; $i < count($quotations); $i++) {
@@ -40,12 +41,14 @@ class Calculator implements CalculatorInterface {
    * @inherit
    */
   public function calc(array $formation) {
-    $footballers = array();
+    $formation = new Formation($formation);
 
-    for ($i = 0; $i < count($formation); $i++) {
-      array_push($footballers, new Footballer($formation[$i]));
+    $sum = $formation->getSum();
+
+    if ($this->_settings['defenseBonus']) {
+      $sum += $formation->getDefenseBonus();
     }
 
-    // TODO ...
+    return $sum;
   }
 }

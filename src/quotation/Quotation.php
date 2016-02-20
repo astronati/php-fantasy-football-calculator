@@ -30,6 +30,10 @@ class Quotation implements QuotationInterface {
     return true;
   }
 
+  /**
+   * @param Array $config
+   * @throws Exception Missing parameter
+   */
   public function __construct(array $config) {
     if (!$this->_checkConfiguration($config)) {
       throw new Exception ("Missing parameter");
