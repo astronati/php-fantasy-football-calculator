@@ -15,7 +15,8 @@ interface CalculatorInterface {
   /**
    * Returns votes of each footballer and the totals of the formation.
    *
+   * @param Array $footballers
    * @returns Array
    */
-  public function calc();
+  public function calc(array $footballers);
 }
