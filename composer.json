@@ -1,0 +1,26 @@
+{
+  "name": "astronati/fantasy-football-calculator",
+  "description": "",
+  "license": "MIT",
+  "version": "0.1.0",
+  "authors": [
+    {
+      "name": "Andrea Stronati",
+      "email": "astronati@vendini.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require-dev": {
+    "phpdocumentor/phpdocumentor": "2.8.*",
+    "phpunit/phpunit": "4.8.*"
+  },
+  "require": {
+    "php": ">=5.3.0"
+  },
+  "autoload": {
+    "exclude-from-classmap": ["tests"],
+    "classmap": [
+      "src/"
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+language: php
+sudo: false
+cache:
+  directories:
+  - vendor
+install:
+- composer install
+script:
+- ./vendor/phpunit/phpunit/phpunit ./tests
+notifications:
+  email:
+    recipients:
+      - astronati@vendini.com+fantasyfootballcalculator@vendini.com
+    on_success: change
+    on_failure: always
