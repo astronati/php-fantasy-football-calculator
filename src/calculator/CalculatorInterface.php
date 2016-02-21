@@ -13,10 +13,26 @@
 interface CalculatorInterface {
 
   /**
-   * Returns votes of each footballer and the totals of the formation.
+   * Returns the sum of the formation. It is calculated taking into account that there are a number of reserves by each
+   * role.
    *
    * @param Array $footballers
-   * @returns float
+   * @return float
    */
-  public function calc(array $footballers);
+  public function getSum(array $footballers);
+
+  /**
+   * Returns the defense bonus of the formation.
+   * The defense bonus is calculated using the goalkeeper votes and the ones of the best 3 defenders.
+   * To apply this bonus the formation needs to have 4 defenders at least.
+   *
+   * @param Array $footballers
+   * @return integer
+   */
+  public function getDefenseBonus(array $footballers);
+
+  /**
+   * TODO
+   */
+  public function getFootballers(array $footballers);
 }

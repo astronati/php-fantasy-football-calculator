@@ -10,4 +10,20 @@
 /**
  * Defines the interface of a Quotation
  */
-interface QuotationInterface {}
+interface QuotationInterface {
+
+  /**
+   * TODO
+   */
+  public function getId();
+
+  /**
+   * TODO
+   */
+  public function getMagicPoints();
+
+  /**
+   * TODO
+   */
+  public function getVote();
+}

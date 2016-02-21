@@ -10,4 +10,25 @@
 /**
  * Defines the interface of a footballer.
  */
-interface FootballerInterface {}
+interface FootballerInterface {
+
+  /**
+   * TODO
+   */
+  public function getId();
+
+  /**
+   * TODO
+   */
+  public function getType();
+
+  /**
+   * TODO
+   */
+  public function getOrder();
+
+  /**
+   * TODO
+   */
+  public function getRole();
+}

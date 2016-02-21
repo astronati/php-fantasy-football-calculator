@@ -13,6 +13,26 @@
 class Footballer implements FootballerInterface {
 
   /**
+   * @var integer
+   */
+  private $_id;
+
+  /**
+   * @type string
+   */
+  private $_type;
+
+  /**
+   * @type integer
+   */
+  private $_order;
+
+  /**
+   * @type string
+   */
+  private $_role;
+
+  /**
    * Checks if the configuration array has all needed parameters.
    *
    * @param Array $config
@@ -39,6 +59,29 @@ class Footballer implements FootballerInterface {
       throw new Exception ("Missing parameter");
     }
 
-    // TODO ...
+    $this->_id = (int) $config['id'];
+    $this->_type = (string) $config['type'];
+    $this->_order = (int) $config['order'];
+    $this->_role = (string) $config['role'];
   }
+
+  /**
+   * TODO
+   */
+  public function getId() {}
+
+  /**
+   * TODO
+   */
+  public function getType() {}
+
+  /**
+   * TODO
+   */
+  public function getOrder() {}
+
+  /**
+   * TODO
+   */
+  public function getRole() {}
 }

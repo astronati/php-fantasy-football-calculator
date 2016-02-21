@@ -13,6 +13,26 @@
 class Formation implements FormationInterface {
 
   /**
+   * TODO
+   */
+  const GOALKEEPER = 'P';
+
+  /**
+   * TODO
+   */
+  const DEFENDER = 'D';
+
+  /**
+   * TODO
+   */
+  const MIDFIELDER = 'C';
+
+  /**
+   * TODO
+   */
+  const FORWARD = 'A';
+
+  /**
    * A container of footballers
    * @var Array
    */
@@ -30,19 +50,14 @@ class Formation implements FormationInterface {
   /**
    * TODO
    */
-  public function getSum() {
-    // TODO Get portiere sum
-    // TODO Get difensore sum
-    // TODO Get centrocampisti sum
-    // TODO Get attaccanti sum
+  public function getFirstStrings($role = null) {
+    // TODO
   }
 
   /**
    * TODO
    */
-  public function getDefenseBonus() {
-    // TODO Se e solo se difensori > 3
-    // TODO Get portiere sum
-    // TODO Get best 3 difensori sum
+  public function getReserves($role = null) {
+    // TODO
   }
 }

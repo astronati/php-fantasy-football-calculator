@@ -13,6 +13,21 @@
 class Quotation implements QuotationInterface {
 
   /**
+   * @var integer
+   */
+  private $_id;
+
+  /**
+   * @var float
+   */
+  private $_magicPoints;
+
+  /**
+   * @var float
+   */
+  private $_vote;
+
+  /**
    * Checks if the configuration array has all needed parameters.
    *
    * @param array $config
@@ -39,6 +54,23 @@ class Quotation implements QuotationInterface {
       throw new Exception ("Missing parameter");
     }
 
-    // TODO ...
+    $this->_id = (int) $config['id'];
+    $this->_magicPoints = (float) $config['magicPoints'];
+    $this->_vote = (float) $config['vote'];
   }
+
+  /**
+   * TODO
+   */
+  public function getId() {}
+
+  /**
+   * TODO
+   */
+  public function getMagicPoints() {}
+
+  /**
+   * TODO
+   */
+  public function getVote() {}
 }

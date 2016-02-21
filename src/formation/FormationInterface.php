@@ -15,10 +15,10 @@ interface FormationInterface {
   /**
    * TODO
    */
-  public function getSum();
+  public function getFirstStrings($role = null);
 
   /**
    * TODO
    */
-  public function getDefenseBonus();
+  public function getReserves($role = null);
 }
