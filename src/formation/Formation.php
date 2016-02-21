@@ -42,9 +42,7 @@ class Formation implements FormationInterface {
    * @param Array $footballers
    */
   public function __construct(array $footballers) {
-    for ($i = 0; $i < count($footballers); $i++) {
-      array_push($this->_footballers, new Footballer($footballers[$i]));
-    }
+    $this->_footballers = $footballers;
   }
 
   /**
@@ -85,12 +83,5 @@ class Formation implements FormationInterface {
       }
     }
     return $reserves;
-  }
-
-  /**
-   * @inherit
-   */
-  public function getAll() {
-    return array_merge($this->getFirstStrings(), $this->getReserves());
   }
 }

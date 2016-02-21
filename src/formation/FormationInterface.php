@@ -27,11 +27,4 @@ interface FormationInterface {
    * @return Array
    */
   public function getReserves($role = null);
-
-  /**
-   * Returns all footballers of the formation. Includes first strings and reserves.
-   *
-   * @return Array
-   */
-  public function getAll();
 }
