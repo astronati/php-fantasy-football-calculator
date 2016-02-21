@@ -28,6 +28,11 @@ class Footballer implements FootballerInterface {
   private $_id;
 
   /**
+   * @var string
+   */
+  private $_type;
+
+  /**
    * @type string
    */
   private $_role;
@@ -60,6 +65,7 @@ class Footballer implements FootballerInterface {
     }
 
     $this->_id = (int) $config['id'];
+    $this->_type = (string) $config['type'];
     $this->_role = (string) $config['role'];
   }
 
@@ -81,13 +87,13 @@ class Footballer implements FootballerInterface {
    * @inherit
    */
   public function isFirstString() {
-    return $this->getRole() === self::FIRST_STRING;
+    return $this->_type === self::FIRST_STRING;
   }
 
   /**
    * @inherit
    */
   public function isReserve() {
-    return $this->getRole() === self::RESERVE;
+    return $this->_type === self::RESERVE;
   }
 }
