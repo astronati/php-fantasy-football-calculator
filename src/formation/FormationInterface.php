@@ -13,17 +13,25 @@
 interface FormationInterface {
 
   /**
-   * TODO
+   * Returns only first strings of the formation. These footballers can be filtered by role.
+   *
+   * @param string $role (Optional)
+   * @return Array
    */
   public function getFirstStrings($role = null);
 
   /**
-   * TODO
+   * Returns only reserves of the formation. These footballers can be filtered by role.
+   *
+   * @param string $role (Optional)
+   * @return Array
    */
   public function getReserves($role = null);
 
   /**
-   * TODO
+   * Returns all footballers of the formation. Includes first strings and reserves.
+   *
+   * @return Array
    */
   public function getAll();
 }

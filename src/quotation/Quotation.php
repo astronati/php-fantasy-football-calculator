@@ -60,22 +60,38 @@ class Quotation implements QuotationInterface {
   }
 
   /**
-   * TODO
+   * @inherit
    */
-  public function getId() {}
+  public function getId() {
+    return $this->_id;
+  }
 
   /**
-   * TODO
+   * @inherit
    */
-  public function getMagicPoints() {}
+  public function getMagicPoints() {
+    return $this->_magicPoints;
+  }
 
   /**
-   * TODO
+   * @inherit
    */
-  public function getVote() {}
+  public function getVote() {
+    return $this->_vote;
+  }
 
   /**
-   * TODO
+   * @inherit
    */
-  public function toArray() {}
+  public function toArray() {
+    $quotationArray = array();
+    // e.g. ['code', 'player', ...]
+    foreach (array('id', 'magicPoints', 'vote') as $field) {
+      // e.g. 'getCode', 'getPlayer'
+      $methodName = 'get' . ucfirst($field);
+      $quotationArray[$field] = $this->$methodName();
+    }
+
+    return $quotationArray;
+  }
 }

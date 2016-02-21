@@ -13,22 +13,30 @@
 interface QuotationInterface {
 
   /**
-   * TODO
+   * Returns the id of the footballer associated to the quotation.
+   *
+   * @return integer
    */
   public function getId();
 
   /**
-   * TODO
+   * Returns the magic points given to the footballer.
+   *
+   * @return float
    */
   public function getMagicPoints();
 
   /**
-   * TODO
+   * Returns the vote give to the footballer.
+   *
+   * @return float
    */
   public function getVote();
 
   /**
-   * TODO
+   * Returns the quotation as an array.
+   *
+   * @return Array
    */
   public function toArray();
 }

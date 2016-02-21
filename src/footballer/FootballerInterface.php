@@ -13,22 +13,30 @@
 interface FootballerInterface {
 
   /**
-   * TODO
+   * Returns the ID of the footballer.
+   *
+   * @return integer
    */
   public function getId();
 
   /**
-   * TODO
-   */
-  public function getType();
-
-  /**
-   * TODO
-   */
-  public function getOrder();
-
-  /**
-   * TODO
+   * Returns the role of the footballer.
+   *
+   * @return string
    */
   public function getRole();
+
+  /**
+   * Determines if the footballer is one of the first strings in the current formation.
+   *
+   * @returns boolean
+   */
+  public function isFirstString();
+
+  /**
+   * Determines if the footballer is one of the reserves in the current formation.
+   *
+   * @returns boolean
+   */
+  public function isReserve();
 }

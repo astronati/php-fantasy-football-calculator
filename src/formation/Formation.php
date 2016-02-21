@@ -13,22 +13,22 @@
 class Formation implements FormationInterface {
 
   /**
-   * TODO
+   * @var string
    */
   const GOALKEEPER = 'P';
 
   /**
-   * TODO
+   * @var string
    */
   const DEFENDER = 'D';
 
   /**
-   * TODO
+   * @var string
    */
   const MIDFIELDER = 'C';
 
   /**
-   * TODO
+   * @var string
    */
   const FORWARD = 'A';
 
@@ -48,21 +48,47 @@ class Formation implements FormationInterface {
   }
 
   /**
-   * TODO
+   * @inherit
    */
   public function getFirstStrings($role = null) {
-    // TODO
+    $firstStrings = array();
+    foreach ($this->_footballers as $footballer) {
+      if ($footballer->isFirstString()) {
+        if ($role) {
+          if ($role === $footballer->getRole()) {
+            array_push($firstStrings, $footballer);
+          }
+        }
+        else {
+          array_push($firstStrings, $footballer);
+        }
+      }
+    }
+    return $firstStrings;
   }
 
   /**
-   * TODO
+   * @inherit
    */
   public function getReserves($role = null) {
-    // TODO
+    $reserves = array();
+    foreach ($this->_footballers as $footballer) {
+      if ($footballer->isReserve()) {
+        if ($role) {
+          if ($role === $footballer->getRole()) {
+            array_push($reserves, $footballer);
+          }
+        }
+        else {
+          array_push($reserves, $footballer);
+        }
+      }
+    }
+    return $reserves;
   }
 
   /**
-   * TODO
+   * @inherit
    */
   public function getAll() {
     return array_merge($this->getFirstStrings(), $this->getReserves());

@@ -13,19 +13,19 @@
 class Footballer implements FootballerInterface {
 
   /**
+   * @var string
+   */
+  const FIRST_STRING = 'T';
+
+  /**
+   * @var string
+   */
+  const RESERVE = 'R';
+
+  /**
    * @var integer
    */
   private $_id;
-
-  /**
-   * @type string
-   */
-  private $_type;
-
-  /**
-   * @type integer
-   */
-  private $_order;
 
   /**
    * @type string
@@ -60,28 +60,34 @@ class Footballer implements FootballerInterface {
     }
 
     $this->_id = (int) $config['id'];
-    $this->_type = (string) $config['type'];
-    $this->_order = (int) $config['order'];
     $this->_role = (string) $config['role'];
   }
 
   /**
-   * TODO
+   * @inherit
    */
-  public function getId() {}
+  public function getId() {
+    return $this->_id;
+  }
 
   /**
-   * TODO
+   * @inherit
    */
-  public function getType() {}
+  public function getRole() {
+    return $this->_role;
+  }
 
   /**
-   * TODO
+   * @inherit
    */
-  public function getOrder() {}
+  public function isFirstString() {
+    return $this->getRole() === self::FIRST_STRING;
+  }
 
   /**
-   * TODO
+   * @inherit
    */
-  public function getRole() {}
+  public function isReserve() {
+    return $this->getRole() === self::RESERVE;
+  }
 }
