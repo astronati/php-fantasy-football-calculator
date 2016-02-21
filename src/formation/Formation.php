@@ -52,12 +52,7 @@ class Formation implements FormationInterface {
     $firstStrings = array();
     foreach ($this->_footballers as $footballer) {
       if ($footballer->isFirstString()) {
-        if ($role) {
-          if ($role === $footballer->getRole()) {
-            array_push($firstStrings, $footballer);
-          }
-        }
-        else {
+        if ($role === $footballer->getRole() || is_null($role)) {
           array_push($firstStrings, $footballer);
         }
       }
@@ -72,12 +67,7 @@ class Formation implements FormationInterface {
     $reserves = array();
     foreach ($this->_footballers as $footballer) {
       if ($footballer->isReserve()) {
-        if ($role) {
-          if ($role === $footballer->getRole()) {
-            array_push($reserves, $footballer);
-          }
-        }
-        else {
+        if ($role === $footballer->getRole() || is_null($role)) {
           array_push($reserves, $footballer);
         }
       }

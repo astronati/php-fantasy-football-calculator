@@ -8,15 +8,15 @@
  */
 
 /**
- * Defines the interface of the Footballer Factory
+ * Defines the interface of the Quotation Factory
  */
-interface FootballerFactoryInterface {
+interface QuotationFactoryInterface {
 
   /**
-   * Returns a new instance of the Footballer class
+   * Returns a new instance of the Quotation class
    *
    * @param Array $config
-   * @return Footballer
+   * @return Quotation
    */
-  public function create($config = array());
+  public function create(array $config);
 }

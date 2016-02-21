@@ -38,16 +38,20 @@ class Footballer implements FootballerInterface {
   private $_role;
 
   /**
+   * @var Array
+   */
+  private $_fields = array(
+    'id', 'type', 'order', 'role'
+  );
+
+  /**
    * Checks if the configuration array has all needed parameters.
    *
    * @param Array $config
    * @return boolean
    */
   private function _checkConfiguration(array $config) {
-    $mandatoryParams = array(
-        'id', 'type', 'order', 'role'
-    );
-    foreach ($mandatoryParams as $param) {
+    foreach ($this->_fields as $param) {
       if (!array_key_exists($param, $config)) {
         return false;
       }

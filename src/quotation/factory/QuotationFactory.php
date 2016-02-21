@@ -8,14 +8,14 @@
  */
 
 /**
- * Defines a FootballerFactory
+ * Defines a QuotationFactory
  */
-class FootballerFactory implements FootballerFactoryInterface {
+class QuotationFactory implements QuotationFactoryInterface {
 
   /**
    * @inherit
    */
-  public function create($config = array()) {
-    return new Footballer($config);
+  public function create(array $config) {
+    return new Quotation($config);
   }
 }

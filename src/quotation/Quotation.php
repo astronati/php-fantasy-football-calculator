@@ -28,16 +28,20 @@ class Quotation implements QuotationInterface {
   private $_vote;
 
   /**
+   * @var Array
+   */
+  private $_fields = array(
+    'id', 'magicPoints', 'vote'
+  );
+
+  /**
    * Checks if the configuration array has all needed parameters.
    *
    * @param array $config
    * @return boolean
    */
   private function _checkConfiguration(array $config) {
-    $mandatoryParams = array(
-        'id', 'magicPoints', 'vote'
-    );
-    foreach ($mandatoryParams as $param) {
+    foreach ($this->_fields as $param) {
       if (!array_key_exists($param, $config)) {
         return false;
       }
@@ -86,7 +90,7 @@ class Quotation implements QuotationInterface {
   public function toArray() {
     $quotationArray = array();
     // e.g. ['code', 'player', ...]
-    foreach (array('id', 'magicPoints', 'vote') as $field) {
+    foreach ($this->_fields as $field) {
       // e.g. 'getCode', 'getPlayer'
       $methodName = 'get' . ucfirst($field);
       $quotationArray[$field] = $this->$methodName();

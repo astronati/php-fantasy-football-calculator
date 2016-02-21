@@ -18,10 +18,8 @@ class FormationFactory implements FormationFactoryInterface {
   public function create($container = array()) {
     $footballers = array();
 
-    $footballerFactory = new FootballerFactory();
-
     foreach ($container as $config) {
-      array_push($footballers, $footballerFactory->create($config));
+      array_push($footballers, new Footballer($config));
     }
 
     return new Formation($footballers);

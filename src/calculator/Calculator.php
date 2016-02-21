@@ -25,6 +25,16 @@ class Calculator implements CalculatorInterface {
   private $_options;
 
   /**
+   * @var Array
+   */
+  private $_formationFactory;
+
+  /**
+   * @var Array
+   */
+  private $_quotationFactory;
+
+  /**
    * @param Array $firstStrings
    * @param Array $reserves
    * @param boolean $isJustVote
@@ -52,32 +62,28 @@ class Calculator implements CalculatorInterface {
   }
 
   /**
-   * TODO
-   */
-  private function _getFormation($footballers, $formationFactory) {
-    $formationFactory = $formationFactory ? $formationFactory : new FormationFactory();
-    return $formationFactory->create($footballers);
-  }
-
-  /**
    * @param Array $quotations
    * @param Array $options It can have following options:
    * - defenseBonus Boolean - Default false
+   * @param FormationFactory $formationFactory
+   * @param QuotationFactory $quotationFactory
    */
-  public function __construct(array $quotations, array $options = array()) {
+  public function __construct(array $quotations, array $options = array(), FormationFactory $formationFactory, QuotationFactory $quotationFactory) {
     for ($i = 0; $i < count($quotations); $i++) {
-      $quotation = new Quotation($quotations[$i]);
+      $quotation = $formationFactory->create($quotations[$i]);
       $this->_quotations[$quotation->getId()] = $quotation;
     }
 
     $this->_options = $options;
+    $this->_formationFactory = $formationFactory;
+    $this->_quotationFactory = $quotationFactory;
   }
 
   /**
    * @inherit
    */
-  public function getSum(array $footballers, $formationFactory = null) {
-    $formation = $this->_getFormation($footballers, $formationFactory);
+  public function getSum(array $footballers) {
+    $formation = $this->_formationFactory->create($footballers);
 
     $sum = 0;
     $sum += array_sum($this->_getVotesByRole(
@@ -101,12 +107,12 @@ class Calculator implements CalculatorInterface {
   /**
    * @inherit
    */
-  public function getDefenseBonus(array $footballers, $formationFactory = null) {
-    $formation = $this->_getFormation($footballers, $formationFactory);
+  public function getDefenseBonus(array $footballers) {
+    $formation = $this->_formationFactory->create($footballers);
 
     if (count($formation->getFirstStrings(Formation::DEFENDER))
         && $this->_options['defenseBonus']) {
-      $goalkeeperSum = array_sum($this->_getVotesByRole(
+      $goalkeeperVote = array_sum($this->_getVotesByRole(
         $formation->getFirstStrings(Formation::GOALKEEPER),
         $formation->getReserves(Formation::GOALKEEPER)
       ));
@@ -117,13 +123,16 @@ class Calculator implements CalculatorInterface {
         true
       );
 
+      // Oder from high to low by value
       rsort($defenderVotes);
 
+      // Take three footballers with the highest vote
       $defenderSum = array_sum(
         array_slice($defenderVotes, 0, 3)
       );
 
-      $ratio = ($goalkeeperSum + $defenderSum) / 4;
+      // Sum the goalkeeper and defenders votes and divide the result by 4
+      $ratio = ($goalkeeperVote + $defenderSum) / 4;
 
       if ($ratio >= 7) {
         return 6;
@@ -144,16 +153,15 @@ class Calculator implements CalculatorInterface {
   /**
    * @inherit
    */
-  public function getFootballers(array $footballers, $formationFactory = null) {
-    $formation = $this->_getFormation($footballers, $formationFactory);
+  public function getFormationDetails(array $footballers) {
+    $formation = $this->_formationFactory->create($footballers);
+    $allFootballers = array_merge($formation->getFirstStrings(), $formation->getReserves());
 
-    $formationComponents = $formation->getAll();
-    $footballers = array();
-    for ($i = 0; $i < count($formationComponents); $i++) {
-      $quotation = $this->_quotations[$formationComponents[$i]->getId()];
-      array_push($footballers, $quotation->toArray());
+    $details = array();
+    for ($i = 0; $i < count($allFootballers); $i++) {
+      array_push($details, $this->_quotations[$allFootballers[$i]->getId()]->toArray());
     }
 
-    return $footballers;
+    return $details;
   }
 }
