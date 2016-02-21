@@ -52,6 +52,14 @@ class Calculator implements CalculatorInterface {
   }
 
   /**
+   * TODO
+   */
+  private function _getFormation($footballers, $formationFactory) {
+    $formationFactory = $formationFactory ? $formationFactory : new FormationFactory();
+    return $formationFactory->create($footballers);
+  }
+
+  /**
    * @param Array $quotations
    * @param Array $options It can have following options:
    * - defenseBonus Boolean - Default false
@@ -68,8 +76,8 @@ class Calculator implements CalculatorInterface {
   /**
    * @inherit
    */
-  public function getSum(array $footballers) {
-    $formation = new Formation($footballers);
+  public function getSum(array $footballers, $formationFactory = null) {
+    $formation = $this->_getFormation($footballers, $formationFactory);
 
     $sum = 0;
     $sum += array_sum($this->_getVotesByRole(
@@ -93,8 +101,8 @@ class Calculator implements CalculatorInterface {
   /**
    * @inherit
    */
-  public function getDefenseBonus(array $footballers) {
-    $formation = new Formation($footballers);
+  public function getDefenseBonus(array $footballers, $formationFactory = null) {
+    $formation = $this->_getFormation($footballers, $formationFactory);
 
     if (count($formation->getFirstStrings(Formation::DEFENDER))
         && $this->_options['defenseBonus']) {
@@ -136,8 +144,9 @@ class Calculator implements CalculatorInterface {
   /**
    * @inherit
    */
-  public function getFootballers(array $footballers) {
-    $formation = new Formation($footballers);
+  public function getFootballers(array $footballers, $formationFactory = null) {
+    $formation = $this->_getFormation($footballers, $formationFactory);
+
     $formationComponents = $formation->getAll();
     $footballers = array();
     for ($i = 0; $i < count($formationComponents); $i++) {

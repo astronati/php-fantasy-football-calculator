@@ -17,9 +17,10 @@ interface CalculatorInterface {
    * role.
    *
    * @param Array $footballers
+   * @param FormationFactory $formationFactory
    * @return float
    */
-  public function getSum(array $footballers);
+  public function getSum(array $footballers, $formationFactory = null);
 
   /**
    * Returns the defense bonus of the formation.
@@ -27,15 +28,17 @@ interface CalculatorInterface {
    * To apply this bonus the formation needs to have 4 defenders at least.
    *
    * @param Array $footballers
+   * @param FormationFactory $formationFactory
    * @return integer
    */
-  public function getDefenseBonus(array $footballers);
+  public function getDefenseBonus(array $footballers, $formationFactory = null);
 
   /**
    * Returns the entire formation with the vote and the magic points for each footballer.
    *
    * @param Array $footballers
+   * @param FormationFactory $formationFactory
    * @return Array
    */
-  public function getFootballers(array $footballers);
+  public function getFootballers(array $footballers, $formationFactory = null);
 }
