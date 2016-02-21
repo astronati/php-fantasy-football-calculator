@@ -60,4 +60,11 @@ class Formation implements FormationInterface {
   public function getReserves($role = null) {
     // TODO
   }
+
+  /**
+   * TODO
+   */
+  public function getAll() {
+    return array_merge($this->getFirstStrings(), $this->getReserves());
+  }
 }

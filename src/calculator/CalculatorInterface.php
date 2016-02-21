@@ -32,7 +32,10 @@ interface CalculatorInterface {
   public function getDefenseBonus(array $footballers);
 
   /**
-   * TODO
+   * Returns the entire formation with the vote and the magic points for each footballer.
+   *
+   * @param Array $footballers
+   * @return Array
    */
   public function getFootballers(array $footballers);
 }

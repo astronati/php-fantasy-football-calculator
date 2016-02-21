@@ -26,4 +26,9 @@ interface QuotationInterface {
    * TODO
    */
   public function getVote();
+
+  /**
+   * TODO
+   */
+  public function toArray();
 }

@@ -73,4 +73,9 @@ class Quotation implements QuotationInterface {
    * TODO
    */
   public function getVote() {}
+
+  /**
+   * TODO
+   */
+  public function toArray() {}
 }

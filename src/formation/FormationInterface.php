@@ -21,4 +21,9 @@ interface FormationInterface {
    * TODO
    */
   public function getReserves($role = null);
+
+  /**
+   * TODO
+   */
+  public function getAll();
 }

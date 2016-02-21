@@ -16,13 +16,13 @@ class Calculator implements CalculatorInterface {
    * A container of all footballer quotations of the match day
    * @var Array
    */
-  private $_quotations;
+  private $_quotations = array();
 
   /**
-   * A container for all calculator settings
+   * A container for all calculator options
    * @var Array
    */
-  private $_settings;
+  private $_options;
 
   /**
    * @param Array $firstStrings
@@ -58,10 +58,11 @@ class Calculator implements CalculatorInterface {
    */
   public function __construct(array $quotations, array $options = array()) {
     for ($i = 0; $i < count($quotations); $i++) {
-      array_push($this->_quotations, new Quotation($quotations[$i]));
+      $quotation = new Quotation($quotations[$i]);
+      $this->_quotations[$quotation->getId()] = $quotation;
     }
 
-    $this->_settings = $options;
+    $this->_options = $options;
   }
 
   /**
@@ -95,7 +96,8 @@ class Calculator implements CalculatorInterface {
   public function getDefenseBonus(array $footballers) {
     $formation = new Formation($footballers);
 
-    if (count($formation->getFirstStrings(Formation::DEFENDER))) {
+    if (count($formation->getFirstStrings(Formation::DEFENDER))
+        && $this->_options['defenseBonus']) {
       $goalkeeperSum = array_sum($this->_getVotesByRole(
         $formation->getFirstStrings(Formation::GOALKEEPER),
         $formation->getReserves(Formation::GOALKEEPER)
@@ -132,11 +134,17 @@ class Calculator implements CalculatorInterface {
   }
 
   /**
-   * TODO
+   * @inherit
    */
   public function getFootballers(array $footballers) {
     $formation = new Formation($footballers);
+    $formationComponents = $formation->getAll();
+    $footballers = array();
+    for ($i = 0; $i < count($formationComponents); $i++) {
+      $quotation = $this->_quotations[$formationComponents[$i]->getId()];
+      array_push($footballers, $quotation->toArray());
+    }
 
-    // TODO Should retunr footballers with values and if they have been taken into account
+    return $footballers;
   }
 }
