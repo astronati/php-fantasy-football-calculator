@@ -4,7 +4,7 @@
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
  * @copyright 2016 Andrea Stronati
- * @version 0.1.0
+ * @version 0.0.0
  */
 
 /**
@@ -68,7 +68,7 @@ class Calculator implements CalculatorInterface {
    * @param FormationFactory $formationFactory
    * @param QuotationFactory $quotationFactory
    */
-  public function __construct(array $quotations, array $options = array(), FormationFactory $formationFactory, QuotationFactory $quotationFactory) {
+  public function __construct(array $quotations, array $options = array(), $formationFactory, $quotationFactory) {
     for ($i = 0; $i < count($quotations); $i++) {
       $quotation = $formationFactory->create($quotations[$i]);
       $this->_quotations[$quotation->getId()] = $quotation;
@@ -85,20 +85,19 @@ class Calculator implements CalculatorInterface {
   public function getSum(array $footballers) {
     $formation = $this->_formationFactory->create($footballers);
 
-    $sum = 0;
-    $sum += array_sum($this->_getVotesByRole(
+    return array_sum($this->_getVotesByRole(
       $formation->getFirstStrings(Formation::GOALKEEPER),
       $formation->getReserves(Formation::GOALKEEPER)
-    ));
-    $sum += array_sum($this->_getVotesByRole(
+    )) +
+    array_sum($this->_getVotesByRole(
       $formation->getFirstStrings(Formation::DEFENDER),
       $formation->getReserves(Formation::DEFENDER)
-    ));
-    $sum += array_sum($this->_getVotesByRole(
+    )) +
+    array_sum($this->_getVotesByRole(
       $formation->getFirstStrings(Formation::MIDFIELDER),
       $formation->getReserves(Formation::MIDFIELDER)
-    ));
-    $sum += array_sum($this->_getVotesByRole(
+    )) +
+    array_sum($this->_getVotesByRole(
       $formation->getFirstStrings(Formation::FORWARD),
       $formation->getReserves(Formation::FORWARD)
     ));
