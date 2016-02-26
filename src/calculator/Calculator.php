@@ -79,7 +79,7 @@ class Calculator implements CalculatorInterface {
    * - defenseBonus Boolean - Default false
    * @param FormationFactory $formationFactory
    * @param QuotationFactory $quotationFactory
-   * @param ConversionTable $conversionTable
+   * @param Object $conversionTable
    */
   public function __construct(array $quotations, array $options = array(), $formationFactory, $quotationFactory, $conversionTable) {
     for ($i = 0; $i < count($quotations); $i++) {

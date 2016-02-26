@@ -95,7 +95,9 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
     $quotationFactoryMock->method('create')
         ->will($this->returnValueMap($quotationFactoryMap));
 
-    $calculator = new Calculator($quotations, array(), $formationFactoryMock, $quotationFactoryMock);
+    //$conversionTableMock = $this->getMockBuilder('ConversionTable')->getMock();
+
+    //$calculator = new Calculator($quotations, array(), $formationFactoryMock, $quotationFactoryMock, $conversionTableMock);
   }
 
   public function testGetSumMethod() {}
@@ -122,7 +124,9 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
     $quotationFactoryMock->method('create')
         ->will($this->returnValueMap($quotationFactoryMap));
 
-    $calculator = new Calculator($quotations, array('defenseBonus' => $defenseBonus), $formationFactoryMock, $quotationFactoryMock);
+    //$conversionTableMock = $this->getMockBuilder('ConversionTable')->getMock();
+
+    //$calculator = new Calculator($quotations, array('defenseBonus' => $defenseBonus), $formationFactoryMock, $quotationFactoryMock, $conversionTableMock);
     //$this->assertSame($result, $calculator->getDefenseBonus($footballers));
   }
 
