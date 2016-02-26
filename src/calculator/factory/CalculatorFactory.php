@@ -20,7 +20,8 @@ class CalculatorFactory implements CalculatorFactoryInterface {
       $quotations,
       $options,
       new FormationFactory(),
-      new QuotationFactory()
+      new QuotationFactory(),
+      ConversionTable::getInstance()
     );
   }
 }

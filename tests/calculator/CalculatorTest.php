@@ -1,8 +1,50 @@
 <?php
 
+class AnObj extends stdClass
+{
+  public function __call($closure, $args)
+  {
+    return call_user_func_array($this->{$closure}->bindTo($this),$args);
+  }
+
+  public function __toString()
+  {
+    return call_user_func($this->{"__toString"}->bindTo($this));
+  }
+}
+
 class CalculatorTest extends PHPUnit_Framework_TestCase {
 
   public function goodConfigProvider() {
+    $st1 = new AnObj();
+    $st1->getId = function() {
+      return 1;
+    };
+    $st2 = new AnObj();
+    $st2->getId = function() {
+      return 2;
+    };
+    $st3 = new AnObj();
+    $st3->getId = function() {
+      return 3;
+    };
+    $st4 = new AnObj();
+    $st4->getId = function() {
+      return 4;
+    };
+    $st5 = new AnObj();
+    $st5->getId = function() {
+      return 5;
+    };
+
+    $formationMock = new AnObj();
+    $formationMock->getFirstStrings = function($type) {
+      if ($type == 'D') {
+        return array(1,2,3,4);
+      }
+      else return array();
+    };
+
     return array(
       array(
         array(
@@ -13,12 +55,20 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
           array('id' => 5, 'vote' => 5, 'magicPoints' => 5),
         ),
         array(
-          array('getId' => 1),
-          array('getId' => 2),
-          array('getId' => 3),
-          array('getId' => 4),
-          array('getId' => 5),
-        )
+          $st1, $st2, $st3, $st4, $st5
+        ),
+        array(
+          array('id' => 1, 'type' => 'T', 'order' => '3', 'role' => 'D'),
+          array('id' => 2, 'type' => 'R', 'order' => '3', 'role' => 'D'),
+          array('id' => 3, 'type' => 'T', 'order' => '3', 'role' => 'D'),
+          array('id' => 4, 'type' => 'T', 'order' => '3', 'role' => 'D'),
+          array('id' => 5, 'type' => 'T', 'order' => '3', 'role' => 'D'),
+          array('id' => 6, 'type' => 'R', 'order' => '3', 'role' => 'P'),
+          array('id' => 7, 'type' => 'T', 'order' => '3', 'role' => 'C'),
+        ),
+        $formationMock,
+        true,
+        0
       // TODO Should I add a reference to indicate which rule and result I should attend
       )
     );
@@ -26,9 +76,9 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @dataProvider goodConfigProvider
-   * @param Array $config
+   * @param Array $quotations
    */
-  public function testConstructMethod($config) {
+  public function testConstructMethod($quotations, $quotationsObjects) {
     $formationFactoryMock = $this->getMockBuilder('FormationFactory')
         ->setMethods(array('create'))
         ->getMock();
@@ -37,13 +87,44 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
         ->setMethods(array('create'))
         ->getMock();
 
-    // Prepare quotations mocks
-    // TODO Value map quotations
+    $quotationFactoryMap = array();
+    foreach($quotations as $index => $singleConfig) {
+      array_push($quotationFactoryMap, array($singleConfig, $quotationsObjects[$index]));
+    }
 
-    //$calculator = new Calculator($config, array(), $formationFactoryMock, $quotationFactoryMock);
+    $quotationFactoryMock->method('create')
+        ->will($this->returnValueMap($quotationFactoryMap));
+
+    $calculator = new Calculator($quotations, array(), $formationFactoryMock, $quotationFactoryMock);
   }
 
-  public function testGetSumMethod() {
+  public function testGetSumMethod() {}
 
+  /**
+   * @dataProvider goodConfigProvider
+   * @param Array $quotations
+   */
+  public function testGetDefenseBonusMethod($quotations, $quotationsObjects, $footballers, $formationMock, $defenseBonus, $result) {
+    $formationFactoryMock = $this->getMockBuilder('FormationFactory')
+        ->setMethods(array('create'))
+        ->getMock();
+    $formationFactoryMock->method('create')->will($this->returnValue($formationMock));
+
+    $quotationFactoryMock = $this->getMockBuilder('QuotationsFactory')
+        ->setMethods(array('create'))
+        ->getMock();
+
+    $quotationFactoryMap = array();
+    foreach($quotations as $index => $singleConfig) {
+      array_push($quotationFactoryMap, array($singleConfig, $quotationsObjects[$index]));
+    }
+
+    $quotationFactoryMock->method('create')
+        ->will($this->returnValueMap($quotationFactoryMap));
+
+    $calculator = new Calculator($quotations, array('defenseBonus' => $defenseBonus), $formationFactoryMock, $quotationFactoryMock);
+    //$this->assertSame($result, $calculator->getDefenseBonus($footballers));
   }
+
+  public function testGetFormationDetailsMethod() {}
 }

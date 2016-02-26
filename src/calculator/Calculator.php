@@ -25,14 +25,19 @@ class Calculator implements CalculatorInterface {
   private $_options;
 
   /**
-   * @var Array
+   * @var Object
    */
   private $_formationFactory;
 
   /**
-   * @var Array
+   * @var Object
    */
   private $_quotationFactory;
+
+  /**
+   * @var Object
+   */
+  private $_conversionTable;
 
   /**
    * @param Array $firstStrings
@@ -62,21 +67,30 @@ class Calculator implements CalculatorInterface {
   }
 
   /**
+   * TODO
+   */
+  private function _isDefenseBonusAvailable() {
+    return array_key_exists('defenseBonus', $this->_options) && $this->_options['defenseBonus'];
+  }
+
+  /**
    * @param Array $quotations
    * @param Array $options It can have following options:
    * - defenseBonus Boolean - Default false
    * @param FormationFactory $formationFactory
    * @param QuotationFactory $quotationFactory
+   * @param ConversionTable $conversionTable
    */
-  public function __construct(array $quotations, array $options = array(), $formationFactory, $quotationFactory) {
+  public function __construct(array $quotations, array $options = array(), $formationFactory, $quotationFactory, $conversionTable) {
     for ($i = 0; $i < count($quotations); $i++) {
-      $quotation = $formationFactory->create($quotations[$i]);
+      $quotation = $quotationFactory->create($quotations[$i]);
       $this->_quotations[$quotation->getId()] = $quotation;
     }
 
     $this->_options = $options;
     $this->_formationFactory = $formationFactory;
     $this->_quotationFactory = $quotationFactory;
+    $this->_conversionTable = $conversionTable;
   }
 
   /**
@@ -108,9 +122,10 @@ class Calculator implements CalculatorInterface {
    */
   public function getDefenseBonus(array $footballers) {
     $formation = $this->_formationFactory->create($footballers);
+    $ratio = 0;
 
     if (count($formation->getFirstStrings(Formation::DEFENDER))
-        && $this->_options['defenseBonus']) {
+        && $this->_isDefenseBonusAvailable()) {
       $goalkeeperVote = array_sum($this->_getVotesByRole(
         $formation->getFirstStrings(Formation::GOALKEEPER),
         $formation->getReserves(Formation::GOALKEEPER)
@@ -132,21 +147,9 @@ class Calculator implements CalculatorInterface {
 
       // Sum the goalkeeper and defenders votes and divide the result by 4
       $ratio = ($goalkeeperVote + $defenderSum) / 4;
-
-      if ($ratio >= 7) {
-        return 6;
-      }
-
-      if ($ratio >= 6.5) {
-        return 3;
-      }
-
-      if ($ratio >= 6) {
-        return 1;
-      }
     }
 
-    return 0;
+    return $this->_conversionTable->getDefenseBonus($ratio);
   }
 
   /**
