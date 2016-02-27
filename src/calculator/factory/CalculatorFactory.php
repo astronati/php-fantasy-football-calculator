@@ -4,7 +4,7 @@
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
  * @copyright 2016 Andrea Stronati
- * @version 0.1.0
+ * @version 0.0.0
  */
 
 /**
@@ -20,7 +20,8 @@ class CalculatorFactory implements CalculatorFactoryInterface {
       $quotations,
       $options,
       new FormationFactory(),
-      new QuotationFactory()
+      new QuotationFactory(),
+      ConversionTable::getInstance()
     );
   }
 }
