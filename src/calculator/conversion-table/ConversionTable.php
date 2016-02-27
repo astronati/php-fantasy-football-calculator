@@ -60,7 +60,7 @@ class ConversionTable implements ConversionTableInterface {
   }
 
   /**
-   * Returns an instance of this classe.
+   * Returns an instance of this class.
    *
    * @return ConversationTable
    */
