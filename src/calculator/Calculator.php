@@ -45,7 +45,9 @@ class Calculator implements CalculatorInterface {
    * @param boolean $isJustVote
    * @return Array
    */
-  private function _getVotesByRole(array $firstStrings, array $reserves = array(), $isJustVote = false) {
+  private function _getVotesByRole($formation, $role, $isJustVote = false) {
+    $firstStrings = $formation->getFirstStrings($role);
+    $reserves = $formation->getReserves($role);
     $votes = array();
     $reservesIndex = 0;
     for ($i = 0; $i < count($firstStrings); $i++) {
@@ -99,22 +101,10 @@ class Calculator implements CalculatorInterface {
   public function getSum(array $footballers) {
     $formation = $this->_formationFactory->create($footballers);
 
-    return array_sum($this->_getVotesByRole(
-      $formation->getFirstStrings(Formation::GOALKEEPER),
-      $formation->getReserves(Formation::GOALKEEPER)
-    )) +
-    array_sum($this->_getVotesByRole(
-      $formation->getFirstStrings(Formation::DEFENDER),
-      $formation->getReserves(Formation::DEFENDER)
-    )) +
-    array_sum($this->_getVotesByRole(
-      $formation->getFirstStrings(Formation::MIDFIELDER),
-      $formation->getReserves(Formation::MIDFIELDER)
-    )) +
-    array_sum($this->_getVotesByRole(
-      $formation->getFirstStrings(Formation::FORWARD),
-      $formation->getReserves(Formation::FORWARD)
-    ));
+    return array_sum($this->_getVotesByRole($formation, Formation::GOALKEEPER)) +
+      array_sum($this->_getVotesByRole($formation, Formation::DEFENDER)) +
+      array_sum($this->_getVotesByRole($formation, Formation::MIDFIELDER)) +
+      array_sum($this->_getVotesByRole($formation, Formation::FORWARD));
   }
 
   /**
@@ -126,16 +116,8 @@ class Calculator implements CalculatorInterface {
 
     if (count($formation->getFirstStrings(Formation::DEFENDER))
         && $this->_isDefenseBonusAvailable()) {
-      $goalkeeperVote = array_sum($this->_getVotesByRole(
-        $formation->getFirstStrings(Formation::GOALKEEPER),
-        $formation->getReserves(Formation::GOALKEEPER)
-      ));
-
-      $defenderVotes = $this->_getVotesByRole(
-        $formation->getFirstStrings(Formation::DEFENDER),
-        $formation->getReserves(Formation::DEFENDER),
-        true
-      );
+      $goalkeeperVote = array_sum($this->_getVotesByRole($formation, Formation::GOALKEEPER));
+      $defenderVotes = $this->_getVotesByRole($formation, Formation::DEFENDER, true);
 
       // Oder from high to low by value
       rsort($defenderVotes);
