@@ -32,47 +32,20 @@ class Calculator implements CalculatorInterface {
   /**
    * @var Object
    */
-  private $_quotationFactory;
+  private $_conversionTable;
 
   /**
    * @var Object
    */
-  private $_conversionTable;
+  private $_reportCard;
 
   /**
-   * @param Array $firstStrings
-   * @param Array $reserves
-   * @param boolean $isJustVote
-   * @return Array
-   */
-  private function _getVotesByRole($formation, $role, $isJustVote = false) {
-    $firstStrings = $formation->getFirstStrings($role);
-    $reserves = $formation->getReserves($role);
-    $votes = array();
-    $reservesIndex = 0;
-    for ($i = 0; $i < count($firstStrings); $i++) {
-      $isReserveFound = false;
-      if ($firstStrings[$i]->getVote()) {
-        array_push($votes, $isJustVote ? $firstStrings[$i]->getVote() : $firstStrings[$i]->getMagicPoints());
-      }
-      else {
-        for ($k = $reservesIndex; $k < count($reserves) && !$isReserveFound; $k++) {
-          if ($reserves[$k]->getVote()) {
-            array_push($votes, $isJustVote ? $reserves[$k]->getVote() : $reserves[$k]->getMagicPoints());
-            $isReserveFound = true;
-          }
-        }
-      }
-    }
-
-    return $votes;
-  }
-
-  /**
-   * TODO
+   * Determines if the defense bonus options is usable or not.
+   *
+   * @return boolean
    */
   private function _isDefenseBonusAvailable() {
-    return array_key_exists('defenseBonus', $this->_options) && $this->_options['defenseBonus'];
+    return (bool) (array_key_exists('defenseBonus', $this->_options) && $this->_options['defenseBonus']);
   }
 
   /**
@@ -81,9 +54,10 @@ class Calculator implements CalculatorInterface {
    * - defenseBonus Boolean - Default false
    * @param FormationFactory $formationFactory
    * @param QuotationFactory $quotationFactory
-   * @param Object $conversionTable
+   * @param ConversionTable $conversionTable
+   * @param ReportCard $reportCard
    */
-  public function __construct(array $quotations, array $options = array(), $formationFactory, $quotationFactory, $conversionTable) {
+  public function __construct(array $quotations, array $options = array(), $formationFactory, $quotationFactory, $conversionTable, $reportCard) {
     for ($i = 0; $i < count($quotations); $i++) {
       $quotation = $quotationFactory->create($quotations[$i]);
       $this->_quotations[$quotation->getId()] = $quotation;
@@ -91,8 +65,8 @@ class Calculator implements CalculatorInterface {
 
     $this->_options = $options;
     $this->_formationFactory = $formationFactory;
-    $this->_quotationFactory = $quotationFactory;
     $this->_conversionTable = $conversionTable;
+    $this->_reportCard = $reportCard;
   }
 
   /**
@@ -101,10 +75,10 @@ class Calculator implements CalculatorInterface {
   public function getSum(array $footballers) {
     $formation = $this->_formationFactory->create($footballers);
 
-    return array_sum($this->_getVotesByRole($formation, Formation::GOALKEEPER)) +
-      array_sum($this->_getVotesByRole($formation, Formation::DEFENDER)) +
-      array_sum($this->_getVotesByRole($formation, Formation::MIDFIELDER)) +
-      array_sum($this->_getVotesByRole($formation, Formation::FORWARD));
+    return array_sum($this->_reportCard->getVotes($formation, $this->_quotations, Formation::GOALKEEPER)) +
+      array_sum($this->_reportCard->getVotes($formation, $this->_quotations, Formation::DEFENDER)) +
+      array_sum($this->_reportCard->getVotes($formation, $this->_quotations, Formation::MIDFIELDER)) +
+      array_sum($this->_reportCard->getVotes($formation, $this->_quotations, Formation::FORWARD));
   }
 
   /**
@@ -116,8 +90,8 @@ class Calculator implements CalculatorInterface {
 
     if (count($formation->getFirstStrings(Formation::DEFENDER))
         && $this->_isDefenseBonusAvailable()) {
-      $goalkeeperVote = array_sum($this->_getVotesByRole($formation, Formation::GOALKEEPER));
-      $defenderVotes = $this->_getVotesByRole($formation, Formation::DEFENDER, true);
+      $goalkeeperVote = array_sum($this->_reportCard->getVotes($formation, $this->_quotations, Formation::GOALKEEPER));
+      $defenderVotes = $this->_reportCard->getVotes($formation, $this->_quotations, Formation::DEFENDER, true);
 
       // Oder from high to low by value
       rsort($defenderVotes);

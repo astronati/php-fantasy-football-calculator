@@ -19,5 +19,5 @@ interface CalculatorFactoryInterface {
    * @param Array $options
    * @return Calculator
    */
-  public function create(array $quotations, $options = array());
+  public static function create(array $quotations, $options = array());
 }

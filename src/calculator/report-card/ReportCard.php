@@ -32,7 +32,7 @@ class ReportCard implements ReportCardInterface {
   /**
    * @inherit
    */
-  public function getVotes($formation, $role, $useMagicPoints = true) {
+  public function getVotes($formation, $quotations, $role, $useMagicPoints = true) {
     $firstStrings = $formation->getFirstStrings($role);
     $reserves = $formation->getReserves($role);
 
@@ -41,13 +41,15 @@ class ReportCard implements ReportCardInterface {
 
     for ($i = 0; $i < count($firstStrings); $i++) {
       $isReserveFound = false;
-      if ($firstStrings[$i]->getVote()) {
-        array_push($votes, $useMagicPoints ? $firstStrings[$i]->getMagicPoints() : $firstStrings[$i]->getVote());
+      $firstStringQuotation = $quotations[$firstStrings[$i]->getId()];
+      if ($firstStringQuotation->getVote()) {
+        array_push($votes, $useMagicPoints ? $firstStringQuotation->getMagicPoints() : $firstStringQuotation->getVote());
       }
       else {
         for ($k = $reservesIndex; $k < count($reserves) && !$isReserveFound; $k++) {
-          if ($reserves[$k]->getVote()) {
-            array_push($votes, $useMagicPoints ? $reserves[$k]->getMagicPoints() : $reserves[$k]->getVote());
+          $reserveQuotation = $quotations[$reserves[$k]->getId()];
+          if ($reserveQuotation->getVote()) {
+            array_push($votes, $useMagicPoints ? $reserveQuotation->getMagicPoints() : $reserveQuotation->getVote());
             $isReserveFound = true;
           }
         }

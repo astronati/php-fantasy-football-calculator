@@ -25,8 +25,9 @@ interface ReportCardInterface {
    *
    * @param Formation $formation
    * @param string $role
+   * @param Array $quotations An array of Quotation instances
    * @param boolean $useMagicPoints If true, it returns the magic points of the footballers otherwise their votes.
    * @return Array
    */
-  public function getVotes($formation, $role, $useMagicPoints = true);
+  public function getVotes($formation, $quotations, $role, $useMagicPoints = true);
 }
