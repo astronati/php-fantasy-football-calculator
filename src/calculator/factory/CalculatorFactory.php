@@ -15,13 +15,14 @@ class CalculatorFactory implements CalculatorFactoryInterface {
   /**
    * @inherit
    */
-  public function create(array $quotations, $options = array()) {
+  public static function create(array $quotations, $options = array()) {
     return new Calculator(
       $quotations,
       $options,
       new FormationFactory(),
       new QuotationFactory(),
-      ConversionTable::getInstance()
+      ConversionTable::getInstance(),
+      ReportCard::getInstance()
     );
   }
 }
