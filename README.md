@@ -12,7 +12,7 @@ $ composer require fantasy-football-calculator
 
 ## Documentation
 The documentation is generated using [phpDocumentor](http://www.phpdoc.org/) and you can find it in
-`[docs/api](http://astronati.github.io/fantasy-football-calculator/docs/api)`.
+[docs/api](http://astronati.github.io/fantasy-football-calculator/docs/api).
 
 ### Calculator
 Run the following command to instantiate a calculator:
@@ -21,16 +21,22 @@ $calculator = CalculatorFactory::create($quotations, $options);
 ```
 
 #### getSum
+#### @param Array
+#### @return integer
 ```php
 $total = $calculator->getSum($footballers);
 ```
 
 #### getDefenseBonus
+##### @param Array
+##### @return integer
 ```php
 $defenseBonus = $calculator->getDefenseBonus($footballers);
 ```
 
 #### getFormationDetails
+##### @param Array
+##### @return Array
 ```php
 $formationDetails = $calculator->getFormationDetails($footballers);
 ```
