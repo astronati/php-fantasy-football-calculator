@@ -21,22 +21,22 @@ $calculator = CalculatorFactory::create($quotations, $options);
 ```
 
 #### getSum
-#### @param Array
-#### @return integer
+**@param Array**  
+**@return integer**  
 ```php
 $total = $calculator->getSum($footballers);
 ```
 
 #### getDefenseBonus
-##### @param Array
-##### @return integer
+**@param Array**  
+**@return integer**  
 ```php
 $defenseBonus = $calculator->getDefenseBonus($footballers);
 ```
 
 #### getFormationDetails
-##### @param Array
-##### @return Array
+**@param Array**  
+**@return Array**  
 ```php
 $formationDetails = $calculator->getFormationDetails($footballers);
 ```
