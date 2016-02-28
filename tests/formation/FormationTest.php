@@ -137,4 +137,24 @@ class FormationTest extends PHPUnit_Framework_TestCase {
       $this->assertSame($role, $formationFSBR[$index]->getRole());
     }
   }
+
+  public function testGetGoalKeeperLabelMethod() {
+    $formation = new Formation(array());
+    $this->assertSame('P', $formation->getGoalKeeperLabel());
+  }
+
+  public function testGetDefenderLabelMethod() {
+    $formation = new Formation(array());
+    $this->assertSame('D', $formation->getDefenderLabel());
+  }
+
+  public function testGetMidfielderLabelMethod() {
+    $formation = new Formation(array());
+    $this->assertSame('C', $formation->getMidfielderLabel());
+  }
+
+  public function testGetForwardLabelMethod() {
+    $formation = new Formation(array());
+    $this->assertSame('A', $formation->getForwardLabel());
+  }
 }

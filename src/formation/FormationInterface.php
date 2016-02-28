@@ -27,4 +27,32 @@ interface FormationInterface {
    * @return Array
    */
   public function getReserves($role = null);
+
+  /**
+   * Returns the label of the goalkeeper.
+   *
+   * @return string
+   */
+  public function getGoalKeeperLabel();
+
+  /**
+   * Returns the label of the defender.
+   *
+   * @return string
+   */
+  public function getDefenderLabel();
+
+  /**
+   * Returns the label of the midfielder.
+   *
+   * @return string
+   */
+  public function getMidfielderLabel();
+
+  /**
+   * Returns the label of the forward.
+   *
+   * @return string
+   */
+  public function getForwardLabel();
 }

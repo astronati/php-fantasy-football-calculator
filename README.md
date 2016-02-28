@@ -1,13 +1,21 @@
 [![Build Status](https://travis-ci.org/astronati/fantasy-football-calculator.svg?branch=master)](https://travis-ci.org/astronati/calculator)
 
 # Fantasy Football Calculator
-TODO
+This library allows user to calculate the points that a team have reached after a soccer match. The total can be
+altered through some bonus like the defense one.
 
 ## Example
-TODO
+Run the following command to instantiate a calculator:
+```php
+$calculator = CalculatorFactory::create($quotations, $options);
+$total = $calculator->getSum($footballers);
+```
 
 ## Installation
-TODO
+You can install the library and its dependencies using composer running:
+```sh
+$ composer require fantasy-football-calculator
+```
 
 ## API Documentation
 The documentation is generated using [phpDocumentor](http://www.phpdoc.org/) and you can find it in `docs/api`.
@@ -24,10 +32,10 @@ The directories structure within the `tests` folder reflects what is inside the 
 ```
 src
 \---->[folder-name]
-\-------->[file-name].js
+\-------->[file-name].php
 tests
 \---->[folder-name]
-\-------->[file-name].test.js
+\-------->[file-name]Test.php
 ```
 
 ### Installation
@@ -42,7 +50,6 @@ To install all modules you just need to follow these steps:
 
 For example from here:
 ```sh
-$ cd ../
 $ composer install
 ```
 
@@ -51,7 +58,7 @@ Follow these steps to run the tests suite:
 
 - Run `$ phpunit [tests-folder-path]`
 
-For example from here:
+For example from the root path:
 ```sh
 $ ./vendor/phpunit/phpunit/phpunit ./tests
 ```
