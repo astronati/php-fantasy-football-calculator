@@ -75,10 +75,10 @@ class Calculator implements CalculatorInterface {
   public function getSum(array $footballers) {
     $formation = $this->_formationFactory->create($footballers);
 
-    return array_sum($this->_reportCard->getVotes($formation, $this->_quotations, Formation::GOALKEEPER)) +
-      array_sum($this->_reportCard->getVotes($formation, $this->_quotations, Formation::DEFENDER)) +
-      array_sum($this->_reportCard->getVotes($formation, $this->_quotations, Formation::MIDFIELDER)) +
-      array_sum($this->_reportCard->getVotes($formation, $this->_quotations, Formation::FORWARD));
+    return array_sum($this->_reportCard->getVotes($formation, $this->_quotations, $formation->getGoalKeeperLabel())) +
+      array_sum($this->_reportCard->getVotes($formation, $this->_quotations, $formation->getDefenderLabel())) +
+      array_sum($this->_reportCard->getVotes($formation, $this->_quotations, $formation->getMidfielderLabel())) +
+      array_sum($this->_reportCard->getVotes($formation, $this->_quotations, $formation->getForwardLabel()));
   }
 
   /**
@@ -88,21 +88,20 @@ class Calculator implements CalculatorInterface {
     $formation = $this->_formationFactory->create($footballers);
     $ratio = 0;
 
-    if (count($formation->getFirstStrings(Formation::DEFENDER))
-        && $this->_isDefenseBonusAvailable()) {
-      $goalkeeperVote = array_sum($this->_reportCard->getVotes($formation, $this->_quotations, Formation::GOALKEEPER));
-      $defenderVotes = $this->_reportCard->getVotes($formation, $this->_quotations, Formation::DEFENDER, true);
+    if ($this->_isDefenseBonusAvailable()
+        && count($formation->getFirstStrings($formation->getDefenderLabel())) >= 4) {
+
+      $goalkeeperVote = $this->_reportCard->getVotes($formation, $this->_quotations, $formation->getGoalKeeperLabel());
+      $defenderVotes = $this->_reportCard->getVotes($formation, $this->_quotations, $formation->getDefenderLabel(), true);
 
       // Oder from high to low by value
       rsort($defenderVotes);
 
-      // Take three footballers with the highest vote
-      $defenderSum = array_sum(
-        array_slice($defenderVotes, 0, 3)
-      );
+      // Take three footballers with the highest vote and sum them
+      $threeBestDefendersVotes = array_slice($defenderVotes, 0, 3);
 
       // Sum the goalkeeper and defenders votes and divide the result by 4
-      $ratio = ($goalkeeperVote + $defenderSum) / 4;
+      $ratio = ($goalkeeperVote[0] + array_sum($threeBestDefendersVotes)) / 4;
     }
 
     return $this->_conversionTable->getDefenseBonus($ratio);

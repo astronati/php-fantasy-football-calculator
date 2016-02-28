@@ -48,6 +48,34 @@ class Formation implements FormationInterface {
   /**
    * @inherit
    */
+  public function getGoalKeeperLabel() {
+    return self::GOALKEEPER;
+  }
+
+  /**
+   * @inherit
+   */
+  public function getDefenderLabel() {
+    return self::DEFENDER;
+  }
+
+  /**
+   * @inherit
+   */
+  public function getMidfielderLabel() {
+    return self::MIDFIELDER;
+  }
+
+  /**
+   * @inherit
+   */
+  public function getForwardLabel() {
+    return self::FORWARD;
+  }
+
+  /**
+   * @inherit
+   */
   public function getFirstStrings($role = null) {
     $firstStrings = array();
     foreach ($this->_footballers as $footballer) {
