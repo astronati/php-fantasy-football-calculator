@@ -1,5 +1,9 @@
 <?php
 
+namespace FFC;
+
+use \FFC\FootballerInterface as FootballerInterface;
+
 /**
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
@@ -61,11 +65,11 @@ class Footballer implements FootballerInterface {
 
   /**
    * @param Array $config
-   * @throws Exception Missing parameter
+   * @throws \Exception Missing parameter
    */
   public function __construct(array $config) {
     if (!$this->_checkConfiguration($config)) {
-      throw new Exception ("Missing parameter");
+      throw new \Exception ("Missing parameter");
     }
 
     $this->_id = (int) $config['id'];

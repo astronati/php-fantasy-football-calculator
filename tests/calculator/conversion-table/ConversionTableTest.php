@@ -1,5 +1,7 @@
 <?php
 
+use \FFC\ConversionTable as ConversionTable;
+
 class ConversionTableTest extends PHPUnit_Framework_TestCase {
 
   public function teamPointsProvider() {

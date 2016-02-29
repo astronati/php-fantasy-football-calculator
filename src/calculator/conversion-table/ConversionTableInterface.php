@@ -1,5 +1,7 @@
 <?php
 
+namespace FFC;
+
 /**
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
@@ -13,10 +15,10 @@
 interface ConversionTableInterface {
 
   /**
-   * Returns the instance of the ConversationTable.
+   * Returns the instance of the ConversionTable.
    * It implements the Singleton pattern.
    *
-   * @return ConversationTable
+   * @return ConversionTable
    */
   public static function getInstance();
 

@@ -1,5 +1,9 @@
 <?php
 
+namespace FFC;
+
+use \FFC\ConversionTableInterface as ConversionTableInterface;
+
 /**
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
@@ -13,7 +17,7 @@
 class ConversionTable implements ConversionTableInterface {
 
   /**
-   * @var ConversationTable
+   * @var ConversionTable
    */
   private static $instance;
 
@@ -62,7 +66,7 @@ class ConversionTable implements ConversionTableInterface {
   /**
    * Returns an instance of this class.
    *
-   * @return ConversationTable
+   * @return ConversionTable
    */
   public static function getInstance() {
     if (!isset(self::$instance)) {

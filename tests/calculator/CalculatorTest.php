@@ -1,5 +1,7 @@
 <?php
 
+use \FFC\Calculator as Calculator;
+
 class CalculatorTest extends PHPUnit_Framework_TestCase {
 
   public function goodProvider() {
