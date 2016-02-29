@@ -18,11 +18,12 @@ use \FFC\ReportCard as ReportCard;
 
 /**
  * Defines a QuotationFactory
+ * It implements the Factory pattern.
  */
 class CalculatorFactory implements CalculatorFactoryInterface {
 
   /**
-   * @inherit
+   * @inheritDoc
    */
   public static function create(array $quotations, $options = array()) {
     return new Calculator(

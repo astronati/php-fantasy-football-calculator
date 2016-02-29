@@ -10,7 +10,8 @@ namespace FFC;
  */
 
 /**
- * Defines the interface of a Conversion Table
+ * Defines the interface of a Conversion Table.
+ * Conversion Table is used to map different values like magic points and goals or defense votes ratio and bonus.
  */
 interface ConversionTableInterface {
 
@@ -23,7 +24,7 @@ interface ConversionTableInterface {
   public static function getInstance();
 
   /**
-   * Returns the team goals from the given magic points.
+   * Returns the relative team goals from the given magic points.
    *
    * @param integer $magicPoints
    * @return integer
@@ -35,8 +36,8 @@ interface ConversionTableInterface {
    * The value is an average between the goalkeeper vote and the 3 best votes of the defenders that have played.
    * NOTE: Defense Bonus can be applied just if 4 or more defenders have been lined up.
    *
-   * @param integer $average
+   * @param integer $ratio
    * @return integer
    */
-  public function getDefenseBonus($average);
+  public function getDefenseBonus($ratio);
 }

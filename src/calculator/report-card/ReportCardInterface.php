@@ -10,7 +10,8 @@ namespace FFC;
  */
 
 /**
- * Defines the interface of a ReportCard
+ * Defines the interface of a ReportCard.
+ * Report Card is used to return the votes of the footballers that have played in terms of fantasy team.
  */
 interface ReportCardInterface {
 
@@ -23,7 +24,8 @@ interface ReportCardInterface {
   public static function getInstance();
 
   /**
-   * Returns the votes of the footballers that have played. Filtering is performed by role.
+   * Returns the votes of the footballers that have played.
+   * The footballers are filtered by role.
    *
    * @param Formation $formation
    * @param string $role

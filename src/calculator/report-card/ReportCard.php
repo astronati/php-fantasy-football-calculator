@@ -12,19 +12,19 @@ use \FFC\ReportCardInterface as ReportCardInterface;
  */
 
 /**
- * Defines a ReportCard
+ * Defines a ReportCard.
+ * Report Card is used to return the votes of the footballers that have played in terms of fantasy team.
  */
 class ReportCard implements ReportCardInterface {
 
   /**
+   * The instance of the class itself.
    * @var ReportCard
    */
   private static $instance;
 
   /**
-   * Returns an instance of this class.
-   *
-   * @return ReportCard
+   * @inheritDoc
    */
   public static function getInstance() {
     if (!isset(self::$instance)) {
@@ -34,7 +34,7 @@ class ReportCard implements ReportCardInterface {
   }
 
   /**
-   * @inherit
+   * @inheritDoc
    */
   public function getVotes($formation, $quotations, $role, $useMagicPoints = true) {
     $firstStrings = $formation->getFirstStrings($role);
