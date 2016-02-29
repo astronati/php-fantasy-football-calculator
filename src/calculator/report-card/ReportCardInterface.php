@@ -1,5 +1,7 @@
 <?php
 
+namespace FFC;
+
 /**
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT

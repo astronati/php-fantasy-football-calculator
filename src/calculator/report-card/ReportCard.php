@@ -1,5 +1,9 @@
 <?php
 
+namespace FFC;
+
+use \FFC\ReportCardInterface as ReportCardInterface;
+
 /**
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT

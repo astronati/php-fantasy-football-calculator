@@ -1,5 +1,7 @@
 <?php
 
+use \FFC\Footballer as Footballer;
+
 class FootballerTest extends PHPUnit_Framework_TestCase {
 
   public function badConfigProvider() {

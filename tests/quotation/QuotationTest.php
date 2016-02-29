@@ -1,5 +1,7 @@
 <?php
 
+use \FFC\Quotation as Quotation;
+
 class QuotationTest extends PHPUnit_Framework_TestCase {
 
   public function badConfigProvider() {
