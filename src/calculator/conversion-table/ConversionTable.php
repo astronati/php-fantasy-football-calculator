@@ -12,16 +12,19 @@ use \FFC\ConversionTableInterface as ConversionTableInterface;
  */
 
 /**
- * Used to return different values from those that have been given.
+ * Conversion Table is used to map different values like magic points and goals or defense votes ratio and bonus.
  */
 class ConversionTable implements ConversionTableInterface {
 
   /**
+   * The instance of the table itself.
    * @var ConversionTable
    */
   private static $instance;
 
   /**
+   * A map between magic points and goals.
+   * The first value is the minimum value in order to have the second one as goals.
    * @type Array
    */
   private $_goalsRange = array(
@@ -38,6 +41,8 @@ class ConversionTable implements ConversionTableInterface {
   );
 
   /**
+   * A map between the defence votes ratio and the bonus.
+   * The first value is the minimum value in order to have the second one as bonus.
    * @type Array
    */
   private $_defenseBonusRange = array(
@@ -47,7 +52,7 @@ class ConversionTable implements ConversionTableInterface {
   );
 
   /**
-   * Returns the appropriate value from the given one.
+   * Returns the appropriate map value from the given one.
    *
    * @param integer $value
    * @param Array $map
@@ -64,9 +69,7 @@ class ConversionTable implements ConversionTableInterface {
   }
 
   /**
-   * Returns an instance of this class.
-   *
-   * @return ConversionTable
+   * @inheritDoc
    */
   public static function getInstance() {
     if (!isset(self::$instance)) {
@@ -76,14 +79,14 @@ class ConversionTable implements ConversionTableInterface {
   }
 
   /**
-   * @inherit
+   * @inheritDoc
    */
   public function getGoals($magicPoints) {
     return $this->_getValue($magicPoints, $this->_goalsRange);
   }
 
   /**
-   * @inherit
+   * @inheritDoc
    */
   public function getDefenseBonus($average) {
     return $this->_getValue($average, $this->_defenseBonusRange);

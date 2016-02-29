@@ -10,12 +10,13 @@ namespace FFC;
  */
 
 /**
- * Defines the interface of the Calculator Factory
+ * Defines the interface of the Calculator Factory.
+ * It implements the Factory pattern.
  */
 interface CalculatorFactoryInterface {
 
   /**
-   * Returns a new instance of the Calculator class
+   * Returns a new instance of the Calculator class.
    *
    * @param Array $quotations
    * @param Array $options

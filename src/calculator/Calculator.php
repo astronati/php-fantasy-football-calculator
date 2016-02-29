@@ -12,33 +12,38 @@ use \FFC\CalculatorInterface as CalculatorInterface;
  */
 
 /**
- * Used to calc the total of a fantasy football formation.
+ * Used to calculate results of a fantasy football formation.
  */
 class Calculator implements CalculatorInterface {
 
   /**
-   * A container of all footballer quotations of the match day
+   * A container of all footballer quotations of the match day.
    * @var Array
    */
   private $_quotations = array();
 
   /**
-   * A container for all calculator options
+   * A container for all calculator options.
+   * Available keys:
+   * - 'defenseBonus' boolean
    * @var Array
    */
   private $_options;
 
   /**
+   * An instance of the FormationFactory.
    * @var Object
    */
   private $_formationFactory;
 
   /**
+   * An instance of the ConversionTable.
    * @var Object
    */
   private $_conversionTable;
 
   /**
+   * An instance of the ReportCard.
    * @var Object
    */
   private $_reportCard;
@@ -54,8 +59,7 @@ class Calculator implements CalculatorInterface {
 
   /**
    * @param Array $quotations
-   * @param Array $options It can have following options:
-   * - defenseBonus Boolean - Default false
+   * @param Array $options
    * @param FormationFactory $formationFactory
    * @param QuotationFactory $quotationFactory
    * @param ConversionTable $conversionTable
@@ -74,7 +78,7 @@ class Calculator implements CalculatorInterface {
   }
 
   /**
-   * @inherit
+   * @inheritDoc
    */
   public function getSum(array $footballers) {
     $formation = $this->_formationFactory->create($footballers);
@@ -86,7 +90,7 @@ class Calculator implements CalculatorInterface {
   }
 
   /**
-   * @inherit
+   * @inheritDoc
    */
   public function getDefenseBonus(array $footballers) {
     $formation = $this->_formationFactory->create($footballers);
@@ -112,7 +116,7 @@ class Calculator implements CalculatorInterface {
   }
 
   /**
-   * @inherit
+   * @inheritDoc
    */
   public function getFormationDetails(array $footballers) {
     $formation = $this->_formationFactory->create($footballers);

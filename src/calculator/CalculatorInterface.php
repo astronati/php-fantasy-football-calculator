@@ -10,13 +10,15 @@ namespace FFC;
  */
 
 /**
- * Defines the interface of a Calculator
+ * Defines the interface of a Calculator.
+ * The calculator is used to retrieve all info about formation results like the total of magic points or the defense
+ * bonus.
  */
 interface CalculatorInterface {
 
   /**
-   * Returns the sum of the formation. It is calculated taking into account that there are a number of reserves by each
-   * role.
+   * Returns the sum of the magic points of the footballers of the formation.
+   * It is calculated taking into account that there are a number of reserves by each role.
    *
    * @param Array $formation
    * @return float
