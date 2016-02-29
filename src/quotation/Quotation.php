@@ -55,7 +55,7 @@ class Quotation implements QuotationInterface {
 
   /**
    * @param Array $config
-   * @throws Exception Missing parameter
+   * @throws \Exception Missing parameter
    */
   public function __construct(array $config) {
     if (!$this->_checkConfiguration($config)) {
