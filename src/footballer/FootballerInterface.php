@@ -1,7 +1,5 @@
 <?php
 
-namespace FFC;
-
 /**
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
@@ -9,36 +7,40 @@ namespace FFC;
  * @version 0.1.0
  */
 
-/**
- * Defines the interface of a footballer.
- */
-interface FootballerInterface {
+namespace FFC {
 
   /**
-   * Returns the ID of the footballer.
-   *
-   * @return integer
+   * Defines the interface of a footballer.
    */
-  public function getId();
-
-  /**
-   * Returns the role of the footballer.
-   *
-   * @return string
-   */
-  public function getRole();
-
-  /**
-   * Determines if the footballer is one of the first strings in the current formation.
-   *
-   * @returns boolean
-   */
-  public function isFirstString();
-
-  /**
-   * Determines if the footballer is one of the reserves in the current formation.
-   *
-   * @returns boolean
-   */
-  public function isReserve();
+  interface FootballerInterface {
+  
+    /**
+     * Returns the ID of the footballer.
+     *
+     * @return integer
+     */
+    public function getId();
+  
+    /**
+     * Returns the role of the footballer.
+     *
+     * @return string
+     */
+    public function getRole();
+  
+    /**
+     * Determines if the footballer is one of the first strings in the current formation.
+     *
+     * @returns boolean
+     */
+    public function isFirstString();
+  
+    /**
+     * Determines if the footballer is one of the reserves in the current formation.
+     *
+     * @returns boolean
+     */
+    public function isReserve();
+  }
+  
 }

@@ -1,7 +1,5 @@
 <?php
 
-namespace FFC;
-
 use \FFC\CalculatorFactoryInterface as CalculatorFactoryInterface;
 use \FFC\Calculator as Calculator;
 use \FFC\FormationFactory as FormationFactory;
@@ -16,23 +14,27 @@ use \FFC\ReportCard as ReportCard;
  * @version 0.1.0
  */
 
-/**
- * Defines a QuotationFactory
- * It implements the Factory pattern.
- */
-class CalculatorFactory implements CalculatorFactoryInterface {
+namespace FFC {
 
   /**
-   * @inheritDoc
+   * Defines a QuotationFactory
+   * It implements the Factory pattern.
    */
-  public static function create(array $quotations, $options = array()) {
-    return new Calculator(
-      $quotations,
-      $options,
-      new FormationFactory(),
-      new QuotationFactory(),
-      ConversionTable::getInstance(),
-      ReportCard::getInstance()
-    );
+  class CalculatorFactory implements CalculatorFactoryInterface {
+  
+    /**
+     * @inheritDoc
+     */
+    public static function create(array $quotations, $options = array()) {
+      return new Calculator(
+        $quotations,
+        $options,
+        new FormationFactory(),
+        new QuotationFactory(),
+        ConversionTable::getInstance(),
+        ReportCard::getInstance()
+      );
+    }
   }
+  
 }

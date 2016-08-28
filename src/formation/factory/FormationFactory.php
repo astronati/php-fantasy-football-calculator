@@ -1,7 +1,5 @@
 <?php
 
-namespace FFC;
-
 use \FFC\FormationFactoryInterface as FormationFactoryInterface;
 use \FFC\Footballer as Footballer;
 use \FFC\Formation as Formation;
@@ -13,21 +11,25 @@ use \FFC\Formation as Formation;
  * @version 0.1.0
  */
 
-/**
- * Defines a FormationFactory
- */
-class FormationFactory implements FormationFactoryInterface {
+namespace FFC {
 
   /**
-   * @inherit
+   * Defines a FormationFactory
    */
-  public function create($container = array()) {
-    $footballers = array();
-
-    foreach ($container as $config) {
-      array_push($footballers, new Footballer($config));
+  class FormationFactory implements FormationFactoryInterface {
+  
+    /**
+     * @inherit
+     */
+    public function create($container = array()) {
+      $footballers = array();
+  
+      foreach ($container as $config) {
+        array_push($footballers, new Footballer($config));
+      }
+  
+      return new Formation($footballers);
     }
-
-    return new Formation($footballers);
   }
+  
 }

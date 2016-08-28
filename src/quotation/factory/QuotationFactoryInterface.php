@@ -1,7 +1,5 @@
 <?php
 
-namespace FFC;
-
 /**
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
@@ -9,16 +7,20 @@ namespace FFC;
  * @version 0.1.0
  */
 
-/**
- * Defines the interface of the Quotation Factory
- */
-interface QuotationFactoryInterface {
+namespace FFC {
 
   /**
-   * Returns a new instance of the Quotation class
-   *
-   * @param Array $config
-   * @return Quotation
+   * Defines the interface of the Quotation Factory
    */
-  public function create(array $config);
+  interface QuotationFactoryInterface {
+  
+    /**
+     * Returns a new instance of the Quotation class
+     *
+     * @param Array $config
+     * @return Quotation
+     */
+    public function create(array $config);
+}
+  
 }

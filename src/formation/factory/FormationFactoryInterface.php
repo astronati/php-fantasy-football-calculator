@@ -1,6 +1,5 @@
 <?php
 
-namespace FFC;
 
 /**
  * @author Andrea Stronati <astronati@vendini.com>
@@ -9,16 +8,20 @@ namespace FFC;
  * @version 0.1.0
  */
 
-/**
- * Defines the interface of the Formation Factory
- */
-interface FormationFactoryInterface {
+namespace FFC {
 
   /**
-   * Returns a new instance of the Formation class
-   *
-   * @param Array $container
-   * @return Formation
+   * Defines the interface of the Formation Factory
    */
-  public function create($container = array());
+  interface FormationFactoryInterface {
+  
+    /**
+     * Returns a new instance of the Formation class
+     *
+     * @param Array $container
+     * @return Formation
+     */
+    public function create($container = array());
+  }
+  
 }

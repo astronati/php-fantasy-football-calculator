@@ -1,7 +1,5 @@
 <?php
 
-namespace FFC;
-
 use \FFC\QuotationFactoryInterface as QuotationFactoryInterface;
 use \FFC\Quotation as Quotation;
 
@@ -12,15 +10,19 @@ use \FFC\Quotation as Quotation;
  * @version 0.1.0
  */
 
-/**
- * Defines a QuotationFactory
- */
-class QuotationFactory implements QuotationFactoryInterface {
+namespace FFC {
 
   /**
-   * @inherit
+   * Defines a QuotationFactory
    */
-  public function create(array $config) {
-    return new Quotation($config);
+  class QuotationFactory implements QuotationFactoryInterface {
+  
+    /**
+     * @inherit
+     */
+    public function create(array $config) {
+      return new Quotation($config);
+    }
   }
+  
 }
