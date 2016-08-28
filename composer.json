@@ -2,7 +2,7 @@
   "name": "astronati/fantasy-football-calculator",
   "description": "This library allows user to calculate the points that a team has reached after a soccer match. The total can be altered through some bonus like the defense one.",
   "license": "MIT",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "authors": [
     {
       "name": "Andrea Stronati",
