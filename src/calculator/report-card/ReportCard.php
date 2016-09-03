@@ -55,6 +55,8 @@ namespace FFC {
             if ($reserveQuotation->getVote()) {
               array_push($votes, $useMagicPoints ? $reserveQuotation->getMagicPoints() : $reserveQuotation->getVote());
               $isReserveFound = true;
+              // Next round starts from the next reserve
+              $reservesIndex++;
             }
           }
         }
