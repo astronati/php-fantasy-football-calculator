@@ -6,7 +6,7 @@ use \FFC\CalculatorInterface as CalculatorInterface;
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
  * @copyright 2016 Andrea Stronati
- * @version 0.1.0
+ * @version 0.2.1
  */
 
 namespace FFC {
@@ -99,8 +99,8 @@ namespace FFC {
       if ($this->_isDefenseBonusAvailable()
           && count($formation->getFirstStrings($formation->getDefenderLabel())) >= 4) {
   
-        $goalkeeperVote = $this->_reportCard->getVotes($formation, $this->_quotations, $formation->getGoalKeeperLabel());
-        $defenderVotes = $this->_reportCard->getVotes($formation, $this->_quotations, $formation->getDefenderLabel(), true);
+        $goalkeeperVote = $this->_reportCard->getVotes($formation, $this->_quotations, $formation->getGoalKeeperLabel(), false);
+        $defenderVotes = $this->_reportCard->getVotes($formation, $this->_quotations, $formation->getDefenderLabel(), false);
   
         // Oder from high to low by value
         rsort($defenderVotes);

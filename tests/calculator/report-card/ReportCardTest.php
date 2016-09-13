@@ -20,6 +20,20 @@ class ReportCardTest extends PHPUnit_Framework_TestCase {
         true,
         array(6,7,8,9)
       ),
+        array(
+          array(
+            array('id' => 1, 'vote' => 5, 'magicPoints' => 6),
+            array('id' => 2, 'vote' => 0, 'magicPoints' => 7),
+            array('id' => 3, 'vote' => 7, 'magicPoints' => 8),
+            array('id' => 4, 'vote' => 8, 'magicPoints' => 9),
+          ),
+          array(
+            array('id' => 5, 'vote' => 0, 'magicPoints' => 5),
+            array('id' => 6, 'vote' => 3, 'magicPoints' => 4),
+          ),
+          true,
+          array(6,7,8,9)
+        ),
       array(
         array(
           array('id' => 1, 'vote' => 5, 'magicPoints' => 6),
