@@ -129,6 +129,13 @@ namespace FFC {
   
       return $details;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getGoals($magicPointsSum) {
+      return $this->_conversionTable->getGoals($magicPointsSum);
+    }
   }
   
 }
