@@ -42,6 +42,14 @@ namespace FFC {
      * @return Array
      */
     public function getFormationDetails(array $formation);
+
+    /**
+     * Returns the number of goals associated to the given magic points.
+     *
+     * @param float
+     * @return integer
+     */
+    public function getGoals($magicPoints);
   }
   
 }
