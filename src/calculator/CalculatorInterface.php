@@ -46,7 +46,8 @@ namespace FFC {
          * @see Quotation::_checkConfiguration
          * @param array $formation A $formation element is a 'footballer' that to be instantiated needs to satisfy
          * Footballer::_checkConfiguration
-         * @return array Contains a list of the players (from the given formation) containing all quotations info such as:
+         * @return array Contains a list of the players (from the given formation) containing all quotations info such
+         * as:
          * [
          *  [
          *    id: {number}

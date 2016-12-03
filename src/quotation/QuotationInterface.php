@@ -10,7 +10,8 @@
 namespace FFC {
 
     /**
-     * Defines the interface of a Quotation. A quotation contains following information for each footballer after a match:
+     * Defines the interface of a Quotation. A quotation contains following information for each footballer after a
+     * match:
      * - id (of the footballer)
      * - magic points (vote + modifiers)
      * - vote

@@ -67,7 +67,14 @@ namespace FFC {
          * @param ConversionTable $conversionTable An instance of ConversionTable
          * @param ReportCard $reportCard An instance of ReportCard
          */
-        public function __construct(array $quotations, array $options = array(), $formationFactory, $quotationFactory, $conversionTable, $reportCard) {
+        public function __construct(
+            array $quotations,
+            array $options = array(),
+            $formationFactory,
+            $quotationFactory,
+            $conversionTable,
+            $reportCard
+        ) {
             for ($i = 0; $i < count($quotations); $i++) {
                 $quotation = $quotationFactory->create($quotations[$i]);
                 // Fills $this->_quotations with Quotation instances
