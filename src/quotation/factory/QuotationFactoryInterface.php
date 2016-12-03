@@ -9,18 +9,17 @@
 
 namespace FFC {
 
-  /**
-   * Defines the interface of the Quotation Factory
-   */
-  interface QuotationFactoryInterface {
-  
     /**
-     * Returns a new instance of the Quotation class
-     *
-     * @param array $config
-     * @return Quotation
+     * Defines the interface of the Quotation Factory
      */
-    public function create(array $config);
-}
-  
+    interface QuotationFactoryInterface {
+
+        /**
+         * Returns a new instance of the Quotation class
+         *
+         * @param array $config
+         * @return Quotation
+         */
+        public function create(array $config);
+    }
 }
