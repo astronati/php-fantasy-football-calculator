@@ -38,52 +38,55 @@ namespace FFC {
   
     /**
      * A container of footballers
-     * @var Array
+     * @var array
      */
     private $_footballers = array();
   
     /**
-     * @param Array $footballers
+     * @param array $footballers
      */
     public function __construct(array $footballers) {
       $this->_footballers = $footballers;
     }
   
     /**
-     * @inherit
+     * @inheritDoc
      */
     public function getGoalKeeperLabel() {
       return self::GOALKEEPER;
     }
   
     /**
-     * @inherit
+     * @inheritDoc
      */
     public function getDefenderLabel() {
       return self::DEFENDER;
     }
   
     /**
-     * @inherit
+     * @inheritDoc
      */
     public function getMidfielderLabel() {
       return self::MIDFIELDER;
     }
   
     /**
-     * @inherit
+     * @inheritDoc
      */
     public function getForwardLabel() {
       return self::FORWARD;
     }
   
     /**
-     * @inherit
+     * @inheritDoc
      */
     public function getFirstStrings($role = null) {
       $firstStrings = array();
       foreach ($this->_footballers as $footballer) {
         if ($footballer->isFirstString()) {
+          // Adds the footballer
+          // - if the role is not specified so it means that all footballers have to be taken int account
+          // - if the role matches the one of the footballer
           if ($role === $footballer->getRole() || is_null($role)) {
             array_push($firstStrings, $footballer);
           }
@@ -93,7 +96,7 @@ namespace FFC {
     }
   
     /**
-     * @inherit
+     * @inheritDoc
      */
     public function getReserves($role = null) {
       $reserves = array();

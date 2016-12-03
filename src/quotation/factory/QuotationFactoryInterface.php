@@ -17,7 +17,7 @@ namespace FFC {
     /**
      * Returns a new instance of the Quotation class
      *
-     * @param Array $config
+     * @param array $config
      * @return Quotation
      */
     public function create(array $config);

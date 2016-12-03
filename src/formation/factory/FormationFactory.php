@@ -19,7 +19,7 @@ namespace FFC {
   class FormationFactory implements FormationFactoryInterface {
   
     /**
-     * @inherit
+     * @inheritDoc
      */
     public function create($container = array()) {
       $footballers = array();
