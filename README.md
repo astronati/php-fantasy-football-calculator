@@ -13,34 +13,15 @@ $ composer require fantasy-football-calculator
 
 ## Documentation
 The documentation is generated using [phpDocumentor](http://www.phpdoc.org/) and you can find it in
-[docs/api](docs/api).
+[docs/api](http://astronati.github.io/php-fantasy-football-calculator/docs/api).
 
 ### Calculator
 Run the following command to instantiate a calculator:
 ```php
 $calculator = CalculatorFactory::create($quotations, $options);
 ```
-
-#### getSum
-**@param Array**  
-**@return integer**  
-```php
-$total = $calculator->getSum($footballers);
-```
-
-#### getDefenseBonus
-**@param Array**  
-**@return integer**  
-```php
-$defenseBonus = $calculator->getDefenseBonus($footballers);
-```
-
-#### getFormationDetails
-**@param Array**  
-**@return Array**  
-```php
-$formationDetails = $calculator->getFormationDetails($footballers);
-```
+See [CalculatorFactory API](http://astronati.github.io/php-fantasy-football-calculator/docs/api/classes/CalculatorFactory.html)
+for more details.
 
 ## Development
 The environment requires [phpunit](https://phpunit.de/), that has been already included in the `dev-dependencies` of the
