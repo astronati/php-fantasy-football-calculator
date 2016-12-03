@@ -135,8 +135,8 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @dataProvider goodProvider
-   * @param Array $quotations
-   * @param Array $footballers
+   * @param array $quotations
+   * @param array $footballers
    */
   public function testConstructMethod($quotations, $footballers) {
     $quotationFactoryMock = $this->_getQuotationFactoryMock($quotations);
@@ -150,8 +150,8 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @dataProvider goodProvider
-   * @param Array $quotations
-   * @param Array $footballers
+   * @param array $quotations
+   * @param array $footballers
    * @param integer $result
    */
   public function testGetSumMethod($quotations, $footballers, $result) {
@@ -167,9 +167,9 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @dataProvider defenseBonusProvider
-   * @param Array $quotations
-   * @param Array $footballers
-   * @param Array $result
+   * @param array $quotations
+   * @param array $footballers
+   * @param array $result
    */
   public function testGetDefenseBonusMethod($quotations, $footballers, $result) {
     $quotationFactoryMock = $this->_getQuotationFactoryMock($quotations);

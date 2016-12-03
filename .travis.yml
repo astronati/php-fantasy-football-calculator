@@ -6,7 +6,7 @@ cache:
 install:
 - composer install
 script:
-- ./vendor/phpunit/phpunit/phpunit ./tests
+- ./vendor/bin/robo test
 notifications:
   email:
     recipients:

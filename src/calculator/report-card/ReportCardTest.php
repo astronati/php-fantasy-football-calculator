@@ -118,10 +118,10 @@ class ReportCardTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @dataProvider dataProvider
-   * @param Array $firstStrings
-   * @param Array $reserves
+   * @param array $firstStrings
+   * @param array $reserves
    * @param boolean $useMagicPoints
-   * @param Array $result
+   * @param array $result
    */
   public function testGetVotesMethod($firstStringsQuotations, $reservesQuotations, $useMagicPoints, $result) {
     $formationMock = $this->getMockBuilder('Formation')

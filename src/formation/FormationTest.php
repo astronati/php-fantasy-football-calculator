@@ -5,7 +5,7 @@ use \FFC\Formation as Formation;
 class FormationTest extends PHPUnit_Framework_TestCase {
 
   /**
-   * @var Array
+   * @var array
    */
   private $_footballers = array(
     array('id' => 1, 'type' => 'T', 'order' => '1', 'role' => 'P'),
@@ -61,7 +61,7 @@ class FormationTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @dataProvider goodFirstStringsProvider
-   * @param Array $footballers
+   * @param array $footballers
    */
   public function testConstructMethod($footballers) {
     $formation = new Formation($footballers);
@@ -70,10 +70,10 @@ class FormationTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @dataProvider goodFirstStringsProvider
-   * @param Array $footballers
+   * @param array $footballers
    * @param string $role
-   * @param Array $firstStrings
-   * @param Array $firstStringsByRole
+   * @param array $firstStrings
+   * @param array $firstStringsByRole
    */
   public function testGetFirstStringsMethod($footballers, $role, $firstStrings, $firstStringsByRole) {
     $footballerMocks = array();
@@ -106,10 +106,10 @@ class FormationTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @dataProvider goodReservesProvider
-   * @param Array $footballers
+   * @param array $footballers
    * @param string $role
-   * @param Array $reserves
-   * @param Array $reservesByRole
+   * @param array $reserves
+   * @param array $reservesByRole
    */
   public function testGetReservesMethod($footballers, $role, $reserves, $reservesByRole) {
     $footballerMocks = array();

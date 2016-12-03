@@ -27,7 +27,7 @@ class QuotationTest extends PHPUnit_Framework_TestCase {
    * @expectedException Exception
    * @expectedExceptionMessage Missing parameter
    * @dataProvider badConfigProvider
-   * @param Array $config
+   * @param array $config
    */
   public function testBadConstructMethod($config) {
     $quotation = new Quotation($config);
@@ -35,7 +35,7 @@ class QuotationTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @dataProvider goodConfigProvider
-   * @param Array $config
+   * @param array $config
    */
   public function testGoodConstructMethod($config) {
     $quotation = new Quotation($config);
@@ -44,8 +44,8 @@ class QuotationTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @dataProvider goodConfigProvider
-   * @param Array $config
-   * @param Array $result
+   * @param array $config
+   * @param array $result
    */
   public function testGetIdMethod($config, $result) {
     $quotation = new Quotation($config);
@@ -54,8 +54,8 @@ class QuotationTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @dataProvider goodConfigProvider
-   * @param Array $config
-   * @param Array $result
+   * @param array $config
+   * @param array $result
    */
   public function testGetMagicPointsMethod($config, $result) {
     $quotation = new Quotation($config);
@@ -64,8 +64,8 @@ class QuotationTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @dataProvider goodConfigProvider
-   * @param Array $config
-   * @param Array $result
+   * @param array $config
+   * @param array $result
    */
   public function testGetVoteMethod($config, $result) {
     $quotation = new Quotation($config);
@@ -74,11 +74,11 @@ class QuotationTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @dataProvider goodConfigProvider
-   * @param Array $config
-   * @param Array $result
+   * @param array $config
+   * @param array $result
    */
-  public function testToArrayMethod($config, $result) {
+  public function testToarrayMethod($config, $result) {
     $quotation = new Quotation($config);
-    $this->assertSame($result, $quotation->toArray());
+    $this->assertSame($result, $quotation->toarray());
   }
 }
