@@ -1,7 +1,5 @@
 <?php
 
-use \FFC\FootballerInterface as FootballerInterface;
-
 /**
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
@@ -10,6 +8,8 @@ use \FFC\FootballerInterface as FootballerInterface;
  */
 
 namespace FFC {
+
+    use \FFC\FootballerInterface as FootballerInterface;
 
     /**
      * Used to get footballer data.

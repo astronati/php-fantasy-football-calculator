@@ -1,8 +1,5 @@
 <?php
 
-use \FFC\QuotationFactoryInterface as QuotationFactoryInterface;
-use \FFC\Quotation as Quotation;
-
 /**
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
@@ -11,6 +8,9 @@ use \FFC\Quotation as Quotation;
  */
 
 namespace FFC {
+
+    use \FFC\QuotationFactoryInterface as QuotationFactoryInterface;
+    use \FFC\Quotation as Quotation;
 
     /**
      * Defines a QuotationFactory

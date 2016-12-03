@@ -20,7 +20,7 @@ Run the following command to instantiate a calculator:
 ```php
 $calculator = CalculatorFactory::create($quotations, $options);
 ```
-See [CalculatorFactory API](http://astronati.github.io/php-fantasy-football-calculator/docs/api/classes/CalculatorFactory.html)
+See [CalculatorFactory API](http://astronati.github.io/php-fantasy-football-calculator/docs/api/classes/FFC.CalculatorFactory.html)
 for more details.
 
 ## Development

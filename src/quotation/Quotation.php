@@ -1,7 +1,5 @@
 <?php
 
-use \FFC\QuotationInterface as QuotationInterface;
-
 /**
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
@@ -10,6 +8,8 @@ use \FFC\QuotationInterface as QuotationInterface;
  */
 
 namespace FFC {
+
+    use \FFC\QuotationInterface as QuotationInterface;
 
     /**
      * Used to map a quotation.

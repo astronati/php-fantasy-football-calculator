@@ -1,12 +1,5 @@
 <?php
 
-use \FFC\CalculatorFactoryInterface as CalculatorFactoryInterface;
-use \FFC\Calculator as Calculator;
-use \FFC\FormationFactory as FormationFactory;
-use \FFC\QuotationFactory as QuotationFactory;
-use \FFC\ConversionTable as ConversionTable;
-use \FFC\ReportCard as ReportCard;
-
 /**
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
@@ -15,6 +8,13 @@ use \FFC\ReportCard as ReportCard;
  */
 
 namespace FFC {
+
+    use \FFC\CalculatorFactoryInterface as CalculatorFactoryInterface;
+    use \FFC\Calculator as Calculator;
+    use \FFC\FormationFactory as FormationFactory;
+    use \FFC\QuotationFactory as QuotationFactory;
+    use \FFC\ConversionTable as ConversionTable;
+    use \FFC\ReportCard as ReportCard;
 
     /**
      * Defines a QuotationFactory
