@@ -10,18 +10,17 @@
 
 namespace FFC {
 
-  /**
-   * Defines the interface of the Formation Factory
-   */
-  interface FormationFactoryInterface {
-  
     /**
-     * Returns a new instance of the Formation class
-     *
-     * @param array $container
-     * @return Formation
+     * Defines the interface of the Formation Factory
      */
-    public function create($container = array());
-  }
-  
+    interface FormationFactoryInterface {
+
+        /**
+         * Returns a new instance of the Formation class
+         *
+         * @param array $container
+         * @return Formation
+         */
+        public function create($container = array());
+    }
 }

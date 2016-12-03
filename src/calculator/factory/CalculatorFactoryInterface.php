@@ -9,20 +9,19 @@
 
 namespace FFC {
 
-  /**
-   * Defines the interface of the Calculator Factory.
-   * It implements the Factory pattern.
-   */
-  interface CalculatorFactoryInterface {
-  
     /**
-     * Returns a new instance of the Calculator class.
-     *
-     * @param array $quotations
-     * @param array $options
-     * @return Calculator
+     * Defines the interface of the Calculator Factory.
+     * It implements the Factory pattern.
      */
-    public static function create(array $quotations, $options = array());
-  }
-  
+    interface CalculatorFactoryInterface {
+
+        /**
+         * Returns a new instance of the Calculator class.
+         *
+         * @param array $quotations
+         * @param array $options
+         * @return Calculator
+         */
+        public static function create(array $quotations, $options = array());
+    }
 }
