@@ -13,23 +13,22 @@ use \FFC\Formation as Formation;
 
 namespace FFC {
 
-  /**
-   * Defines a FormationFactory
-   */
-  class FormationFactory implements FormationFactoryInterface {
-  
     /**
-     * @inheritDoc
+     * Defines a FormationFactory
      */
-    public function create($container = array()) {
-      $footballers = array();
-  
-      foreach ($container as $config) {
-        array_push($footballers, new Footballer($config));
-      }
-  
-      return new Formation($footballers);
+    class FormationFactory implements FormationFactoryInterface {
+
+        /**
+         * @inheritDoc
+         */
+        public function create($container = array()) {
+            $footballers = array();
+
+            foreach ($container as $config) {
+                array_push($footballers, new Footballer($config));
+            }
+
+            return new Formation($footballers);
+        }
     }
-  }
-  
 }

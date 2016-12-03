@@ -12,17 +12,16 @@ use \FFC\Quotation as Quotation;
 
 namespace FFC {
 
-  /**
-   * Defines a QuotationFactory
-   */
-  class QuotationFactory implements QuotationFactoryInterface {
-  
     /**
-     * @inheritDoc
+     * Defines a QuotationFactory
      */
-    public function create(array $config) {
-      return new Quotation($config);
+    class QuotationFactory implements QuotationFactoryInterface {
+
+        /**
+         * @inheritDoc
+         */
+        public function create(array $config) {
+          return new Quotation($config);
+        }
     }
-  }
-  
 }

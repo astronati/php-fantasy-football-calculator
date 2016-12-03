@@ -16,25 +16,25 @@ use \FFC\ReportCard as ReportCard;
 
 namespace FFC {
 
-  /**
-   * Defines a QuotationFactory
-   * It implements the Factory pattern.
-   */
-  class CalculatorFactory implements CalculatorFactoryInterface {
-  
     /**
-     * @inheritDoc
+     * Defines a QuotationFactory
+     * It implements the Factory pattern.
      */
-    public static function create(array $quotations, $options = array()) {
-      return new Calculator(
-        $quotations,
-        $options,
-        new FormationFactory(),
-        new QuotationFactory(),
-        ConversionTable::getInstance(),
-        ReportCard::getInstance()
-      );
+    class CalculatorFactory implements CalculatorFactoryInterface {
+
+        /**
+         * @inheritDoc
+         */
+        public static function create(array $quotations, $options = array()) {
+          return new Calculator(
+            $quotations,
+            $options,
+            new FormationFactory(),
+            new QuotationFactory(),
+            ConversionTable::getInstance(),
+            ReportCard::getInstance()
+          );
+        }
     }
-  }
   
 }
