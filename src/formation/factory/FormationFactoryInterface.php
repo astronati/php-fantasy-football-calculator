@@ -18,7 +18,7 @@ namespace FFC {
     /**
      * Returns a new instance of the Formation class
      *
-     * @param Array $container
+     * @param array $container
      * @return Formation
      */
     public function create($container = array());

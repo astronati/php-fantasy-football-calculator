@@ -17,22 +17,26 @@ namespace FFC {
   class Quotation implements QuotationInterface {
   
     /**
+     * The identifier of the quotation
      * @var integer
      */
     private $_id;
-  
+
     /**
+     * Magic points of the footballer
      * @var float
      */
     private $_magicPoints;
   
     /**
+     * Vote (magic points without bonus/malus) of the footballer
      * @var float
      */
     private $_vote;
   
     /**
-     * @var Array
+     * Needed fields to define a valid quotation
+     * @var array
      */
     private $_fields = array(
       'id', 'magicPoints', 'vote'
@@ -54,7 +58,7 @@ namespace FFC {
     }
   
     /**
-     * @param Array $config
+     * @param array $config
      * @throws \Exception Missing parameter
      */
     public function __construct(array $config) {
@@ -68,28 +72,28 @@ namespace FFC {
     }
   
     /**
-     * @inherit
+     * @inheritDoc
      */
     public function getId() {
       return $this->_id;
     }
   
     /**
-     * @inherit
+     * @inheritDoc
      */
     public function getMagicPoints() {
       return $this->_magicPoints;
     }
   
     /**
-     * @inherit
+     * @inheritDoc
      */
     public function getVote() {
       return $this->_vote;
     }
   
     /**
-     * @inherit
+     * @inheritDoc
      */
     public function toArray() {
       $quotationArray = array();

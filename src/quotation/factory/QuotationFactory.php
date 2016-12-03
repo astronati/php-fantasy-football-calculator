@@ -18,7 +18,7 @@ namespace FFC {
   class QuotationFactory implements QuotationFactoryInterface {
   
     /**
-     * @inherit
+     * @inheritDoc
      */
     public function create(array $config) {
       return new Quotation($config);

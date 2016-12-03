@@ -25,7 +25,7 @@ namespace FFC {
     /**
      * A map between magic points and goals.
      * The first value is the minimum value in order to have the second one as goals.
-     * @type Array
+     * @type array
      */
     private $_goalsRange = array(
       array(120, 10),
@@ -43,7 +43,7 @@ namespace FFC {
     /**
      * A map between the defence votes ratio and the bonus.
      * The first value is the minimum value in order to have the second one as bonus.
-     * @type Array
+     * @type array
      */
     private $_defenseBonusRange = array(
       array(7, 6),
@@ -55,7 +55,7 @@ namespace FFC {
      * Returns the appropriate map value from the given one.
      *
      * @param integer $value
-     * @param Array $map
+     * @param array $map
      * @return integer
      */
     private function _getValue($value, $map = array()) {

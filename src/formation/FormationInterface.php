@@ -18,7 +18,7 @@ namespace FFC {
      * Returns only first strings of the formation. These footballers can be filtered by role.
      *
      * @param string $role (Optional)
-     * @return Array
+     * @return array
      */
     public function getFirstStrings($role = null);
   
@@ -26,10 +26,11 @@ namespace FFC {
      * Returns only reserves of the formation. These footballers can be filtered by role.
      *
      * @param string $role (Optional)
-     * @return Array
+     * @return array
      */
     public function getReserves($role = null);
-  
+
+    // FIXME Instead of getGoalKeeperLabel getDefenderLabel getMidfielderLabel getForwardLabel you should add role logic into footballer
     /**
      * Returns the label of the goalkeeper.
      *

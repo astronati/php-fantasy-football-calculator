@@ -28,10 +28,10 @@ namespace FFC {
      * The footballers are filtered by role.
      *
      * @param Formation $formation
+     * @param object[] $quotations An array of Quotation instances
      * @param string $role
-     * @param Array $quotations An array of Quotation instances
      * @param boolean $useMagicPoints If true, it returns the magic points of the footballers otherwise their votes.
-     * @return Array
+     * @return float[]
      */
     public function getVotes($formation, $quotations, $role, $useMagicPoints = true);
   }

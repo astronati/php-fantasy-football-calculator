@@ -18,8 +18,8 @@ namespace FFC {
     /**
      * Returns a new instance of the Calculator class.
      *
-     * @param Array $quotations
-     * @param Array $options
+     * @param array $quotations
+     * @param array $options
      * @return Calculator
      */
     public static function create(array $quotations, $options = array());

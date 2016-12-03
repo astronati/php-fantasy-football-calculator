@@ -17,8 +17,8 @@ namespace FFC {
   class Calculator implements CalculatorInterface {
   
     /**
-     * A container of all footballer quotations of the match day.
-     * @var Array
+     * A container of all footballers quotations of the match day.
+     * @var Quotation[]
      */
     private $_quotations = array();
   
@@ -26,48 +26,51 @@ namespace FFC {
      * A container for all calculator options.
      * Available keys:
      * - 'defenseBonus' boolean
-     * @var Array
+     * @var array
      */
     private $_options;
   
     /**
      * An instance of the FormationFactory.
-     * @var Object
+     * @var FormationFactory
      */
     private $_formationFactory;
   
     /**
      * An instance of the ConversionTable.
-     * @var Object
+     * @var ConversionTable
      */
     private $_conversionTable;
   
     /**
      * An instance of the ReportCard.
-     * @var Object
+     * @var ReportCard
      */
     private $_reportCard;
   
     /**
-     * Determines if the defense bonus options is usable or not.
+     * Determines if the defense bonus options is allowed or not.
      *
-     * @return boolean
+     * @return boolean True if the defense bonus can be used
      */
-    private function _isDefenseBonusAvailable() {
+    private function _isDefenseBonusAllowed() {
       return (bool) (array_key_exists('defenseBonus', $this->_options) && $this->_options['defenseBonus']);
     }
   
     /**
-     * @param Array $quotations
-     * @param Array $options
-     * @param FormationFactory $formationFactory
-     * @param QuotationFactory $quotationFactory
-     * @param ConversionTable $conversionTable
-     * @param ReportCard $reportCard
+     * @see Calculator::$_options
+     * @see Quotation::_checkConfiguration
+     * @param array $quotations Contains arrays with properties that satisfy Quotation::_checkConfiguration
+     * @param array $options Contains properties as mentioned in Calculator::$_options
+     * @param FormationFactory $formationFactory An instance of FormationFactory
+     * @param QuotationFactory $quotationFactory An instance of QuotationFactory
+     * @param ConversionTable $conversionTable An instance of ConversionTable
+     * @param ReportCard $reportCard An instance of ReportCard
      */
     public function __construct(array $quotations, array $options = array(), $formationFactory, $quotationFactory, $conversionTable, $reportCard) {
       for ($i = 0; $i < count($quotations); $i++) {
         $quotation = $quotationFactory->create($quotations[$i]);
+        // Fills $this->_quotations with Quotation instances
         $this->_quotations[$quotation->getId()] = $quotation;
       }
   
@@ -92,41 +95,41 @@ namespace FFC {
     /**
      * @inheritDoc
      */
-    public function getDefenseBonus(array $footballers) {
-      $formation = $this->_formationFactory->create($footballers);
+    public function getDefenseBonus(array $formation) {
+      $formation = $this->_formationFactory->create($formation);
       $ratio = 0;
   
-      if ($this->_isDefenseBonusAvailable()
+      if ($this->_isDefenseBonusAllowed()
           && count($formation->getFirstStrings($formation->getDefenderLabel())) >= 4) {
   
         $goalkeeperVote = $this->_reportCard->getVotes($formation, $this->_quotations, $formation->getGoalKeeperLabel(), false);
         $defenderVotes = $this->_reportCard->getVotes($formation, $this->_quotations, $formation->getDefenderLabel(), false);
   
-        // Oder from high to low by value
+        // Orders from the highest value to the lowest one
         rsort($defenderVotes);
   
-        // Take three footballers with the highest vote and sum them
+        // Takes three footballers with the highest vote and sum them
         $threeBestDefendersVotes = array_slice($defenderVotes, 0, 3);
   
-        // Sum the goalkeeper and defenders votes and divide the result by 4
+        // Sums the goalkeeper and defenders votes and divide the result by 4
         $ratio = ($goalkeeperVote[0] + array_sum($threeBestDefendersVotes)) / 4;
       }
   
       return $this->_conversionTable->getDefenseBonus($ratio);
     }
-  
+
     /**
      * @inheritDoc
      */
     public function getFormationDetails(array $footballers) {
       $formation = $this->_formationFactory->create($footballers);
       $allFootballers = array_merge($formation->getFirstStrings(), $formation->getReserves());
-  
+
       $details = array();
       for ($i = 0; $i < count($allFootballers); $i++) {
         array_push($details, $this->_quotations[$allFootballers[$i]->getId()]->toArray());
       }
-  
+
       return $details;
     }
 
