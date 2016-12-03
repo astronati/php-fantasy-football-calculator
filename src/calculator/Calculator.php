@@ -1,7 +1,5 @@
 <?php
 
-use \FFC\CalculatorInterface as CalculatorInterface;
-
 /**
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
@@ -11,8 +9,12 @@ use \FFC\CalculatorInterface as CalculatorInterface;
 
 namespace FFC {
 
+    use \FFC\CalculatorInterface as CalculatorInterface;
+
     /**
      * Used to calculate results of a fantasy football formation.
+     * Lorem pasd as dasdad asd ad as dasdasd asd asdasd asd asdasd asd asd asdasdasasd da d asd a dasdasd asdas da dasd
+     * dasd asdas.
      */
     class Calculator implements CalculatorInterface {
 

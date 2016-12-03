@@ -1,9 +1,5 @@
 <?php
 
-use \FFC\FormationFactoryInterface as FormationFactoryInterface;
-use \FFC\Footballer as Footballer;
-use \FFC\Formation as Formation;
-
 /**
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
@@ -12,6 +8,10 @@ use \FFC\Formation as Formation;
  */
 
 namespace FFC {
+
+    use \FFC\FormationFactoryInterface as FormationFactoryInterface;
+    use \FFC\Footballer as Footballer;
+    use \FFC\Formation as Formation;
 
     /**
      * Defines a FormationFactory

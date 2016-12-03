@@ -1,7 +1,5 @@
 <?php
 
-use \FFC\FormationInterface as FormationInterface;
-
 /**
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
@@ -10,6 +8,8 @@ use \FFC\FormationInterface as FormationInterface;
  */
 
 namespace FFC {
+
+    use \FFC\FormationInterface as FormationInterface;
 
     /**
      * Used to map a soccer formation.
