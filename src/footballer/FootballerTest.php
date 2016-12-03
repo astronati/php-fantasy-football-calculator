@@ -31,7 +31,7 @@ class FootballerTest extends PHPUnit_Framework_TestCase {
    * @expectedException Exception
    * @expectedExceptionMessage Missing parameter
    * @dataProvider badConfigProvider
-   * @param Array $config
+   * @param array $config
    */
   public function testBadConstructMethod($config) {
     $footballer = new Footballer($config);
@@ -39,7 +39,7 @@ class FootballerTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @dataProvider goodConfigProvider
-   * @param Array $config
+   * @param array $config
    */
   public function testGoodConstructMethod($config) {
     $footballer = new Footballer($config);
@@ -48,8 +48,8 @@ class FootballerTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @dataProvider goodConfigProvider
-   * @param Array $config
-   * @param Array $result
+   * @param array $config
+   * @param array $result
    */
   public function testGetIdMethod($config, $result) {
     $footballer = new Footballer($config);
@@ -58,8 +58,8 @@ class FootballerTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @dataProvider goodConfigProvider
-   * @param Array $config
-   * @param Array $result
+   * @param array $config
+   * @param array $result
    */
   public function testGetRoleMethod($config, $result) {
     $footballer = new Footballer($config);
@@ -68,8 +68,8 @@ class FootballerTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @dataProvider goodConfigProvider
-   * @param Array $config
-   * @param Array $result
+   * @param array $config
+   * @param array $result
    */
   public function testIsFirstStringMethod($config, $result) {
     $footballer = new Footballer($config);
@@ -78,8 +78,8 @@ class FootballerTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @dataProvider goodConfigProvider
-   * @param Array $config
-   * @param Array $result
+   * @param array $config
+   * @param array $result
    */
   public function testIsReserveMethod($config, $result) {
     $footballer = new Footballer($config);

@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.org/astronati/fantasy-football-calculator.svg?branch=master)](https://travis-ci.org/astronati/calculator)
+[![Build Status](https://api.travis-ci.org/astronati/php-fantasy-football-calculator.svg?branch=master)](https://travis-ci.org/astronati/calculator)
 
 # Fantasy Football Calculator
-This library allows user to calculate the points that a team has reached after a soccer match. The total can be
-altered through some bonus like the defense one.
+This library allows user to calculate the points that a team has reached after a soccer match. The total can be altered
+through some bonus like the defense one.
 
 ## Installation
 You can install the library and its dependencies using composer running:
@@ -12,7 +12,7 @@ $ composer require fantasy-football-calculator
 
 ## Documentation
 The documentation is generated using [phpDocumentor](http://www.phpdoc.org/) and you can find it in
-[docs/api](http://astronati.github.io/fantasy-football-calculator/docs/api).
+[docs/api](docs/api).
 
 ### Calculator
 Run the following command to instantiate a calculator:
@@ -42,8 +42,8 @@ $formationDetails = $calculator->getFormationDetails($footballers);
 ```
 
 ## Development
-The environment requires [phpunit](https://phpunit.de/), that has been already included in the `dev-dependencies` of
-the `composer.json`.
+The environment requires [phpunit](https://phpunit.de/), that has been already included in the `dev-dependencies` of the
+`composer.json`.
 
 ### Dependencies
 To install all modules you just need to run following command from the root path:
@@ -55,23 +55,21 @@ $ composer install
 ### Documentation
 Please use the following command to run the documentation from the root path:
 ```sh
-$ ./vendor/phpdocumentor/phpdocumentor/bin/phpdoc -d ./src -t ./docs/api
+$ ./vendor/bin/robo docs
 ```
 
 ### Testing
-The directories structure within the `tests` folder reflects what is inside the `src` folder:
+Tests are created next to related file as follows:
 ```
 src
-\---->[folder-name]
-\-------->[file-name].php
-tests
-\---->[folder-name]
-\-------->[file-name]Test.php
+\-->[folder-name]
+\---->[file-name].php
+\---->[file-name]Test.php
 ```
 
 Execute following command to run the tests suite from the root path:
 ```sh
-$ ./vendor/phpunit/phpunit/phpunit ./tests
+$ ./vendor/bin/robo test
 ```
 
 ## License
