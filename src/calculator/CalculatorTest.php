@@ -145,7 +145,7 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
     $conversionTableMock = $this->_getConversionTableMock();
     $reportCard = $this->_getReportCardMock();
 
-    $calculator = new Calculator($quotations, array(), $formationFactoryMock, $quotationFactoryMock, $conversionTableMock, $reportCard);
+    new Calculator($quotations, array(), $formationFactoryMock, $quotationFactoryMock, $conversionTableMock, $reportCard);
   }
 
   /**

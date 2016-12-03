@@ -34,7 +34,7 @@ class FootballerTest extends PHPUnit_Framework_TestCase {
    * @param array $config
    */
   public function testBadConstructMethod($config) {
-    $footballer = new Footballer($config);
+    new Footballer($config);
   }
 
   /**
