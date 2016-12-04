@@ -1,6 +1,13 @@
 <?php
 
 /**
+ * A quotation contains following information for each footballer after a
+ * match:
+ *
+ * - id (of the footballer)
+ * - magic points (vote + modifiers)
+ * - vote
+ *
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
  * @copyright 2016 Andrea Stronati
@@ -10,11 +17,7 @@
 namespace FFC {
 
     /**
-     * Defines the interface of a Quotation. A quotation contains following information for each footballer after a
-     * match:
-     * - id (of the footballer)
-     * - magic points (vote + modifiers)
-     * - vote
+     * Defines the interface of a Quotation.
      */
     interface QuotationInterface {
 

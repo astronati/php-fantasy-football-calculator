@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @inheritDoc
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
  * @copyright 2016 Andrea Stronati
@@ -18,7 +19,6 @@ namespace FFC {
 
     /**
      * Defines a QuotationFactory
-     * It implements the Factory pattern.
      */
     class CalculatorFactory implements CalculatorFactoryInterface {
 

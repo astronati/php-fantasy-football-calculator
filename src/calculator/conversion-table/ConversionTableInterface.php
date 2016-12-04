@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * Conversion Table is used to map different values like magic points and goals or defense votes ratio and bonus.
+ *
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
  * @copyright 2016 Andrea Stronati
@@ -11,7 +13,6 @@ namespace FFC {
 
     /**
      * Defines the interface of a Conversion Table.
-     * Conversion Table is used to map different values like magic points and goals or defense votes ratio and bonus.
      */
     interface ConversionTableInterface {
 

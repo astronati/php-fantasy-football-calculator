@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * The calculator is used to retrieve all info about formation results like:
+ * - the total of magic points
+ * - the defense bonus
+ * - other bonus...
+ *
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
  * @copyright 2016 Andrea Stronati
@@ -13,8 +18,6 @@ namespace FFC {
 
     /**
      * Used to calculate results of a fantasy football formation.
-     * Lorem pasd as dasdad asd ad as dasdasd asd asdasd asd asdasd asd asd asdasdasasd da d asd a dasdasd asdas da dasd
-     * dasd asdas.
      */
     class Calculator implements CalculatorInterface {
 
@@ -60,6 +63,8 @@ namespace FFC {
         }
 
         /**
+         * Returns a new instance of Calculator. To define a new instance, a list of quotations is needed.
+         * Optionally it can be configured to calculate bonus.
          * @see Calculator::$_options
          * @see Quotation::_checkConfiguration
          * @param array $quotations Contains arrays with properties that satisfy Quotation::_checkConfiguration
@@ -90,7 +95,12 @@ namespace FFC {
         }
 
         /**
+         * Returns the sum of the magic points of the footballers of the formation.
+         * It is calculated taking into account that there are a number of reserves by each role.
+         *
          * @inheritDoc
+         * @param array $footballers A list of array containing needed data to instantiate a Footballer
+         * @return float The sum of points of the team keeping into account only 11 playing footballers.
          */
         public function getSum(array $footballers) {
             $formation = $this->_formationFactory->create($footballers);
@@ -102,10 +112,17 @@ namespace FFC {
         }
 
         /**
+         * Returns the defense bonus of the formation.
+         * The defense bonus is calculated using the goalkeeper votes and the ones of the best 3 defenders.
+         * To apply this bonus the formation needs to have 4 defenders at least.
+         *
          * @inheritDoc
+         * @param array $footballers A $footballers element is a 'footballer' that to be instantiated needs to satisfy
+         * Footballer::_checkConfiguration
+         * @return integer The defense bonus if allowed.
          */
-        public function getDefenseBonus(array $formation) {
-            $formation = $this->_formationFactory->create($formation);
+        public function getDefenseBonus(array $footballers) {
+            $formation = $this->_formationFactory->create($footballers);
             $ratio = 0;
 
             if ($this->_isDefenseBonusAllowed()
@@ -127,7 +144,23 @@ namespace FFC {
         }
 
         /**
+         * Returns the entire formation with the vote and the magic points for each footballer.
+         *
          * @inheritDoc
+         * @see Footballer::_checkConfiguration
+         * @see Quotation::_checkConfiguration
+         * @param array $footballers A $footballers element is a 'footballer' that to be instantiated needs to satisfy
+         * Footballer::_checkConfiguration
+         * @return array Contains a list of the players (from the given formation) containing all quotations info such
+         * as:
+         *
+         * [
+         *  [
+         *    id: {number}
+         *    magicPoints: {float}
+         *    vote: {float}
+         *  ]
+         * ]
          */
         public function getFormationDetails(array $footballers) {
             $formation = $this->_formationFactory->create($footballers);
@@ -142,7 +175,11 @@ namespace FFC {
         }
 
         /**
-         * @inheritDoc
+         * Returns the number of goals associated to the given magic points.
+         *
+         * @see ConversionTable::$_goalsRange
+         * @param float $magicPointsSum The sum of the magic points of the $formation
+         * @return integer The number of goals.
          */
         public function getGoals($magicPointsSum) {
             return $this->_conversionTable->getGoals($magicPointsSum);
