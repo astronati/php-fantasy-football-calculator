@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * The calculator is used to retrieve all info about formation results like:
+ * - the total of magic points
+ * - the defense bonus
+ * - other bonus...
+ *
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
  * @copyright 2016 Andrea Stronati
@@ -11,8 +16,6 @@ namespace FFC {
 
     /**
      * Defines the interface of a Calculator.
-     * The calculator is used to retrieve all info about formation results like the total of magic points or the defense
-     * bonus.
      */
     interface CalculatorInterface {
 
@@ -33,21 +36,22 @@ namespace FFC {
          * To apply this bonus the formation needs to have 4 defenders at least.
          *
          * @see Footballer::_checkConfiguration
-         * @param array $formation A $formation element is a 'footballer' that to be instantiated needs to satisfy
+         * @param array $footballers A $footballers element is a 'footballer' that to be instantiated needs to satisfy
          * Footballer::_checkConfiguration
          * @return integer The defense bonus if allowed.
          */
-        public function getDefenseBonus(array $formation);
+        public function getDefenseBonus(array $footballers);
 
         /**
          * Returns the entire formation with the vote and the magic points for each footballer.
          *
          * @see Footballer::_checkConfiguration
          * @see Quotation::_checkConfiguration
-         * @param array $formation A $formation element is a 'footballer' that to be instantiated needs to satisfy
+         * @param array $footballers A $footballers element is a 'footballer' that to be instantiated needs to satisfy
          * Footballer::_checkConfiguration
          * @return array Contains a list of the players (from the given formation) containing all quotations info such
          * as:
+         *
          * [
          *  [
          *    id: {number}
@@ -56,15 +60,15 @@ namespace FFC {
          *  ]
          * ]
          */
-        public function getFormationDetails(array $formation);
+        public function getFormationDetails(array $footballers);
 
         /**
          * Returns the number of goals associated to the given magic points.
          *
          * @see ConversionTable::$_goalsRange
-         * @param float $magicPoints The sum of the magic points of the $formation
+         * @param float $magicPointsSum The sum of the magic points of the $formation
          * @return integer The number of goals.
          */
-        public function getGoals($magicPoints);
+        public function getGoals($magicPointsSum);
     }
 }

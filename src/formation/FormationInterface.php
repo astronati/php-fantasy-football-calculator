@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * Used to determine which footballers are reserves or not.
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
  * @copyright 2016 Andrea Stronati

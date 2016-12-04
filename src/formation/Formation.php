@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @inheritDoc
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
  * @copyright 2016 Andrea Stronati
@@ -12,7 +13,7 @@ namespace FFC {
     use \FFC\FormationInterface as FormationInterface;
 
     /**
-     * Used to map a soccer formation.
+     * @inheritDoc
      */
     class Formation implements FormationInterface {
 

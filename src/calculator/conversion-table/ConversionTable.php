@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @inheritDoc
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
  * @copyright 2016 Andrea Stronati
@@ -12,7 +13,7 @@ namespace FFC {
     use \FFC\ConversionTableInterface as ConversionTableInterface;
 
     /**
-     * Conversion Table is used to map different values like magic points and goals or defense votes ratio and bonus.
+     * @inheritDoc
      */
     class ConversionTable implements ConversionTableInterface {
 
