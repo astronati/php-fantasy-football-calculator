@@ -57,7 +57,7 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
     }
 
     private function _getQuotationFactoryMock(array $quotations = array()) {
-        $quotationFactoryMock = $this->getMockBuilder('QuotationsFactory')
+        $quotationFactoryMock = $this->getMockBuilder('FFC\QuotationFactory')
             ->setMethods(array('create'))
             ->getMock();
 
@@ -79,7 +79,7 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
     }
 
     private function _getFormationFactoryMock(array $footballers = array()) {
-        $formationFactoryMock = $this->getMockBuilder('FormationFactory')
+        $formationFactoryMock = $this->getMockBuilder('FFC\FormationFactory')
             ->setMethods(array('create'))
             ->getMock();
 
@@ -111,7 +111,9 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
     }
 
     private function _getConversionTableMock() {
-        $conversionTableMock = $this->getMockBuilder('ConversionTable')->setMethods(array('getDefenseBonus'))->getMock();
+        $conversionTableMock = $this->getMockBuilder('FFC\ConversionTable')
+            ->setMethods(array('getDefenseBonus'))
+            ->getMock();
         $defenseBonusMap = array(
             array($this->greaterThan(6.99), 6),
             array($this->greaterThan(6.49), 3),
@@ -126,7 +128,9 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
     }
 
     private function _getReportCardMock() {
-        $reportCardMock = $this->getMockBuilder('ReportCard')->setMethods(array('getVotes'))->getMock();
+        $reportCardMock = $this->getMockBuilder('FFC\ReportCard')
+            ->setMethods(array('getVotes'))
+            ->getMock();
         // TODO should pass value map as argument
         $reportCardMock->method('getVotes')->will($this->returnValue(array(6,6,6)));
 

@@ -1,5 +1,6 @@
 [![Build Status](https://api.travis-ci.org/astronati/php-fantasy-football-calculator.svg?branch=master)](https://travis-ci.org/astronati/calculator)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/43c132465684468cab8c1f9df367952d)](https://www.codacy.com/app/astronati/php-fantasy-football-calculator?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=astronati/php-fantasy-football-calculator&amp;utm_campaign=Badge_Grade)
+[![Dependency Status](https://www.versioneye.com/user/projects/58442e61b1c38c0a5d2b7e21/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58442e61b1c38c0a5d2b7e21)
 
 # Fantasy Football Calculator
 This library allows user to calculate the points that a team has reached after a soccer match. The total can be altered
