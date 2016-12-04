@@ -77,10 +77,10 @@ namespace FFC {
         public function __construct(
             array $quotations,
             array $options = array(),
-            $formationFactory,
-            $quotationFactory,
-            $conversionTable,
-            $reportCard
+            FormationFactory $formationFactory,
+            QuotationFactory $quotationFactory,
+            ConversionTable $conversionTable,
+            ReportCard $reportCard
         ) {
             for ($i = 0; $i < count($quotations); $i++) {
                 $quotation = $quotationFactory->create($quotations[$i]);

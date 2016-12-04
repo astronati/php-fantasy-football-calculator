@@ -44,7 +44,7 @@ namespace FFC {
         private $_footballers = array();
 
         /**
-         * @param array $footballers
+         * @param Footballer[] $footballers
          */
         public function __construct(array $footballers) {
             $this->_footballers = $footballers;
