@@ -2,6 +2,9 @@
 
 use \FFC\Footballer as Footballer;
 
+/**
+ * @codeCoverageIgnore
+ */
 class FootballerTest extends PHPUnit_Framework_TestCase {
 
     public function badConfigProvider() {

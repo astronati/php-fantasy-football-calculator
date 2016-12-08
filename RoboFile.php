@@ -11,7 +11,7 @@ class RoboFile extends \Robo\Tasks
    */
   public function test()
   {
-    $this->_exec('./vendor/phpunit/phpunit/phpunit ./src --coverage-html temp/report');
+    $this->_exec('./vendor/phpunit/phpunit/phpunit ./src --coverage-html test/report/html --coverage-xml test/report/xml --whitelist ./src');
   }
 
   /**

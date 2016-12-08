@@ -2,6 +2,9 @@
 
 use \FFC\Calculator as Calculator;
 
+/**
+ * @codeCoverageIgnore
+ */
 class CalculatorTest extends PHPUnit_Framework_TestCase {
 
     public function dataProvider() {

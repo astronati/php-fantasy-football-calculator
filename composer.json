@@ -12,13 +12,14 @@
   "minimum-stability": "stable",
   "prefer-stable": true,
   "require-dev": {
+    "codacy/coverage": "dev-master",
     "consolidation/robo": "~1",
-    "phpdocumentor/phpdocumentor": "2.9.*",
-    "phpunit/phpunit": "4.8.*",
-    "phpunit/php-code-coverage": "^2.2"
+    "phpdocumentor/phpdocumentor": "^2.9.0",
+    "phpunit/phpunit": "^5.6.0",
+    "phpunit/php-code-coverage": "^4.0.3"
   },
   "require": {
-    "php": ">=5.3.0"
+    "php": ">=5.6.0"
   },
   "autoload": {
     "exclude-from-classmap": ["/src/**/*Test.php"],
