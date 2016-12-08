@@ -19,6 +19,7 @@ namespace FFC {
 
     /**
      * Defines a QuotationFactory
+     * @codeCoverageIgnore
      */
     class CalculatorFactory implements CalculatorFactoryInterface {
 

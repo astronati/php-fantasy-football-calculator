@@ -6,19 +6,38 @@ class QuotationTest extends PHPUnit_Framework_TestCase {
 
     public function badConfigProvider() {
         return array(
-            array(array('')),
-            array(array('id' => 1)),
-            array(array('id' => 1, 'magicPoints' => 1)),
-            array(array('id' => 1, 'vote' => 1)),
-            array(array('magicPoints' => 1, 'vote' => 1)),
+            array(
+                // Config
+                array('')
+            ),
+            array(
+                array('id' => 1)
+            ),
+            array(
+                array('id' => 1, 'magicPoints' => 1)
+            ),
+            array(
+                array('id' => 1, 'vote' => 1)
+            ),
+            array(
+                array('magicPoints' => 1, 'vote' => 1)
+            ),
         );
     }
 
     public function goodConfigProvider() {
         return array(
             array(
-                array('id' => '1', 'magicPoints' => '2', 'vote' => '3'),
+                // Config
+                array('id' => '1', 'magicPoints' => '2', 'vote' => '3', 'test' => 'gas'),
+                // Result
                 array('id' => 1, 'magicPoints' => 2.0, 'vote' => 3.0),
+            ),
+            array(
+                // Config
+                array('id' => '1', 'magicPoints' => '', 'vote' => ''),
+                // Result
+                array('id' => 1, 'magicPoints' => null, 'vote' => null),
             ),
         );
     }
@@ -77,8 +96,8 @@ class QuotationTest extends PHPUnit_Framework_TestCase {
      * @param array $config
      * @param array $result
      */
-    public function testToarrayMethod($config, $result) {
+    public function testToArrayMethod($config, $result) {
         $quotation = new Quotation($config);
-        $this->assertSame($result, $quotation->toarray());
+        $this->assertSame($result, $quotation->toArray());
     }
 }

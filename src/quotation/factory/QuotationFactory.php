@@ -15,6 +15,7 @@ namespace FFC {
 
     /**
      * Defines a QuotationFactory
+     * @codeCoverageIgnore
      */
     class QuotationFactory implements QuotationFactoryInterface {
 

@@ -12,6 +12,7 @@ namespace FFC {
 
     /**
      * Defines the interface of the Quotation Factory
+     * @codeCoverageIgnore
      */
     interface QuotationFactoryInterface {
 

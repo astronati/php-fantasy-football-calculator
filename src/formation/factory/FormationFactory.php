@@ -16,6 +16,7 @@ namespace FFC {
 
     /**
      * @inheritDoc
+     * @codeCoverageIgnore
      */
     class FormationFactory implements FormationFactoryInterface {
 
