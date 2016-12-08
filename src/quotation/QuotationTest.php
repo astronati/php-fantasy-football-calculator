@@ -2,6 +2,9 @@
 
 use \FFC\Quotation as Quotation;
 
+/**
+ * @codeCoverageIgnore
+ */
 class QuotationTest extends PHPUnit_Framework_TestCase {
 
     public function badConfigProvider() {

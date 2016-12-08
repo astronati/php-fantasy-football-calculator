@@ -2,6 +2,9 @@
 
 use \FFC\ConversionTable as ConversionTable;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ConversionTableTest extends PHPUnit_Framework_TestCase {
 
     public function teamPointsProvider() {

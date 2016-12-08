@@ -2,6 +2,9 @@
 
 use \FFC\ReportCard as ReportCard;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ReportCardTest extends PHPUnit_Framework_TestCase {
 
     public function dataProvider() {

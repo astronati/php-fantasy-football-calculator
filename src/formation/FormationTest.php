@@ -1,8 +1,10 @@
 <?php
 
-
 use \FFC\Formation as Formation;
 
+/**
+ * @codeCoverageIgnore
+ */
 class FormationTest extends PHPUnit_Framework_TestCase {
 
     /**
