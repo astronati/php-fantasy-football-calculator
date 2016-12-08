@@ -31,10 +31,10 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
                 ),
                 true,
                 3,
-                [6, 6, 6],
+                [6, 4, 5, 7],
                 array(
-                    'getSum' => 72,
-                    'getDefenseBonus' => 3,
+                    'getSum' => 88,
+                    'getDefenseBonus' => 1,
                     'details' => [
                         ['id' => 1, 'vote' => 1, 'magicPoints' => 2],
                         ['id' => 2, 'vote' => 2, 'magicPoints' => 3],
@@ -137,7 +137,12 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
                 'getGoals'
             ))
             ->getMock();
-        $conversionTableMock->method('getDefenseBonus')->will($this->returnValue($value));
+        $conversionTableMock->method('getDefenseBonus')->will($this->returnValueMap([
+            [7, 6],
+            [6.5, 3],
+            [6, 1],
+            [4, 0],
+        ]));
         $conversionTableMock->method('getGoals')->will($this->returnValue($value));
         return $conversionTableMock;
     }
