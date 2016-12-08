@@ -25,5 +25,9 @@
     "classmap": [
       "src/"
     ]
+  },
+  "scripts": {
+    "docs": "./vendor/bin/robo docs",
+    "test": "./vendor/bin/robo test"
   }
 }
