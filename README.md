@@ -9,7 +9,7 @@ This library allows user to calculate the points that a team has reached after a
 through some bonus like the defense one.
 
 ## Installation
-You can install the library and its dependencies using composer running:
+You can install the library and its dependencies using `composer` running:
 ```sh
 $ composer require fantasy-football-calculator
 ```
@@ -31,20 +31,20 @@ The environment requires [phpunit](https://phpunit.de/), that has been already i
 `composer.json`.
 
 ### Dependencies
-To install all modules you just need to run following command from the root path:
+To install all modules you just need to run following command:
 
 ```sh
 $ composer install
 ```
 
 ### Documentation
-Please use the following command to run the documentation from the root path:
+Please use the following command to generate the project documentation:
 ```sh
 $ composer docs
 ```
 
 ### Testing
-Tests are created next to related file as follows:
+Tests files are created next to related file as follows:
 ```
 src
 \-->[folder-name]
@@ -52,7 +52,7 @@ src
 \---->[file-name]Test.php
 ```
 
-Execute following command to run the tests suite from the root path:
+Execute following command to run the tests suite:
 ```sh
 $ composer test
 ```
