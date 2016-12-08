@@ -6,19 +6,29 @@
  */
 class RoboFile extends \Robo\Tasks
 {
-  /**
-   * Runs tests suite of the project
-   */
-  public function test()
-  {
-    $this->_exec('./vendor/phpunit/phpunit/phpunit ./src --coverage-html test/report/html --coverage-xml test/report/xml --whitelist ./src');
-  }
+    /**
+     * Runs tests suite of the project
+     */
+    public function test()
+    {
+        $cmd = array();
+        array_push($cmd, './vendor/phpunit/phpunit/phpunit ./src');
+        array_push($cmd, '--coverage-html test/report/html');
+        array_push($cmd, '--coverage-xml test/report/xml');
+        array_push($cmd, '--whitelist ./sr');
+        $this->_exec(implode(' ', $cmd));
+    }
 
-  /**
-   * Generates documentation of the project
-   */
-  public function docs()
-  {
-    $this->_exec('./vendor/phpdocumentor/phpdocumentor/bin/phpdoc -d ./src -t ./docs/api --ignore="**/*Test.php"');
-  }
+    /**
+     * Generates documentation of the project
+     */
+    public function docs()
+    {
+        $cmd = array();
+        array_push($cmd, './vendor/phpdocumentor/phpdocumentor/bin/phpdoc');
+        array_push($cmd, '-d ./src');
+        array_push($cmd, '-t ./docs/api');
+        array_push($cmd, '--ignore="**/*Test.php"');
+        $this->_exec(implode(' ', $cmd));
+    }
 }
