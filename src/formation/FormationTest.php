@@ -1,5 +1,6 @@
 <?php
 
+
 use \FFC\Formation as Formation;
 
 class FormationTest extends PHPUnit_Framework_TestCase {
@@ -18,145 +19,114 @@ class FormationTest extends PHPUnit_Framework_TestCase {
         array('id' => 8, 'type' => 'R', 'order' => '1', 'role' => 'A'),
         array('id' => 9, 'type' => 'T', 'order' => '2', 'role' => 'A'),
         array('id' => 10, 'type' => 'T', 'order' => '3', 'role' => 'A'),
+        array('id' => 11, 'type' => 'R', 'order' => '4', 'role' => 'P'),
     );
 
-    public function goodFirstStringsProvider() {
-        return array(
-            array(
-                $this->_footballers,
-                'D',
-                array(
-                    array('id' => 1, 'type' => 'T', 'order' => '1', 'role' => 'D'),
-                    array('id' => 2, 'type' => 'T', 'order' => '1', 'role' => 'D'),
-                    array('id' => 4, 'type' => 'T', 'order' => '3', 'role' => 'D'),
-                    array('id' => 6, 'type' => 'T', 'order' => '2', 'role' => 'C'),
-                    array('id' => 9, 'type' => 'T', 'order' => '2', 'role' => 'A'),
-                    array('id' => 10, 'type' => 'T', 'order' => '3', 'role' => 'A'),
-                ),
-                array(
-                    array('id' => 2, 'type' => 'T', 'order' => '1', 'role' => 'D'),
-                    array('id' => 4, 'type' => 'T', 'order' => '3', 'role' => 'D'),
-                )
-            )
-        );
+    private function _createFootballersMock($footballers) {
+        $footballerMocks = array();
+
+        foreach ($footballers as $index => $footballer) {
+            $footballerMock = $this->getMockBuilder('Footballer')
+                ->disableOriginalConstructor()
+                ->setMethods(array(
+                    'getId',
+                    'isFirstString',
+                    'isReserve',
+                    'isGoalkeeper',
+                    'isDefender',
+                    'isMidfielder',
+                    'isForward',
+                ))
+                ->getMock();
+
+            $footballerMock->method('getId')->will($this->returnValue($footballer['id']));
+            $footballerMock->method('isFirstString')->will($this->returnValue($footballer['type'] === 'T'));
+            $footballerMock->method('isReserve')->will($this->returnValue($footballer['type'] === 'R'));
+            $footballerMock->method('isGoalkeeper')->will($this->returnValue($footballer['role'] === 'P'));
+            $footballerMock->method('isDefender')->will($this->returnValue($footballer['role'] === 'D'));
+            $footballerMock->method('isMidfielder')->will($this->returnValue($footballer['role'] === 'C'));
+            $footballerMock->method('isForward')->will($this->returnValue($footballer['role'] === 'A'));
+
+            array_push($footballerMocks, $footballerMock);
+        }
+        return $footballerMocks;
     }
 
-    public function goodReservesProvider() {
-        return array(
-            array(
-                $this->_footballers,
-                'D',
-                array(
-                    array('id' => 3, 'type' => 'R', 'order' => '2', 'role' => 'D'),
-                    array('id' => 5, 'type' => 'R', 'order' => '1', 'role' => 'C'),
-                    array('id' => 7, 'type' => 'R', 'order' => '3', 'role' => 'C'),
-                    array('id' => 8, 'type' => 'R', 'order' => '1', 'role' => 'A'),
-                ),
-                array(
-                    array('id' => 3, 'type' => 'R', 'order' => '2', 'role' => 'D'),
-                )
-            )
-        );
-    }
-
-    /**
-     * @dataProvider goodFirstStringsProvider
-     * @param array $footballers
-     */
-    public function testConstructMethod($footballers) {
-        $formation = new Formation($footballers);
+    public function testConstructMethod() {
+        $formation = new Formation($this->_createFootballersMock($this->_footballers));
         $this->assertNotNull($formation);
     }
 
-    /**
-     * @dataProvider goodFirstStringsProvider
-     * @param array $footballers
-     * @param string $role
-     * @param array $firstStrings
-     * @param array $firstStringsByRole
-     */
-    public function testGetFirstStringsMethod($footballers, $role, $firstStrings, $firstStringsByRole) {
-        $footballerMocks = array();
-
-        foreach ($footballers as $index => $footballer) {
-            $footballerMock = $this->getMockBuilder('Footballer')
-                ->disableOriginalConstructor()
-                ->setMethods(array('isFirstString', 'isReserve', 'getRole'))
-                ->getMock();
-
-            $footballerMock->method('isFirstString')->will($this->returnValue($footballer['type'] === 'T'));
-            $footballerMock->method('isReserve')->will($this->returnValue($footballer['type'] === 'R'));
-            $footballerMock->method('getRole')->will($this->returnValue($footballer['role']));
-
-            array_push($footballerMocks, $footballerMock);
-        }
-
-        $formation = new Formation($footballerMocks);
-        $formationFS = $formation->getFirstStrings();
-        foreach ($firstStrings as $index => $firstString) {
-            $this->assertSame(true, $formationFS[$index]->isFirstString());
-        }
-
-        $formationFSBR = $formation->getFirstStrings($role);
-        foreach ($firstStringsByRole as $index => $firstString) {
-            $this->assertSame(true, $formationFSBR[$index]->isFirstString());
-            $this->assertSame($role, $formationFSBR[$index]->getRole());
-        }
+    public function testGetFootballersMethod() {
+        $formation = new Formation($this->_createFootballersMock($this->_footballers));
+        $this->assertSame(11, count($formation->getFootballers()));
     }
 
-    /**
-     * @dataProvider goodReservesProvider
-     * @param array $footballers
-     * @param string $role
-     * @param array $reserves
-     * @param array $reservesByRole
-     */
-    public function testGetReservesMethod($footballers, $role, $reserves, $reservesByRole) {
-        $footballerMocks = array();
-
-        foreach ($footballers as $index => $footballer) {
-            $footballerMock = $this->getMockBuilder('Footballer')
-                ->disableOriginalConstructor()
-                ->setMethods(array('isFirstString', 'isReserve', 'getRole'))
-                ->getMock();
-
-            $footballerMock->method('isFirstString')->will($this->returnValue($footballer['type'] === 'T'));
-            $footballerMock->method('isReserve')->will($this->returnValue($footballer['type'] === 'R'));
-            $footballerMock->method('getRole')->will($this->returnValue($footballer['role']));
-
-            array_push($footballerMocks, $footballerMock);
-        }
-
-        $formation = new Formation($footballerMocks);
-        $formationFS = $formation->getReserves();
-        foreach ($reserves as $index => $reserve) {
-            $this->assertSame(true, $formationFS[$index]->isReserve());
-        }
-
-        $formationFSBR = $formation->getReserves($role);
-        foreach ($reservesByRole as $index => $reserve) {
-            $this->assertSame(true, $formationFSBR[$index]->isReserve());
-            $this->assertSame($role, $formationFSBR[$index]->getRole());
-        }
+    public function testFilterGoalkeeperMethod() {
+        $formation = new Formation($this->_createFootballersMock($this->_footballers));
+        $footballers = $formation->filterGoalkeepers()
+            ->getFootballers();
+        $this->assertSame(2, count($footballers));
+        $this->assertSame(1, $footballers[0]->getId());
+        $this->assertSame(11, $footballers[1]->getId());
     }
 
-    public function testGetGoalKeeperLabelMethod() {
-        $formation = new Formation(array());
-        $this->assertSame('P', $formation->getGoalKeeperLabel());
+    public function testFilterGoalkeeperAsFirstString() {
+        $formation = new Formation($this->_createFootballersMock($this->_footballers));
+        $footballers = $formation->filterGoalkeepers()
+            ->filterFirstStrings()
+            ->getFootballers();
+        $this->assertSame(1, count($footballers));
+        $this->assertSame(1, $footballers[0]->getId());
     }
 
-    public function testGetDefenderLabelMethod() {
-        $formation = new Formation(array());
-        $this->assertSame('D', $formation->getDefenderLabel());
+    public function testFilterDefenderMethod() {
+        $formation = new Formation($this->_createFootballersMock($this->_footballers));
+        $footballers = $formation->filterDefenders()
+            ->getFootballers();
+        $this->assertSame(3, count($footballers));
+        $this->assertSame(2, $footballers[0]->getId());
+        $this->assertSame(3, $footballers[1]->getId());
+        $this->assertSame(4, $footballers[2]->getId());
     }
 
-    public function testGetMidfielderLabelMethod() {
-        $formation = new Formation(array());
-        $this->assertSame('C', $formation->getMidfielderLabel());
+    public function testFilterMidfielderMethod() {
+        $formation = new Formation($this->_createFootballersMock($this->_footballers));
+        $footballers = $formation->filterMidfielders()
+            ->getFootballers();
+        $this->assertSame(3, count($footballers));
+        $this->assertSame(5, $footballers[0]->getId());
+        $this->assertSame(6, $footballers[1]->getId());
+        $this->assertSame(7, $footballers[2]->getId());
     }
 
-    public function testGetForwardLabelMethod() {
-        $formation = new Formation(array());
-        $this->assertSame('A', $formation->getForwardLabel());
+    public function testFilterForwardMethod() {
+        $formation = new Formation($this->_createFootballersMock($this->_footballers));
+        $footballers = $formation->filterForwards()
+            ->getFootballers();
+        $this->assertSame(3, count($footballers));
+        $this->assertSame(8, $footballers[0]->getId());
+        $this->assertSame(9, $footballers[1]->getId());
+        $this->assertSame(10, $footballers[2]->getId());
+    }
+
+    public function testFilterFirstStringsMethod() {
+        $formation = new Formation($this->_createFootballersMock($this->_footballers));
+        $footballers = $formation->filterFirstStrings()
+            ->getFootballers();
+        $this->assertSame(6, count($footballers));
+        $this->assertSame(1, $footballers[0]->getId());
+        $this->assertSame(2, $footballers[1]->getId());
+        $this->assertSame(4, $footballers[2]->getId());
+    }
+
+    public function testFilterReservesMethod() {
+        $formation = new Formation($this->_createFootballersMock($this->_footballers));
+        $footballers = $formation->filterReserves()
+            ->getFootballers();
+        $this->assertSame(5, count($footballers));
+        $this->assertSame(3, $footballers[0]->getId());
+        $this->assertSame(5, $footballers[1]->getId());
+        $this->assertSame(7, $footballers[2]->getId());
     }
 }

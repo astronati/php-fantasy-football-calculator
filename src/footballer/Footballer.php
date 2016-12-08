@@ -30,13 +30,33 @@ namespace FFC {
         const RESERVE = 'R';
 
         /**
+         * @var string
+         */
+        const GOALKEEPER = 'P';
+
+        /**
+         * @var string
+         */
+        const DEFENDER = 'D';
+
+        /**
+         * @var string
+         */
+        const MIDFIELDER = 'C';
+
+        /**
+         * @var string
+         */
+        const FORWARD = 'A';
+
+        /**
          * A unique integer number to identify the footballer
          * @var integer
          */
         private $_id;
 
         /**
-         * First string or reserver
+         * First string or reserve
          * @see Footballer::FIRST_STRING
          * @see Footballer::RESERVE
          * @var string
@@ -97,13 +117,6 @@ namespace FFC {
         /**
          * @inheritDoc
          */
-        public function getRole() {
-            return $this->_role;
-        }
-
-        /**
-         * @inheritDoc
-         */
         public function isFirstString() {
             return $this->_type === self::FIRST_STRING;
         }
@@ -113,6 +126,34 @@ namespace FFC {
          */
         public function isReserve() {
             return $this->_type === self::RESERVE;
+        }
+
+        /**
+         * @inheritDoc
+         */
+        public function isGoalkeeper() {
+            return $this->_role === self::GOALKEEPER;
+        }
+
+        /**
+         * @inheritDoc
+         */
+        public function isDefender() {
+            return $this->_role === self::DEFENDER;
+        }
+
+        /**
+         * @inheritDoc
+         */
+        public function isMidfielder() {
+            return $this->_role === self::MIDFIELDER;
+        }
+
+        /**
+         * @inheritDoc
+         */
+        public function isForward() {
+            return $this->_role === self::FORWARD;
         }
     }
 }

@@ -14,6 +14,7 @@ namespace FFC {
     /**
      * Defines the interface of the Calculator Factory.
      * It implements the Factory pattern.
+     * @codeCoverageIgnore
      */
     interface CalculatorFactoryInterface {
 

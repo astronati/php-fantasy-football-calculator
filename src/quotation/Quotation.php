@@ -70,8 +70,8 @@ namespace FFC {
             }
 
             $this->_id = (int) $config['id'];
-            $this->_magicPoints = (float) $config['magicPoints'];
-            $this->_vote = (float) $config['vote'];
+            $this->_magicPoints = $config['magicPoints'] === '' ? null : (float) $config['magicPoints'];
+            $this->_vote = $config['vote'] === '' ? null : (float) $config['vote'];
         }
 
         /**

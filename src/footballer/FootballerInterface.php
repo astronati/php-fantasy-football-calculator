@@ -29,13 +29,6 @@ namespace FFC {
         public function getId();
 
         /**
-         * Returns the role of the footballer.
-         *
-         * @return string
-         */
-        public function getRole();
-
-        /**
          * Determines if the footballer is one of the first strings in the current formation.
          *
          * @returns boolean
@@ -48,5 +41,33 @@ namespace FFC {
          * @returns boolean
          */
         public function isReserve();
+
+        /**
+         * Determines if the role of the footballer is the goalkeeper.
+         *
+         * @returns boolean
+         */
+        public function isGoalkeeper();
+
+        /**
+         * Determines if the role of the footballer is the defender.
+         *
+         * @returns boolean
+         */
+        public function isDefender();
+
+        /**
+         * Determines if the role of the footballer is the midfielder.
+         *
+         * @returns boolean
+         */
+        public function isMidfielder();
+
+        /**
+         * Determines if the role of the footballer is the forward.
+         *
+         * @returns boolean
+         */
+        public function isForward();
     }
 }

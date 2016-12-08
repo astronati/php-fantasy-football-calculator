@@ -18,30 +18,42 @@ namespace FFC {
     class Formation implements FormationInterface {
 
         /**
-         * @var string
-         */
-        const GOALKEEPER = 'P';
-
-        /**
-         * @var string
-         */
-        const DEFENDER = 'D';
-
-        /**
-         * @var string
-         */
-        const MIDFIELDER = 'C';
-
-        /**
-         * @var string
-         */
-        const FORWARD = 'A';
-
-        /**
-         * A container of footballers
+         * A container of all formation footballers
          * @var array
          */
         private $_footballers = array();
+
+        /**
+         * A container of (filtered) footballers
+         * @var array
+         */
+        private $_filteredFootballers = array();
+
+        /**
+         * Filters footballer by given method to apply on the Footballer instance.
+         *
+         * @param string $footballerMethod The method of the Footballer instance. It should return a boolean
+         */
+        private function _filter($footballerMethod) {
+            $footballers = $this->_getFilteredFootballers();
+
+            $filteredFootballers = array();
+            foreach ($footballers as $footballer) {
+                if ($footballer->$footballerMethod()) {
+                    array_push($filteredFootballers, $footballer);
+                }
+            }
+            $this->_filteredFootballers = $filteredFootballers;
+        }
+
+        /**
+         * Gets all footballers of the formation or a subset if it has been filtered
+         *
+         * @return array
+         */
+        private function _getFilteredFootballers() {
+            return !empty($this->_filteredFootballers) ? $this->_filteredFootballers : $this->_footballers;
+        }
 
         /**
          * @param Footballer[] $footballers
@@ -53,62 +65,58 @@ namespace FFC {
         /**
          * @inheritDoc
          */
-        public function getGoalKeeperLabel() {
-            return self::GOALKEEPER;
+        public function filterFirstStrings() {
+            $this->_filter('isFirstString');
+            return $this;
         }
 
         /**
          * @inheritDoc
          */
-        public function getDefenderLabel() {
-            return self::DEFENDER;
+        public function filterReserves() {
+            $this->_filter('isReserve');
+            return $this;
         }
 
         /**
          * @inheritDoc
          */
-        public function getMidfielderLabel() {
-            return self::MIDFIELDER;
+        public function filterGoalkeepers() {
+            $this->_filter('isGoalkeeper');
+            return $this;
         }
 
         /**
          * @inheritDoc
          */
-        public function getForwardLabel() {
-            return self::FORWARD;
+        public function filterDefenders() {
+            $this->_filter('isDefender');
+            return $this;
         }
 
         /**
          * @inheritDoc
          */
-        public function getFirstStrings($role = null) {
-            $firstStrings = array();
-                foreach ($this->_footballers as $footballer) {
-                if ($footballer->isFirstString()) {
-                    // Adds the footballer
-                    // - if the role is not specified so it means that all footballers have to be taken int account
-                    // - if the role matches the one of the footballer
-                    if ($role === $footballer->getRole() || is_null($role)) {
-                        array_push($firstStrings, $footballer);
-                    }
-                }
-            }
-            return $firstStrings;
+        public function filterMidfielders() {
+            $this->_filter('isMidfielder');
+            return $this;
         }
 
         /**
          * @inheritDoc
          */
-        public function getReserves($role = null) {
-            $reserves = array();
-            foreach ($this->_footballers as $footballer) {
-                if ($footballer->isReserve()) {
-                    if ($role === $footballer->getRole() || is_null($role)) {
-                        array_push($reserves, $footballer);
-                    }
-                }
-            }
-            return $reserves;
+        public function filterForwards() {
+            $this->_filter('isForward');
+            return $this;
+        }
+
+        /**
+         * @inheritDoc
+         */
+        public function getFootballers() {
+            $footballers = $this->_getFilteredFootballers();
+            $this->_filteredFootballers = array();
+            return $footballers;
         }
     }
 }

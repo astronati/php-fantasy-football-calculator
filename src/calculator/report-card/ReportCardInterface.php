@@ -27,12 +27,12 @@ namespace FFC {
          * Returns the votes of the footballers that have played.
          * The footballers are filtered by role.
          *
-         * @param Formation $formation
-         * @param object[] $quotations An array of Quotation instances
-         * @param string $role
+         * @param Quotation[] $quotations An array of Quotation instances
+         * @param Footballer[] $firstStrings An array of footballers as first strings
+         * @param Footballer[] $reserves An array of footballers as reserves
          * @param boolean $useMagicPoints If true, it returns the magic points of the footballers otherwise their votes.
          * @return float[]
          */
-        public function getVotes($formation, $quotations, $role, $useMagicPoints = true);
+        public function getVotes($quotations, $firstStrings, $reserves, $useMagicPoints = true);
     }
 }

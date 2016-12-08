@@ -12,6 +12,7 @@ namespace FFC {
 
     /**
      * Defines the interface of the Formation Factory
+     * @codeCoverageIgnore
      */
     interface FormationFactoryInterface {
 

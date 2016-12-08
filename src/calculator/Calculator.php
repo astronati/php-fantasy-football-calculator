@@ -15,6 +15,10 @@
 namespace FFC {
 
     use \FFC\CalculatorInterface as CalculatorInterface;
+    use \FFC\FormationFactory as FormationFactory;
+    use \FFC\QuotationFactory as QuotationFactory;
+    use \FFC\ConversionTable as ConversionTable;
+    use \FFC\ReportCard as ReportCard;
 
     /**
      * Used to calculate results of a fantasy football formation.
@@ -105,10 +109,26 @@ namespace FFC {
         public function getSum(array $footballers) {
             $formation = $this->_formationFactory->create($footballers);
 
-            return array_sum($this->_reportCard->getVotes($formation, $this->_quotations, $formation->getGoalKeeperLabel())) +
-                array_sum($this->_reportCard->getVotes($formation, $this->_quotations, $formation->getDefenderLabel())) +
-                array_sum($this->_reportCard->getVotes($formation, $this->_quotations, $formation->getMidfielderLabel())) +
-                array_sum($this->_reportCard->getVotes($formation, $this->_quotations, $formation->getForwardLabel()));
+            return array_sum($this->_reportCard->getVotes(
+                    $this->_quotations,
+                    $formation->filterGoalkeepers()->filterFirstStrings()->getFootballers(),
+                    $formation->filterGoalkeepers()->filterReserves()->getFootballers()
+                )) +
+                array_sum($this->_reportCard->getVotes(
+                    $this->_quotations,
+                    $formation->filterDefenders()->filterFirstStrings()->getFootballers(),
+                    $formation->filterDefenders()->filterReserves()->getFootballers()
+                )) +
+                array_sum($this->_reportCard->getVotes(
+                    $this->_quotations,
+                    $formation->filterMidfielders()->filterFirstStrings()->getFootballers(),
+                    $formation->filterMidfielders()->filterReserves()->getFootballers()
+                )) +
+                array_sum($this->_reportCard->getVotes(
+                    $this->_quotations,
+                    $formation->filterForwards()->filterFirstStrings()->getFootballers(),
+                    $formation->filterForwards()->filterReserves()->getFootballers()
+                ));
         }
 
         /**
@@ -126,9 +146,20 @@ namespace FFC {
             $ratio = 0;
 
             if ($this->_isDefenseBonusAllowed()
-                    && count($formation->getFirstStrings($formation->getDefenderLabel())) >= 4) {
-                $goalkeeperVote = $this->_reportCard->getVotes($formation, $this->_quotations, $formation->getGoalKeeperLabel(), false);
-                $defenderVotes = $this->_reportCard->getVotes($formation, $this->_quotations, $formation->getDefenderLabel(), false);
+                    // The number of defenders as first strings is equal or higher than 4
+                    && count($formation->filterDefenders()->filterFirstStrings()->getFootballers()) >= 4) {
+                $goalkeeperVote = $this->_reportCard->getVotes(
+                    $this->_quotations,
+                    $formation->filterGoalkeepers()->filterFirstStrings()->getFootballers(),
+                    $formation->filterGoalkeepers()->filterReserves()->getFootballers(),
+                    false
+                );
+                $defenderVotes = $this->_reportCard->getVotes(
+                    $this->_quotations,
+                    $formation->filterDefenders()->filterFirstStrings()->getFootballers(),
+                    $formation->filterDefenders()->filterReserves()->getFootballers(),
+                    false
+                );
 
                 // Orders from the highest value to the lowest one
                 rsort($defenderVotes);
@@ -164,7 +195,7 @@ namespace FFC {
          */
         public function getFormationDetails(array $footballers) {
             $formation = $this->_formationFactory->create($footballers);
-            $allFootballers = array_merge($formation->getFirstStrings(), $formation->getReserves());
+            $allFootballers = $formation->getFootballers();
 
             $details = array();
             for ($i = 0; $i < count($allFootballers); $i++) {
@@ -177,6 +208,7 @@ namespace FFC {
         /**
          * Returns the number of goals associated to the given magic points.
          *
+         * @inheritDoc
          * @see ConversionTable::$_goalsRange
          * @param float $magicPointsSum The sum of the magic points of the $formation
          * @return integer The number of goals.

@@ -16,50 +16,44 @@ namespace FFC {
     interface FormationInterface {
 
         /**
-         * Returns only first strings of the formation. These footballers can be filtered by role.
+         * Returns footballers of the formation. They can be filtered in order to obtain a specif subset like:
          *
-         * @param string $role (Optional)
+         * - all defenders as first strings
+         * - all forwards as reserves
+         * - ...
+         *
          * @return array
          */
-        public function getFirstStrings($role = null);
+        public function getFootballers();
 
         /**
-         * Returns only reserves of the formation. These footballers can be filtered by role.
-         *
-         * @param string $role (Optional)
-         * @return array
+         * Filters formation by goalkeepers.
          */
-        public function getReserves($role = null);
-
-        // FIXME Instead of getGoalKeeperLabel getDefenderLabel getMidfielderLabel getForwardLabel you should add role
-        // logic into footballer
+        public function filterGoalkeepers();
 
         /**
-         * Returns the label of the goalkeeper.
-         *
-         * @return string
+         * Filters formation by defenders.
          */
-        public function getGoalKeeperLabel();
+        public function filterDefenders();
 
         /**
-         * Returns the label of the defender.
-         *
-         * @return string
+         * Filters formation by midfielders.
          */
-        public function getDefenderLabel();
+        public function filterMidfielders();
 
         /**
-         * Returns the label of the midfielder.
-         *
-         * @return string
+         * Filters formation by forwards.
          */
-        public function getMidfielderLabel();
+        public function filterForwards();
 
         /**
-         * Returns the label of the forward.
-         *
-         * @return string
+         * Filters formation by first strings.
          */
-        public function getForwardLabel();
+        public function filterFirstStrings();
+
+        /**
+         * Filters formation by reserves.
+         */
+        public function filterReserves();
     }
 }
