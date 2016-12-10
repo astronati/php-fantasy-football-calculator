@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implements the Factory pattern to return an instance of Quoatation
+ * Implements the Factory pattern to return an instance of Quotation
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
  * @copyright 2016 Andrea Stronati
@@ -17,7 +17,7 @@ namespace FFC {
     interface QuotationFactoryInterface {
 
         /**
-         * Returns a new instance of the Quotation class
+         * Implements the Factory Pattern.
          *
          * @param array $config
          * @return Quotation

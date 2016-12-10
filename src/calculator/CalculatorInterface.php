@@ -12,13 +12,13 @@
  * @version 0.2.1
  */
 
-namespace FFC {
-
+namespace FFC
+{
     /**
      * Defines the interface of a Calculator.
      */
-    interface CalculatorInterface {
-
+    interface CalculatorInterface
+    {
         /**
          * Returns the sum of the magic points of the footballers of the formation.
          * It is calculated taking into account that there are a number of reserves by each role.

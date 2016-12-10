@@ -15,7 +15,7 @@ class RoboFile extends \Robo\Tasks
         array_push($cmd, './vendor/phpunit/phpunit/phpunit ./src');
         array_push($cmd, '--coverage-html test/report/html');
         array_push($cmd, '--coverage-xml test/report/xml');
-        array_push($cmd, '--whitelist ./sr');
+        array_push($cmd, '--whitelist ./src');
         $this->_exec(implode(' ', $cmd));
     }
 

@@ -12,19 +12,21 @@
  * @version 0.2.1
  */
 
-namespace FFC {
-
+namespace FFC
+{
     use \FFC\CalculatorInterface as CalculatorInterface;
     use \FFC\FormationFactory as FormationFactory;
     use \FFC\QuotationFactory as QuotationFactory;
+    use \FFC\ModifierFactory as ModifierFactory;
+    use \FFC\ConversionTableFactory as ConversionTableFactory;
     use \FFC\ConversionTable as ConversionTable;
     use \FFC\ReportCard as ReportCard;
 
     /**
      * Used to calculate results of a fantasy football formation.
      */
-    class Calculator implements CalculatorInterface {
-
+    class Calculator implements CalculatorInterface
+    {
         /**
          * A container of all footballers quotations of the match day.
          * @var Quotation[]
@@ -46,10 +48,16 @@ namespace FFC {
         private $_formationFactory;
 
         /**
-         * An instance of the ConversionTable.
-         * @var ConversionTable
+         * An instance of the ModifierFactory.
+         * @var ModifierFactory
          */
-        private $_conversionTable;
+        private $_modifierFactory;
+
+        /**
+         * An instance of the ConversionTableFactory.
+         * @var ConversionTableFactory
+         */
+        private $_conversionTableFactory;
 
         /**
          * An instance of the ReportCard.
@@ -62,7 +70,8 @@ namespace FFC {
          *
          * @return boolean True if the defense bonus can be used
          */
-        private function _isDefenseBonusAllowed() {
+        private function _isDefenseBonusAllowed()
+        {
             return (bool) (array_key_exists('defenseBonus', $this->_options) && $this->_options['defenseBonus']);
         }
 
@@ -75,7 +84,8 @@ namespace FFC {
          * @param array $options Contains properties as mentioned in Calculator::$_options
          * @param FormationFactory $formationFactory An instance of FormationFactory
          * @param QuotationFactory $quotationFactory An instance of QuotationFactory
-         * @param ConversionTable $conversionTable An instance of ConversionTable
+         * @param ModifierFactory $modifierFactory An instance of ModifierFactory
+         * @param ConversionTableFactory $conversionTableFactory An instance of ConversionTableFactory
          * @param ReportCard $reportCard An instance of ReportCard
          */
         public function __construct(
@@ -83,7 +93,8 @@ namespace FFC {
             array $options = array(),
             FormationFactory $formationFactory,
             QuotationFactory $quotationFactory,
-            ConversionTable $conversionTable,
+            ModifierFactory $modifierFactory,
+            ConversionTableFactory $conversionTableFactory,
             ReportCard $reportCard
         ) {
             for ($i = 0; $i < count($quotations); $i++) {
@@ -94,7 +105,8 @@ namespace FFC {
 
             $this->_options = $options;
             $this->_formationFactory = $formationFactory;
-            $this->_conversionTable = $conversionTable;
+            $this->_modifierFactory = $modifierFactory;
+            $this->_conversionTableFactory = $conversionTableFactory;
             $this->_reportCard = $reportCard;
         }
 
@@ -106,7 +118,8 @@ namespace FFC {
          * @param array $footballers A list of array containing needed data to instantiate a Footballer
          * @return float The sum of points of the team keeping into account only 11 playing footballers.
          */
-        public function getSum(array $footballers) {
+        public function getSum(array $footballers)
+        {
             $formation = $this->_formationFactory->create($footballers);
 
             return array_sum($this->_reportCard->getVotes(
@@ -141,14 +154,11 @@ namespace FFC {
          * Footballer::_checkConfiguration
          * @return integer The defense bonus if allowed.
          */
-        public function getDefenseBonus(array $footballers) {
-            $formation = $this->_formationFactory->create($footballers);
-            $ratio = 0;
-
-            if ($this->_isDefenseBonusAllowed()
-                    // The number of defenders as first strings is equal or higher than 4
-                    && count($formation->filterDefenders()->filterFirstStrings()->getFootballers()) >= 4) {
-                $goalkeeperVote = $this->_reportCard->getVotes(
+        public function getDefenseBonus(array $footballers)
+        {
+            if ($this->_isDefenseBonusAllowed()) {
+                $formation = $this->_formationFactory->create($footballers);
+                $goalkeeperVotes = $this->_reportCard->getVotes(
                     $this->_quotations,
                     $formation->filterGoalkeepers()->filterFirstStrings()->getFootballers(),
                     $formation->filterGoalkeepers()->filterReserves()->getFootballers(),
@@ -160,18 +170,14 @@ namespace FFC {
                     $formation->filterDefenders()->filterReserves()->getFootballers(),
                     false
                 );
-
-                // Orders from the highest value to the lowest one
-                rsort($defenderVotes);
-
-                // Takes three footballers with the highest vote and sum them
-                $threeBestDefendersVotes = array_slice($defenderVotes, 0, 3);
-
-                // Sums the goalkeeper and defenders votes and divide the result by 4
-                $ratio = ($goalkeeperVote[0] + array_sum($threeBestDefendersVotes)) / 4;
+                return $this->_modifierFactory
+                    ->createBestDefendersModifier()
+                    ->getBonus([
+                        'goalkeeper' => $goalkeeperVotes[0],
+                        'defenders' => $defenderVotes
+                    ]);
             }
-
-            return $this->_conversionTable->getDefenseBonus($ratio);
+            return 0;
         }
 
         /**
@@ -193,7 +199,8 @@ namespace FFC {
          *  ]
          * ]
          */
-        public function getFormationDetails(array $footballers) {
+        public function getFormationDetails(array $footballers)
+        {
             $formation = $this->_formationFactory->create($footballers);
             $allFootballers = $formation->getFootballers();
 
@@ -209,12 +216,14 @@ namespace FFC {
          * Returns the number of goals associated to the given magic points.
          *
          * @inheritDoc
-         * @see ConversionTable::$_goalsRange
          * @param float $magicPointsSum The sum of the magic points of the $formation
          * @return integer The number of goals.
          */
-        public function getGoals($magicPointsSum) {
-            return $this->_conversionTable->getGoals($magicPointsSum);
+        public function getGoals($magicPointsSum)
+        {
+            return $this->_conversionTableFactory
+                ->createGoalsConversionTable()
+                ->getConvertedValue($magicPointsSum);
         }
     }
 }
