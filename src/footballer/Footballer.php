@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * A Footballer is a soccer player.
  * @inheritDoc
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
@@ -13,6 +14,7 @@ namespace FFC {
     use \FFC\FootballerInterface as FootballerInterface;
 
     /**
+     * A footballer has a role, a type and an order.
      * @inheritDoc
      */
     class Footballer implements FootballerInterface {
@@ -64,16 +66,19 @@ namespace FFC {
         private $_type;
 
         /**
+         * The role of the footballer (goalkeeper, defender, midfielder or forward).
          * @type string
          */
         private $_role;
 
         /**
+         * An array containing all needed properties to define a footballer.
          * @var array
          */
         private $_fields = array(
             'id',
             'type',
+            // TODO Should be sorted by order
             'order',
             'role',
         );
@@ -94,6 +99,7 @@ namespace FFC {
         }
 
         /**
+         * Checks if the given $config contains all needed properties in order to instantiate a new instnace.
          * @param array $config
          * @throws \Exception Missing parameter
          */
@@ -108,6 +114,7 @@ namespace FFC {
         }
 
         /**
+         * Returns the ID of the footballer.
          * @inheritDoc
          */
         public function getId() {
@@ -115,6 +122,7 @@ namespace FFC {
         }
 
         /**
+         * Determines if the footballer is a first string or not.
          * @inheritDoc
          */
         public function isFirstString() {
@@ -122,6 +130,7 @@ namespace FFC {
         }
 
         /**
+         * Determines if the footballer is a reserve or not.
          * @inheritDoc
          */
         public function isReserve() {
@@ -129,6 +138,7 @@ namespace FFC {
         }
 
         /**
+         * Determines if the footballer is a goalkeeper or not.
          * @inheritDoc
          */
         public function isGoalkeeper() {
@@ -136,6 +146,7 @@ namespace FFC {
         }
 
         /**
+         * Determines if the footballer is a defender or not.
          * @inheritDoc
          */
         public function isDefender() {
@@ -143,6 +154,7 @@ namespace FFC {
         }
 
         /**
+         * Determines if the footballer is a midfielder or not.
          * @inheritDoc
          */
         public function isMidfielder() {
@@ -150,6 +162,7 @@ namespace FFC {
         }
 
         /**
+         * Determines if the footballer is a forward or not.
          * @inheritDoc
          */
         public function isForward() {

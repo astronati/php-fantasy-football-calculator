@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * Defines the votes, malus and bonus given from a newspaper after a soccer match day to a footballer
  * @inheritDoc
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
@@ -13,6 +14,7 @@ namespace FFC {
     use \FFC\QuotationInterface as QuotationInterface;
 
     /**
+     * A quotation allows to return vote and other properties of a footballer after a soccer match.
      * @inheritDoc
      */
     class Quotation implements QuotationInterface {
@@ -61,6 +63,7 @@ namespace FFC {
         }
 
         /**
+         * Checks if the given $config contains all needed properties in order to define a Quotation instance.
          * @param array $config
          * @throws \Exception Missing parameter
          */
@@ -75,6 +78,7 @@ namespace FFC {
         }
 
         /**
+         * Returns the ID of the quotation.
          * @inheritDoc
          */
         public function getId() {
@@ -82,6 +86,7 @@ namespace FFC {
         }
 
         /**
+         * Returns the magic points of the quotation.
          * @inheritDoc
          */
         public function getMagicPoints() {
@@ -89,6 +94,7 @@ namespace FFC {
         }
 
         /**
+         * Returns the vote of the quotation.
          * @inheritDoc
          */
         public function getVote() {
@@ -96,6 +102,7 @@ namespace FFC {
         }
 
         /**
+         * Returns the quotation instance as an array.
          * @inheritDoc
          */
         public function toArray() {

@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * A Quotation Factory allows to return a Quotation instance.
  * @inheritDoc
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
@@ -20,7 +21,10 @@ namespace FFC {
     class QuotationFactory implements QuotationFactoryInterface {
 
         /**
+         * Returns a new instance of the Quotation class
          * @inheritDoc
+         * @param array $config An array containing all those data needed to instantiate a Quotation
+         * @return Quotation
          */
         public function create(array $config) {
           return new Quotation($config);

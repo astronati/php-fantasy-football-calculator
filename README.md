@@ -46,16 +46,20 @@ $ composer docs
 ### Testing
 Tests files are created next to related file as follows:
 ```
-src
-\-->[folder-name]
-\---->[file-name].php
-\---->[file-name]Test.php
+.
++-- src
+|   +-- [folder-name]
+|   |   +-- [file-name].php
+|   |   +-- [file-name]Test.php
 ```
 
 Execute following command to run the tests suite:
 ```sh
 $ composer test
 ```
+
+See [Code Coverage](http://astronati.github.io/php-fantasy-football-calculator/test/report/html/index.html) for more
+details.
 
 ## License
 This package is released under the [MIT license](LICENSE.md).

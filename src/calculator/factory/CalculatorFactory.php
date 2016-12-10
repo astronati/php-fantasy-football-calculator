@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * Returns a Calculator instance in order to get points and details of the given formation.
+ *
  * @inheritDoc
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
@@ -8,34 +10,39 @@
  * @version 0.2.1
  */
 
-namespace FFC {
-
+namespace FFC
+{
     use \FFC\CalculatorFactoryInterface as CalculatorFactoryInterface;
     use \FFC\Calculator as Calculator;
     use \FFC\FormationFactory as FormationFactory;
     use \FFC\QuotationFactory as QuotationFactory;
-    use \FFC\ConversionTable as ConversionTable;
+    use \FFC\ModifierFactory as ModifierFactory;
+    use \FFC\ConversionTableFactory as ConversionTableFactory;
     use \FFC\ReportCard as ReportCard;
 
     /**
-     * Defines a QuotationFactory
+     * Defines a QuotationFactory.
      * @codeCoverageIgnore
      */
-    class CalculatorFactory implements CalculatorFactoryInterface {
-
+    class CalculatorFactory implements CalculatorFactoryInterface
+    {
         /**
+         * Returns a new instance of the Calculator class.
          * @inheritDoc
+         * @param Quotation[] $quotations An array of Quotation instances
+         * @param array $options Used to config the calculator instance.
+         * @return Calculator
          */
-        public static function create(array $quotations, $options = array()) {
-          return new Calculator(
-            $quotations,
-            $options,
-            new FormationFactory(),
-            new QuotationFactory(),
-            ConversionTable::getInstance(),
-            ReportCard::getInstance()
-          );
+        public function create(array $quotations, $options = array()) {
+            return new Calculator(
+                $quotations,
+                $options,
+                new FormationFactory(),
+                new QuotationFactory(),
+                new ModifierFactory(),
+                new ConversionTableFactory(),
+                ReportCard::getInstance()
+            );
         }
     }
-  
 }

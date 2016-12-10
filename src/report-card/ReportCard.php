@@ -1,6 +1,10 @@
 <?php
 
+// TODO Should be converted into a class with state, since it should save quotations
+
 /**
+ * Report Card allows to compare votes and quotations of footballers in order to return the right votes per each role.
+ *
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
  * @copyright 2016 Andrea Stronati
@@ -24,20 +28,22 @@ namespace FFC {
         private static $instance;
 
         /**
+         * This method is used to return the generic vote of the footballer.
+         * As described in the getVotes method it could happen that a footballer has magic points only. This happens
+         * when a match is not played and the newspaper assigns a 6 by default.
          * @param Quotation $quotation
          * @param boolean $useMagicPoints
          * @return float
          * @private
-         * @description This method is used to return the generic vote of the footballer.
-         * As described in the getVotes method it could happen that a footballer has magic points only. This happens
-         * when a match is not played and the newspaper assigns a 6 by default.
          */
         private function _getVote($quotation, $useMagicPoints) {
             return $useMagicPoints || !$quotation->getVote() ? $quotation->getMagicPoints() : $quotation->getVote();
         }
 
         /**
+         * Returns the instance of the class.
          * @inheritDoc
+         * @return ReportCard
          */
         public static function getInstance() {
             if (!isset(self::$instance)) {
@@ -47,7 +53,13 @@ namespace FFC {
         }
 
         /**
+         * Returns an array containing the votes of those players that have to been taken into account as players who
+         * played in the given formation.
          * @inheritDoc
+         * @param Quotation[] $quotations
+         * @param Footballer[] $firstStrings
+         * @param Footballer[] $reserves
+         * @param boolean $useMagicPoints True by default
          */
         public function getVotes($quotations, $firstStrings, $reserves, $useMagicPoints = true) {
             $votes = array();

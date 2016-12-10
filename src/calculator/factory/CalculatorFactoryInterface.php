@@ -9,22 +9,21 @@
  * @version 0.2.1
  */
 
-namespace FFC {
-
+namespace FFC
+{
     /**
      * Defines the interface of the Calculator Factory.
-     * It implements the Factory pattern.
      * @codeCoverageIgnore
      */
-    interface CalculatorFactoryInterface {
-
+    interface CalculatorFactoryInterface
+    {
         /**
-         * Returns a new instance of the Calculator class.
+         * Implements the Factory pattern.
          *
          * @param array $quotations
          * @param array $options
          * @return Calculator
          */
-        public static function create(array $quotations, $options = array());
+        public function create(array $quotations, $options = array());
     }
 }
