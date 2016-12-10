@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * Report Card is used to compare votes and quotations of footballers in order to return the right votes per each role.
+ *
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
  * @copyright 2016 Andrea Stronati
@@ -11,7 +13,6 @@ namespace FFC {
 
     /**
      * Defines the interface of a ReportCard.
-     * Report Card is used to return the votes of the footballers that have played in terms of fantasy team.
      */
     interface ReportCardInterface {
 

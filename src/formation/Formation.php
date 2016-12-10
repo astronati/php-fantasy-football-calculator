@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * A Formation is a group of Footballers
  * @inheritDoc
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
@@ -13,6 +14,8 @@ namespace FFC {
     use \FFC\FormationInterface as FormationInterface;
 
     /**
+     * Allows to return footballers and to filter them by type (first strings or reserves) or by role (goalkeeper,
+     * defender, midfielder and forward)
      * @inheritDoc
      */
     class Formation implements FormationInterface {
@@ -56,6 +59,7 @@ namespace FFC {
         }
 
         /**
+         * Adds footballers to the instance.
          * @param Footballer[] $footballers
          */
         public function __construct(array $footballers) {
@@ -63,6 +67,7 @@ namespace FFC {
         }
 
         /**
+         * Filters filtered footballers or all of them by type as first strings.
          * @inheritDoc
          */
         public function filterFirstStrings() {
@@ -71,6 +76,7 @@ namespace FFC {
         }
 
         /**
+         * Filters filtered footballers or all of them by type as reserves.
          * @inheritDoc
          */
         public function filterReserves() {
@@ -79,6 +85,7 @@ namespace FFC {
         }
 
         /**
+         * Filters filtered footballers or all of them by role as goalkeeper.
          * @inheritDoc
          */
         public function filterGoalkeepers() {
@@ -87,6 +94,7 @@ namespace FFC {
         }
 
         /**
+         * Filters filtered footballers or all of them by role as defenders.
          * @inheritDoc
          */
         public function filterDefenders() {
@@ -95,6 +103,7 @@ namespace FFC {
         }
 
         /**
+         * Filters filtered footballers or all of them by role as midfielders.
          * @inheritDoc
          */
         public function filterMidfielders() {
@@ -103,6 +112,7 @@ namespace FFC {
         }
 
         /**
+         * Filters filtered footballers or all of them by role as forwards.
          * @inheritDoc
          */
         public function filterForwards() {
@@ -111,7 +121,9 @@ namespace FFC {
         }
 
         /**
+         * Returns all footballers or the filtered ones.
          * @inheritDoc
+         * @return Footballer[]
          */
         public function getFootballers() {
             $footballers = $this->_getFilteredFootballers();

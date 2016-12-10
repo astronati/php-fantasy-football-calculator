@@ -22,7 +22,9 @@
     "php": ">=5.6.0"
   },
   "autoload": {
-    "exclude-from-classmap": ["/src/**/*Test.php"],
+    "exclude-from-classmap": [
+      "/src/**/*Test.php"
+    ],
     "classmap": [
       "src/"
     ]

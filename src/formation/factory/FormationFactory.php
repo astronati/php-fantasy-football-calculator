@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * A FormationFactory returns an instance of a Formation
  * @inheritDoc
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
@@ -15,13 +16,17 @@ namespace FFC {
     use \FFC\Formation as Formation;
 
     /**
+     * Allows to create a new formation from the given footballers
      * @inheritDoc
      * @codeCoverageIgnore
      */
     class FormationFactory implements FormationFactoryInterface {
 
         /**
+         * Returns a Formation instance
          * @inheritDoc
+         * @param array $container
+         * @return Formation
          */
         public function create($container = array()) {
             $footballers = array();
