@@ -9,26 +9,26 @@ class ForwardModifierTest extends PHPUnit_Framework_TestCase
 {
     public function forwardsProvider()
     {
-        return array(
-            array([5, 6, 4, 7], 22),
-            array([5, 5, 5, 6], 21),
-            array([], 0),
-        );
+        return [
+            [[5, 6, 4, 7], 22],
+            [[5, 5, 5, 6], 21],
+            [[], 0],
+        ];
     }
 
     private function _createConversionTableMock()
     {
         $conversionTableMock = $this->getMockBuilder('FFC\ConversionTableAbstract')
-            ->setMethods(array(
+            ->setMethods([
                 'getConvertedValue',
-            ))
+            ])
             ->getMock();
-        $conversionTableMock->method('getConvertedValue')->will($this->returnValueMap(array(
-            array(4, 4),
-            array(5, 5),
-            array(6, 6),
-            array(7, 7),
-        )));
+        $conversionTableMock->method('getConvertedValue')->will($this->returnValueMap([
+            [4, 4],
+            [5, 5],
+            [6, 6],
+            [7, 7],
+        ]));
         return $conversionTableMock;
     }
 
