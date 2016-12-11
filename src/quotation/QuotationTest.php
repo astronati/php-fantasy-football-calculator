@@ -9,40 +9,40 @@ class QuotationTest extends PHPUnit_Framework_TestCase {
 
     public function badConfigProvider() {
         return array(
-            array(
+            [
                 // Config
-                array('')
-            ),
-            array(
-                array('id' => 1)
-            ),
-            array(
-                array('id' => 1, 'magicPoints' => 1)
-            ),
-            array(
-                array('id' => 1, 'vote' => 1)
-            ),
-            array(
-                array('magicPoints' => 1, 'vote' => 1)
-            ),
+                ['']
+            ],
+            [
+                ['id' => 1]
+            ],
+            [
+                ['id' => 1, 'magicPoints' => 1]
+            ],
+            [
+                ['id' => 1, 'vote' => 1]
+            ],
+            [
+                ['magicPoints' => 1, 'vote' => 1]
+            ],
         );
     }
 
     public function goodConfigProvider() {
-        return array(
-            array(
+        return [
+            [
                 // Config
-                array('id' => '1', 'magicPoints' => '2', 'vote' => '3', 'test' => 'gas'),
+                ['id' => '1', 'magicPoints' => '2', 'vote' => '3', 'test' => 'gas'],
                 // Result
-                array('id' => 1, 'magicPoints' => 2.0, 'vote' => 3.0),
-            ),
-            array(
+                ['id' => 1, 'magicPoints' => 2.0, 'vote' => 3.0],
+            ],
+            [
                 // Config
-                array('id' => '1', 'magicPoints' => '', 'vote' => ''),
+                ['id' => '1', 'magicPoints' => '', 'vote' => ''],
                 // Result
-                array('id' => 1, 'magicPoints' => null, 'vote' => null),
-            ),
-        );
+                ['id' => 1, 'magicPoints' => null, 'vote' => null],
+            ],
+        ];
     }
 
     /**

@@ -11,23 +11,23 @@ class FormationTest extends PHPUnit_Framework_TestCase {
      * @var array
      */
     private $_footballers = array(
-        array('id' => 1, 'type' => 'T', 'order' => '1', 'role' => 'P'),
-        array('id' => 2, 'type' => 'T', 'order' => '1', 'role' => 'D'),
-        array('id' => 3, 'type' => 'R', 'order' => '2', 'role' => 'D'),
-        array('id' => 4, 'type' => 'T', 'order' => '3', 'role' => 'D'),
-        array('id' => 5, 'type' => 'R', 'order' => '1', 'role' => 'C'),
-        array('id' => 6, 'type' => 'T', 'order' => '2', 'role' => 'C'),
-        array('id' => 7, 'type' => 'R', 'order' => '3', 'role' => 'C'),
-        array('id' => 8, 'type' => 'R', 'order' => '1', 'role' => 'A'),
-        array('id' => 9, 'type' => 'T', 'order' => '2', 'role' => 'A'),
-        array('id' => 10, 'type' => 'T', 'order' => '3', 'role' => 'A'),
-        array('id' => 11, 'type' => 'R', 'order' => '4', 'role' => 'P'),
+        ['id' => 1, 'type' => 'T', 'order' => '1', 'role' => 'P'],
+        ['id' => 2, 'type' => 'T', 'order' => '1', 'role' => 'D'],
+        ['id' => 3, 'type' => 'R', 'order' => '2', 'role' => 'D'],
+        ['id' => 4, 'type' => 'T', 'order' => '3', 'role' => 'D'],
+        ['id' => 5, 'type' => 'R', 'order' => '1', 'role' => 'C'],
+        ['id' => 6, 'type' => 'T', 'order' => '2', 'role' => 'C'],
+        ['id' => 7, 'type' => 'R', 'order' => '3', 'role' => 'C'],
+        ['id' => 8, 'type' => 'R', 'order' => '1', 'role' => 'A'],
+        ['id' => 9, 'type' => 'T', 'order' => '2', 'role' => 'A'],
+        ['id' => 10, 'type' => 'T', 'order' => '3', 'role' => 'A'],
+        ['id' => 11, 'type' => 'R', 'order' => '4', 'role' => 'P'],
     );
 
     private function _createFootballersMock($footballers) {
         $footballerMocks = array();
 
-        foreach ($footballers as $index => $footballer) {
+        foreach ($footballers as $footballer) {
             $footballerMock = $this->getMockBuilder('Footballer')
                 ->disableOriginalConstructor()
                 ->setMethods(array(

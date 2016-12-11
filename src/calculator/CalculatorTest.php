@@ -10,8 +10,8 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
     public function dataProvider()
     {
         return array(
-            array(
-                array(
+            [
+                [
                     ['id' => 1, 'vote' => 1, 'magicPoints' => 2],
                     ['id' => 2, 'vote' => 2, 'magicPoints' => 3],
                     ['id' => 3, 'vote' => 3, 'magicPoints' => 4],
@@ -20,8 +20,8 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
                     ['id' => 6, 'vote' => 6, 'magicPoints' => 7],
                     ['id' => 7, 'vote' => 7, 'magicPoints' => 8],
                     ['id' => 8, 'vote' => 7, 'magicPoints' => 8],
-                ),
-                array(
+                ],
+                [
                     ['id' => 1, 'type' => 'T', 'order' => '3', 'role' => 'D'],
                     ['id' => 2, 'type' => 'R', 'order' => '3', 'role' => 'D'],
                     ['id' => 3, 'type' => 'T', 'order' => '3', 'role' => 'D'],
@@ -29,11 +29,11 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
                     ['id' => 5, 'type' => 'T', 'order' => '3', 'role' => 'D'],
                     ['id' => 6, 'type' => 'R', 'order' => '3', 'role' => 'C'],
                     ['id' => 7, 'type' => 'T', 'order' => '3', 'role' => 'P'],
-                ),
+                ],
                 true,
                 3,
                 [6, 4, 5, 7],
-                array(
+                [
                     'getSum' => 88,
                     'getDefenseBonus' => 1,
                     'details' => [
@@ -46,8 +46,8 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
                         ['id' => 7, 'vote' => 7, 'magicPoints' => 8],
                     ],
                     'goals' => 3
-                )
-            )
+                ]
+            ]
         );
     }
 
@@ -55,7 +55,7 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
     {
         // Creates mock for the Quotation Factory
         $quotationFactoryMock = $this->getMockBuilder('FFC\QuotationFactory')
-            ->setMethods(array('create'))
+            ->setMethods(['create'])
             ->getMock();
         // From given quotations creates an array of quotation mocks
         $quotationsMocksMap = array();
@@ -71,10 +71,10 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
     {
         $quotationMock = $this->getMockBuilder('Quotation')
             ->disableOriginalConstructor()
-            ->setMethods(array(
+            ->setMethods([
                 'getId',
                 'toArray'
-            ))
+            ])
             ->getMock();
         $quotationMock->method('getId')->will($this->returnValue($quotation['id']));
         $quotationMock->method('toArray')->will($this->returnValue($quotation));
@@ -86,9 +86,9 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
         // Creates mock for the Footballer
         $footballerMock = $this->getMockBuilder('Footballer')
            ->disableOriginalConstructor()
-            ->setMethods(array(
+            ->setMethods([
                 'getId'
-            ))
+            ])
             ->getMock();
         $footballerMock->method('getId')->will($this->returnValue($footballer['id']));
         return $footballerMock;
@@ -98,7 +98,7 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
     {
         // Creates mock for the Formation Factory
         $formationFactoryMock = $this->getMockBuilder('FFC\FormationFactory')
-            ->setMethods(array('create'))
+            ->setMethods(['create'])
             ->getMock();
         $formationFactoryMock->method('create')->will($this->returnValue($this->_createFormationMock($footballers)));
         return $formationFactoryMock;
@@ -176,7 +176,7 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
     private function _createReportCardMock($values)
     {
         $reportCardMock = $this->getMockBuilder('FFC\ReportCard')
-            ->setMethods(array('getVotes'))
+            ->setMethods(['getVotes'])
             ->getMock();
         $reportCardMock->method('getVotes')->will($this->returnValue($values));
         return $reportCardMock;
@@ -191,13 +191,13 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
         $reportCardMock = $this->_createReportCardMock($reports);
 
         return new Calculator(
-            $quotations,
-            ['defenseBonus' => $isDefenseBonusEnabled],
             $formationFactoryMock,
             $quotationFactoryMock,
             $modifierFactoryMock,
             $conversionTableFactoryMock,
-            $reportCardMock
+            $reportCardMock,
+            $quotations,
+            ['defenseBonus' => $isDefenseBonusEnabled]
         );
     }
 

@@ -8,22 +8,22 @@ use \FFC\Footballer as Footballer;
 class FootballerTest extends PHPUnit_Framework_TestCase {
 
     public function badConfigProvider() {
-        return array(
-            array(array('')),
-            array(array('id' => 1)),
-            array(array('id' => 1, 'type' => 1)),
-            array(array('id' => 1, 'type' => 1, 'order' => 1)),
-            array(array('id' => 1, 'type' => 1, 'role' => 1)),
-        );
+        return [
+            [['']],
+            [['id' => 1]],
+            [['id' => 1, 'type' => 1]],
+            [['id' => 1, 'type' => 1, 'order' => 1]],
+            [['id' => 1, 'type' => 1, 'role' => 1]],
+        ];
     }
 
     public function goodConfigProvider() {
-        return array(
-            array(
+        return [
+            [
                 // Config
-                array('id' => '1', 'type' => 'T', 'order' => '3', 'role' => 'C'),
+                ['id' => '1', 'type' => 'T', 'order' => '3', 'role' => 'C'],
                 // Result
-                array(
+                [
                     'id' => 1,
                     'type' => 'T',
                     'order' => 3,
@@ -34,11 +34,11 @@ class FootballerTest extends PHPUnit_Framework_TestCase {
                     'isDefender' => false,
                     'isMidfielder' => true,
                     'isForward' => false,
-                ),
-            ),
-            array(
-                array('id' => '1', 'type' => 'R', 'order' => '3', 'role' => 'C'),
-                array(
+                ],
+            ],
+            [
+                ['id' => '1', 'type' => 'R', 'order' => '3', 'role' => 'C'],
+                [
                     'id' => 1,
                     'type' => 'R',
                     'order' => 3,
@@ -49,11 +49,11 @@ class FootballerTest extends PHPUnit_Framework_TestCase {
                     'isDefender' => false,
                     'isMidfielder' => true,
                     'isForward' => false,
-                ),
-            ),
-            array(
-                array('id' => '1', 'type' => 'R', 'order' => '3', 'role' => 'P'),
-                array(
+                ],
+            ],
+            [
+                ['id' => '1', 'type' => 'R', 'order' => '3', 'role' => 'P'],
+                [
                     'id' => 1,
                     'type' => 'R',
                     'order' => 3,
@@ -64,11 +64,11 @@ class FootballerTest extends PHPUnit_Framework_TestCase {
                     'isDefender' => false,
                     'isMidfielder' => false,
                     'isForward' => false,
-                ),
-            ),
-            array(
-                array('id' => '1', 'type' => 'R', 'order' => '3', 'role' => 'D'),
-                array(
+                ],
+            ],
+            [
+                ['id' => '1', 'type' => 'R', 'order' => '3', 'role' => 'D'],
+                [
                     'id' => 1,
                     'type' => 'R',
                     'order' => 3,
@@ -79,11 +79,11 @@ class FootballerTest extends PHPUnit_Framework_TestCase {
                     'isDefender' => true,
                     'isMidfielder' => false,
                     'isForward' => false,
-                ),
-            ),
-            array(
-                array('id' => '1', 'type' => 'R', 'order' => '3', 'role' => 'A'),
-                array(
+                ],
+            ],
+            [
+                ['id' => '1', 'type' => 'R', 'order' => '3', 'role' => 'A'],
+                [
                     'id' => 1,
                     'type' => 'R',
                     'order' => 3,
@@ -94,9 +94,9 @@ class FootballerTest extends PHPUnit_Framework_TestCase {
                     'isDefender' => false,
                     'isMidfielder' => false,
                     'isForward' => true,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     /**

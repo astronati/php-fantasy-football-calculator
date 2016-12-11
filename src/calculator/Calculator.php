@@ -80,22 +80,22 @@ namespace FFC
          * Optionally it can be configured to calculate bonus.
          * @see Calculator::$_options
          * @see Quotation::_checkConfiguration
-         * @param array $quotations Contains arrays with properties that satisfy Quotation::_checkConfiguration
-         * @param array $options Contains properties as mentioned in Calculator::$_options
          * @param FormationFactory $formationFactory An instance of FormationFactory
          * @param QuotationFactory $quotationFactory An instance of QuotationFactory
          * @param ModifierFactory $modifierFactory An instance of ModifierFactory
          * @param ConversionTableFactory $conversionTableFactory An instance of ConversionTableFactory
          * @param ReportCard $reportCard An instance of ReportCard
+         * @param array $quotations Contains arrays with properties that satisfy Quotation::_checkConfiguration
+         * @param array $options Contains properties as mentioned in Calculator::$_options
          */
         public function __construct(
-            array $quotations,
-            array $options = array(),
             FormationFactory $formationFactory,
             QuotationFactory $quotationFactory,
             ModifierFactory $modifierFactory,
             ConversionTableFactory $conversionTableFactory,
-            ReportCard $reportCard
+            ReportCard $reportCard,
+            array $quotations,
+            array $options = array()
         ) {
             for ($i = 0; $i < count($quotations); $i++) {
                 $quotation = $quotationFactory->create($quotations[$i]);
