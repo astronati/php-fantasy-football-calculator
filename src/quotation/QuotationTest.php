@@ -8,7 +8,7 @@ use \FFC\Quotation as Quotation;
 class QuotationTest extends PHPUnit_Framework_TestCase {
 
     public function badConfigProvider() {
-        return array(
+        return [
             [
                 // Config
                 ['']
@@ -25,7 +25,7 @@ class QuotationTest extends PHPUnit_Framework_TestCase {
             [
                 ['magicPoints' => 1, 'vote' => 1]
             ],
-        );
+        ];
     }
 
     public function goodConfigProvider() {

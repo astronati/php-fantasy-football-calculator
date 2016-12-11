@@ -128,9 +128,9 @@ class ReportCardTest extends PHPUnit_Framework_TestCase {
         foreach ($footballers as $footballer) {
             $footballerMock = $this->getMockBuilder('Footballer')
                 ->disableOriginalConstructor()
-                ->setMethods(array(
+                ->setMethods([
                     'getId',
-                ))
+                ])
                 ->getMock();
             $footballerMock->method('getId')->will($this->returnValue($footballer['id']));
             array_push($footballersMock, $footballerMock);
@@ -141,10 +141,10 @@ class ReportCardTest extends PHPUnit_Framework_TestCase {
     private function _createQuotationMock($quotation) {
         $quotationMock = $this->getMockBuilder('Quotation')
             ->disableOriginalConstructor()
-            ->setMethods(array(
+            ->setMethods([
                 'getVote',
                 'getMagicPoints',
-            ))
+            ])
             ->getMock();
         $quotationMock->method('getVote')->will($this->returnValue($quotation['vote']));
         $quotationMock->method('getMagicPoints')->will($this->returnValue($quotation['magicPoints']));
