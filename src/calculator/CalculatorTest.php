@@ -268,6 +268,14 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
             $reports
         );
         $this->assertSame($result['getDefenseBonus'], $calculator->getDefenseBonus($footballers));
+        $calculator = $this->_createCalculatorMock(
+            $quotations,
+            $footballers,
+            false,
+            $convertedValue,
+            $reports
+        );
+        $this->assertSame(0, $calculator->getDefenseBonus($footballers));
     }
 
     /**
