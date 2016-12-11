@@ -1,7 +1,7 @@
 <?php
 
 /**
- * A forward modifier is used to determine bonus to add to the given formation.
+ * A forward modifier is used to determine bonus to add to each single forward.
  * @inheritDoc
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
@@ -14,19 +14,26 @@ namespace FFC {
     use \FFC\ModifierAbstract as ModifierAbstract;
 
     /**
-     * Allows to return a bonus to the given footballer.
+     * The Forward bonus can be added to all those forwards that did not score but own vote is higher than 6.
+     * So this bonus is a sum of each single bonus that has been given to each forward.
      * @inheritDoc
      */
     class ForwardModifier extends ModifierAbstract {
 
         /**
          * Returns the bonus of the given forward.
-         * @param array $config
+         * @param array $config It has to contain following keys:
+         * - forwards such as an array of forwards votes that played and didn't score or missed a penalty.
          * @return float
          */
         public function getBonus(array $config)
         {
-            // TODO: Implement getBonus() method.
+            $bonus = 0;
+            $forwards = $config['forwards'];
+            foreach ($forwards as $forward) {
+                $bonus += $this->_conversionTable->getConvertedValue($forward);
+            }
+            return $bonus;
         }
     }
 }

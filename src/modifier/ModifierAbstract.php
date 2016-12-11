@@ -20,12 +20,6 @@ namespace FFC
     abstract class ModifierAbstract implements ModifierInterface
     {
         /**
-         * The instance of the class itself.
-         * @var ModifierInterface
-         */
-        protected static $instance;
-
-        /**
          * An instance of a ConversionTableAbstract
          * @var ConversionTableAbstract
          */
