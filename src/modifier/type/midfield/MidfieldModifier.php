@@ -26,7 +26,26 @@ namespace FFC {
          */
         public function getBonus(array $config)
         {
-            // TODO: Implement getBonus() method.
+            $homeMidfielders = $config['home'];
+            $awayMidfielders = $config['away'];
+            $difference = abs(count($homeMidfielders) - count($awayMidfielders));
+            if (count($homeMidfielders) > count($awayMidfielders)) {
+                for ($i = 0; $i < $difference; $i++) {
+                    array_push($awayMidfielders, 5);
+                }
+            }
+            if (count($homeMidfielders) < count($awayMidfielders)) {
+                for ($i = 0; $i < $difference; $i++) {
+                    array_push($homeMidfielders, 5);
+                }
+            }
+
+            $homeAverage = array_sum($homeMidfielders) / count($homeMidfielders);
+            $awayAverage = array_sum($awayMidfielders) / count($awayMidfielders);
+
+            $bonus = $this->_conversionTable->getConvertedValue(abs($homeAverage - $awayAverage));
+
+            return $homeAverage < $awayAverage ? $bonus * (-1) : $bonus;
         }
     }
 }
