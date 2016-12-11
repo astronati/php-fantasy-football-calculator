@@ -19,7 +19,6 @@ namespace FFC
     use \FFC\QuotationFactory as QuotationFactory;
     use \FFC\ModifierFactory as ModifierFactory;
     use \FFC\ConversionTableFactory as ConversionTableFactory;
-    use \FFC\ConversionTable as ConversionTable;
     use \FFC\ReportCard as ReportCard;
 
     /**

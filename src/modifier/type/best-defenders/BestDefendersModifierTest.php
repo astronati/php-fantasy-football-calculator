@@ -12,6 +12,7 @@ class BestDefendersModifierTest extends PHPUnit_Framework_TestCase
         return array(
             array(6, [5, 6, 4, 7], 6),
             array(6, [5, 5, 5, 6], 5.5),
+            array(6, [7, 7, 7], 0),
         );
     }
 
