@@ -22,17 +22,17 @@ namespace FFC
          * The map between the sum of magic points of a formation and related goals.
          * @type array
          */
-        protected $_map = array(
-            array(120, 10),
-            array(114, 9),
-            array(108, 8),
-            array(102, 7),
-            array(96, 6),
-            array(90, 5),
-            array(84, 4),
-            array(78, 3),
-            array(72, 2),
-            array(66, 1),
-        );
+        protected $_map = [
+            [120, 10],
+            [114, 9],
+            [108, 8],
+            [102, 7],
+            [96, 6],
+            [90, 5],
+            [84, 4],
+            [78, 3],
+            [72, 2],
+            [66, 1],
+        ];
     }
 }

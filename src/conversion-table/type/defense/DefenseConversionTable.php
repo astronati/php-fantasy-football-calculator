@@ -22,17 +22,17 @@ namespace FFC
          * The map between the defense average and bonus/malus.
          * @type array
          */
-        protected $_map = array(
-            array(7, -5),
-            array(6.75, -4),
-            array(6.5, -3),
-            array(6.25, -2),
-            array(6, -1),
-            array(5.75, 0),
-            array(5.5, 1),
-            array(5.25, 2),
-            array(5, 3),
-            array(0, 4)
-        );
+        protected $_map = [
+            [7, -5],
+            [6.75, -4],
+            [6.5, -3],
+            [6.25, -2],
+            [6, -1],
+            [5.75, 0],
+            [5.5, 1],
+            [5.25, 2],
+            [5, 3],
+            [0, 4],
+        ];
     }
 }
