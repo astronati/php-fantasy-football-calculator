@@ -22,16 +22,16 @@ namespace FFC
          * The map between the difference between two midfields and bonus/malus.
          * @type array
          */
-        protected $_map = array(
-            array(8, 4),
-            array(7, 3.5),
-            array(6, 3),
-            array(5, 2.5),
-            array(4, 2),
-            array(3, 1.5),
-            array(2, 1),
-            array(1, 0.5),
-            array(0, 0),
-        );
+        protected $_map = [
+            [8, 4],
+            [7, 3.5],
+            [6, 3],
+            [5, 2.5],
+            [4, 2],
+            [3, 1.5],
+            [2, 1],
+            [1, 0.5],
+            [0, 0],
+        ];
     }
 }

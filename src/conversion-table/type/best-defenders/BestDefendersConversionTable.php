@@ -22,10 +22,10 @@ namespace FFC
          * The map between the defense average and bonus.
          * @type array
          */
-        protected $_map = array(
-            array(7, 6),
-            array(6.5, 3),
-            array(6, 1),
-        );
+        protected $_map = [
+            [7, 6],
+            [6.5, 3],
+            [6, 1],
+        ];
     }
 }

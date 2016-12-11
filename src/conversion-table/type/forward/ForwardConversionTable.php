@@ -22,11 +22,11 @@ namespace FFC
          * The map between the forward average and bonus/malus.
          * @type array
          */
-        protected $_map = array(
-            array(8, 2),
-            array(7.5, 1.5),
-            array(7, 1),
-            array(6.5, 0.5),
-        );
+        protected $_map = [
+            [8, 2],
+            [7.5, 1.5],
+            [7, 1],
+            [6.5, 0.5],
+        ];
     }
 }
