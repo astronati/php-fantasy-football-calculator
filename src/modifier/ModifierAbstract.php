@@ -26,6 +26,17 @@ namespace FFC
         protected $_conversionTable;
 
         /**
+         * Returns the average from a list of numbers
+         * @private
+         * @param float[] $array
+         * @return float
+         */
+        protected function _getAverage(array $array)
+        {
+            return array_sum($array) / count($array);
+        }
+
+        /**
          * Returns the malus/bonus given from the modifier.
          * @inheritDoc
          * @param array $config

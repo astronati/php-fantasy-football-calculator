@@ -27,13 +27,12 @@ namespace FFC {
         public function getBonus(array $config)
         {
             $defenders = $config['defenders'];
-            $average = array_sum($defenders) / count($defenders);
             // Conversion table is applied with a defense of 4 footballers by default.
-            $malus = $this->_conversionTable->getConvertedValue($average);
+            $malus = $this->_conversionTable->getConvertedValue($this->_getAverage($defenders));
             // If the defense is composed with a number of footballers different from 4, then the malus can be changed.
             // Malus is increased if the defense has more than 4 footballers.
             // Malus is decreased if the defense has 3 footballers.
-            // The points to add/remove from the malus is given by the difference between the number of defenders and 4.
+            // The points to add/remove to the malus is given by the difference between the number of defenders and 4.
             return $malus - (count($defenders) - 4);
         }
     }

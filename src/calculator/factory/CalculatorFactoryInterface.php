@@ -9,8 +9,7 @@
  * @version 0.2.1
  */
 
-namespace FFC
-{
+namespace FFC {
     /**
      * Defines the interface of the Calculator Factory.
      * @codeCoverageIgnore
