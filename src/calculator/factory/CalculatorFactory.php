@@ -10,8 +10,8 @@
  * @version 0.2.1
  */
 
-namespace FFC
-{
+namespace FFC {
+
     use \FFC\CalculatorFactoryInterface as CalculatorFactoryInterface;
     use \FFC\Calculator as Calculator;
     use \FFC\FormationFactory as FormationFactory;

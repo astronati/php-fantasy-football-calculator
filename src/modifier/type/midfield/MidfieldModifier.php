@@ -20,6 +20,18 @@ namespace FFC {
     class MidfieldModifier extends ModifierAbstract {
 
         /**
+         * Adds reserve votes in order to obtain two groups of votes with the same number of votes.
+         * @param float[] $midfielders
+         * @param integer $increment
+         */
+        private function _fillMidfielders(array &$midfielders, $increment = 0)
+        {
+            for ($i = 0; $i < $increment; $i++) {
+                array_push($midfielders, 5);
+            }
+        }
+
+        /**
          * Returns the bonus/malus to give to both formations
          * @param array $config
          * @return float
@@ -28,24 +40,21 @@ namespace FFC {
         {
             $homeMidfielders = $config['home'];
             $awayMidfielders = $config['away'];
+            // Determines the difference of the numbers of footballers.
             $difference = abs(count($homeMidfielders) - count($awayMidfielders));
+
             if (count($homeMidfielders) > count($awayMidfielders)) {
-                for ($i = 0; $i < $difference; $i++) {
-                    array_push($awayMidfielders, 5);
-                }
+                $this->_fillMidfielders($awayMidfielders, $difference);
             }
             if (count($homeMidfielders) < count($awayMidfielders)) {
-                for ($i = 0; $i < $difference; $i++) {
-                    array_push($homeMidfielders, 5);
-                }
+                $this->_fillMidfielders($homeMidfielders, $difference);
             }
 
-            $homeAverage = array_sum($homeMidfielders) / count($homeMidfielders);
-            $awayAverage = array_sum($awayMidfielders) / count($awayMidfielders);
+            $bonus = $this->_conversionTable->getConvertedValue(abs(
+                $this->_getAverage($homeMidfielders) - $this->_getAverage($awayMidfielders)
+            ));
 
-            $bonus = $this->_conversionTable->getConvertedValue(abs($homeAverage - $awayAverage));
-
-            return $homeAverage < $awayAverage ? $bonus * (-1) : $bonus;
+            return ($this->_getAverage($homeMidfielders) > $this->_getAverage($awayMidfielders) ? 1 : -1) * $bonus;
         }
     }
 }
