@@ -1,7 +1,8 @@
 <?php
 
 /**
- * Report Card is used to compare votes and quotations of footballers in order to return the right votes per each role.
+ * Report Card is used to compare votes and quotations of footballers in order to return the right votes per each
+ * footballer.
  *
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
@@ -17,23 +18,34 @@ namespace FFC {
     interface ReportCardInterface {
 
         /**
-         * Returns the instance of the ReportCard.
-         * It implements the Singleton pattern.
+         * Returns an array of details per each footballer.
          *
-         * @return ReportCard
+         * @param Footballer[] $footballers An array of footballers
+         * @return array It has the following structure
+         * [
+         *   footballerID => [
+         *     ...
+         *   ],
+         *   ...
+         * ]
          */
-        public static function getInstance();
+        public function getDetails(array $footballers);
 
         /**
-         * Returns the votes of the footballers that have played.
-         * The footballers are filtered by role.
+         * Returns the magic points of the given footballers.
          *
-         * @param Quotation[] $quotations An array of Quotation instances
-         * @param Footballer[] $firstStrings An array of footballers as first strings
-         * @param Footballer[] $reserves An array of footballers as reserves
-         * @param boolean $useMagicPoints If true, it returns the magic points of the footballers otherwise their votes.
+         * @param Footballer[] $footballers An array of footballers
          * @return float[]
          */
-        public function getVotes($quotations, $firstStrings, $reserves, $useMagicPoints = true);
+        public function getMagicPoints(array $footballers);
+
+        /**
+         * Returns the votes of the given footballers.
+         *
+         * @param Footballer[] $footballers An array of footballers
+         * @return float[]
+         */
+        public function getVotes(array $footballers);
+
     }
 }

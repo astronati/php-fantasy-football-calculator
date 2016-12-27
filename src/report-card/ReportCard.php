@@ -1,7 +1,5 @@
 <?php
 
-// TODO Should be converted into a class with state, since it should save quotations
-
 /**
  * Report Card allows to compare votes and quotations of footballers in order to return the right votes per each role.
  *
@@ -14,79 +12,94 @@
 namespace FFC {
 
     use \FFC\ReportCardInterface as ReportCardInterface;
+    use \FFC\QuotationFactory as QuotationFactory;
 
     /**
      * Defines a ReportCard.
-     * Report Card is used to return the votes of the footballers that have played in terms of fantasy team.
+     * Report Card is used to return the votes, magic points and details of the given footballers.
      */
     class ReportCard implements ReportCardInterface {
 
         /**
-         * The instance of the class itself.
-         * @var ReportCard
+         * A container of Quotation(s)
+         * @var Quotation[] It has following structure
+         * [
+         *   'footballerID' => [
+         *     'vote' => ...
+         *     'magicPoints' => ...
+         *     ...
+         *   ],
+         *   ...
+         * ]
          */
-        private static $instance;
+        private $_quotations = array();
 
         /**
-         * This method is used to return the generic vote of the footballer.
-         * As described in the getVotes method it could happen that a footballer has magic points only. This happens
-         * when a match is not played and the newspaper assigns a 6 by default.
-         * @param Quotation $quotation
-         * @param boolean $useMagicPoints
-         * @return float
-         * @private
+         * Associates quotations to the ReportCard instance
+         * @param array[] $config
+         * @param QuotationFactory $quotationFactory
          */
-        private function _getVote($quotation, $useMagicPoints) {
-            return $useMagicPoints || !$quotation->getVote() ? $quotation->getMagicPoints() : $quotation->getVote();
-        }
-
-        /**
-         * Returns the instance of the class.
-         * @inheritDoc
-         * @return ReportCard
-         */
-        public static function getInstance() {
-            if (!isset(self::$instance)) {
-                self::$instance = new self();
+        public function __construct(array $config, QuotationFactory $quotationFactory)
+        {
+            for ($i = 0; $i < count($config); $i++) {
+                $quotation = $quotationFactory->create($config[$i]);
+                // Fills $this->_quotations with Quotation instances
+                $this->_quotations[$quotation->getFootballerId()] = $quotation;
             }
-            return self::$instance;
         }
 
         /**
-         * Returns an array containing the votes of those players that have to been taken into account as players who
-         * played in the given formation.
-         * @inheritDoc
-         * @param Quotation[] $quotations
-         * @param Footballer[] $firstStrings
-         * @param Footballer[] $reserves
-         * @param boolean $useMagicPoints True by default
+         * Returns all details (from quotations) per each footballers of the given match.
+         * @param Footballer[] $footballers
+         * @return array
          */
-        public function getVotes($quotations, $firstStrings, $reserves, $useMagicPoints = true) {
+        public function getDetails(array $footballers)
+        {
+            $details = array();
+            for ($i = 0; $i < count($footballers); $i++) {
+                $details[$footballers[$i]->getId()] = $this->_quotations[$footballers[$i]->getId()]->toArray();
+            }
+            return $details;
+        }
+
+        /**
+         * Returns an array containing only magic points per each given footballers. A footballer can have:
+         * - specified magic points
+         * - 0 (that is a valid value)
+         * - null
+         * @param Footballer[] $footballers
+         * @return float[]
+         */
+        public function getMagicPoints(array $footballers)
+        {
+            $magicPoints = array();
+            for ($i = 0; $i < count($footballers); $i++) {
+                array_push($magicPoints, $this->_quotations[$footballers[$i]->getId()]->getMagicPoints());
+            }
+            return $magicPoints;
+        }
+
+        /**
+         * Returns an array containing the votes of given players. A footballer can have:
+         * - specified vote
+         * - 0 (that is a valid value)
+         * - null
+         * @inheritDoc
+         * @param Footballer[] $footballers
+         * @return float[]
+         */
+        public function getVotes(array $footballers)
+        {
             $votes = array();
-            $reservesIndex = 0;
-
-            for ($i = 0; $i < count($firstStrings); $i++) {
-                $isReserveFound = false;
-                $firstStringQuotation = $quotations[$firstStrings[$i]->getId()];
-                $vote = $this->_getVote($firstStringQuotation, $useMagicPoints);
-                if (!is_null($vote)) {
-                    array_push($votes, $vote);
+            for ($i = 0; $i < count($footballers); $i++) {
+                $vote = $this->_quotations[$footballers[$i]->getId()]->getVote();
+                // It could happen that a footballer has magic points only. This happens when a match is not played and
+                // the newspaper assigns a 6 by default.
+                if (is_null($vote)) {
+                    $vote = $this->_quotations[$footballers[$i]->getId()]->getMagicPoints();
                 }
-                else {
-                    // Iterates between available reserves
-                    for ($k = $reservesIndex; $k < count($reserves) && !$isReserveFound; $k++) {
-                        $reserveQuotation = $quotations[$reserves[$k]->getId()];
-                        $vote = $this->_getVote($reserveQuotation, $useMagicPoints);
-                        if (!is_null($vote)) {
-                            array_push($votes, $vote);
-                            $isReserveFound = true;
-                            // Next round starts from the next reserve
-                            $reservesIndex++;
-                        }
-                    }
-                }
+                array_push($votes, $vote);
             }
-
             return $votes;
         }
     }
