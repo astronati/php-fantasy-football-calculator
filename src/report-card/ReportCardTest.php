@@ -209,7 +209,6 @@ class ReportCardTest extends PHPUnit_Framework_TestCase
         $footballers = $this->_createFootballersMock($footballersConfig);
         $reportCard = new ReportCard($this->_quotations(), $this->_createQuotationFactoryMock($this->_quotations()));
         $this->assertSame($result, $reportCard->getDetails($footballers));
-        //echo print_r($result,1);
     }
 
     /**

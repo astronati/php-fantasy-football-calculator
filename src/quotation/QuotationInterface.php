@@ -26,7 +26,7 @@ namespace FFC {
          *
          * @return integer
          */
-        public function getId();
+        public function getFootballerId();
 
         /**
          * Returns the magic points of the footballer.
@@ -41,6 +41,48 @@ namespace FFC {
          * @return float
          */
         public function getVote();
+
+        /**
+         * Returns the goal bonus of the footballer.
+         *
+         * @return integer
+         */
+        public function getGoal();
+
+        /**
+         * Returns the caution malus of the footballer.
+         *
+         * @return float
+         */
+        public function getCaution();
+
+        /**
+         * Returns the expulsion malus of the footballer.
+         *
+         * @return integer
+         */
+        public function getExpulsion();
+
+        /**
+         * Returns the penalty bonus/malus of the footballer.
+         *
+         * @return integer
+         */
+        public function getPenalty();
+
+        /**
+         * Returns the auto goal malus of the footballer.
+         *
+         * @return integer
+         */
+        public function getAutoGoal();
+
+        /**
+         * Returns the assist bonus of the footballer.
+         *
+         * @return integer
+         */
+        public function getAssist();
 
         /**
          * Returns the quotation as an array:

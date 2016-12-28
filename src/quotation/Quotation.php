@@ -20,10 +20,10 @@ namespace FFC {
     class Quotation implements QuotationInterface {
 
         /**
-         * The identifier of the quotation
+         * The identifier of the footballer associated to the quotation
          * @var integer
          */
-        private $_id;
+        private $_footballerID;
 
         /**
          * Magic points of the footballer
@@ -38,13 +38,55 @@ namespace FFC {
         private $_vote;
 
         /**
+         * Goals bonus of the footballer
+         * @var integer
+         */
+        private $_goal;
+
+        /**
+         * Caution malus of the footballer
+         * @var float
+         */
+        private $_caution;
+
+        /**
+         * Expulsion malus of the footballer
+         * @var integer
+         */
+        private $_expulsion;
+
+        /**
+         * Penalty bonus/malus of the footballer
+         * @var float
+         */
+        private $_penalty;
+
+        /**
+         * AutoGoal malus of the footballer
+         * @var float
+         */
+        private $_autoGoal;
+
+        /**
+         * Assist bonus of the footballer
+         * @var float
+         */
+        private $_assist;
+
+        /**
          * Needed fields to define a valid quotation
          * @var array
          */
         private $_fields = array(
-            'id',
+            'footballerID',
             'magicPoints',
             'vote',
+            'goal',
+            'caution',
+            'expulsion',
+            'penalty',
+            'autoGoal',
+            'assist',
         );
 
         /**
@@ -72,17 +114,23 @@ namespace FFC {
                 throw new \Exception ("Missing parameter");
             }
 
-            $this->_id = (int) $config['id'];
+            $this->_footballerID = (int) $config['footballerID'];
             $this->_magicPoints = $config['magicPoints'] === '' ? null : (float) $config['magicPoints'];
             $this->_vote = $config['vote'] === '' ? null : (float) $config['vote'];
+            $this->_goal = (int) $config['goal'];
+            $this->_caution = (float) $config['caution'];
+            $this->_expulsion = (int) $config['expulsion'];
+            $this->_penalty = (int) $config['penalty'];
+            $this->_autoGoal = (int) $config['autoGoal'];
+            $this->_assist = (int) $config['assist'];
         }
 
         /**
-         * Returns the ID of the quotation.
+         * Returns the ID of the footballer.
          * @inheritDoc
          */
-        public function getId() {
-            return $this->_id;
+        public function getFootballerId() {
+            return $this->_footballerID;
         }
 
         /**
@@ -99,6 +147,60 @@ namespace FFC {
          */
         public function getVote() {
             return $this->_vote;
+        }
+
+        /**
+         * Returns the goal bonus of the footballer.
+         *
+         * @return integer
+         */
+        public function getGoal() {
+            return $this->_goal;
+        }
+
+        /**
+         * Returns the caution malus of the footballer.
+         *
+         * @return float
+         */
+        public function getCaution() {
+            return $this->_caution;
+        }
+
+        /**
+         * Returns the expulsion malus of the footballer.
+         *
+         * @return integer
+         */
+        public function getExpulsion() {
+            return $this->_expulsion;
+        }
+
+        /**
+         * Returns the penalty bonus/malus of the footballer.
+         *
+         * @return integer
+         */
+        public function getPenalty() {
+            return $this->_penalty;
+        }
+
+        /**
+         * Returns the auto goal malus of the footballer.
+         *
+         * @return integer
+         */
+        public function getAutoGoal() {
+            return $this->_autoGoal;
+        }
+
+        /**
+         * Returns the assist bonus of the footballer.
+         *
+         * @return integer
+         */
+        public function getAssist() {
+            return $this->_assist;
         }
 
         /**
