@@ -14,16 +14,28 @@ class QuotationTest extends PHPUnit_Framework_TestCase {
                 ['']
             ],
             [
-                ['id' => 1]
+                ['magicPoints' => 1]
             ],
             [
-                ['id' => 1, 'magicPoints' => 1]
-            ],
-            [
-                ['id' => 1, 'vote' => 1]
+                ['magicPoints' => 1, 'magicPoints' => 1]
             ],
             [
                 ['magicPoints' => 1, 'vote' => 1]
+            ],
+            [
+                ['autoGoal' => 1, 'vote' => 1]
+            ],
+            [
+                ['assist' => 1, 'vote' => 1]
+            ],
+            [
+                ['caution' => 1, 'goal' => 1]
+            ],
+            [
+                ['magicPoints' => 1, 'goal' => 1]
+            ],
+            [
+                ['penalty' => 1, 'goal' => 1]
             ],
         ];
     }
@@ -32,15 +44,30 @@ class QuotationTest extends PHPUnit_Framework_TestCase {
         return [
             [
                 // Config
-                ['id' => '1', 'magicPoints' => '2', 'vote' => '3', 'test' => 'gas'],
+                [
+                    'footballerID' => '1',
+                    'magicPoints' => '2',
+                    'vote' => '3',
+                    'test' => 'gas',
+                    'goal' => 3,
+                    'caution' => 0.5,
+                    'expulsion' => 1,
+                    'penalty' => 3,
+                    'autoGoal' => -2,
+                    'assist' => 2,
+                ],
                 // Result
-                ['id' => 1, 'magicPoints' => 2.0, 'vote' => 3.0],
-            ],
-            [
-                // Config
-                ['id' => '1', 'magicPoints' => '', 'vote' => ''],
-                // Result
-                ['id' => 1, 'magicPoints' => null, 'vote' => null],
+                [
+                    'footballerID' => 1,
+                    'magicPoints' => 2.0,
+                    'vote' => 3.0,
+                    'goal' => 3,
+                    'caution' => 0.5,
+                    'expulsion' => 1,
+                    'penalty' => 3,
+                    'autoGoal' => -2,
+                    'assist' => 2,
+                ],
             ],
         ];
     }
@@ -69,9 +96,9 @@ class QuotationTest extends PHPUnit_Framework_TestCase {
      * @param array $config
      * @param array $result
      */
-    public function testGetIdMethod($config, $result) {
+    public function testGetFootballerIdMethod($config, $result) {
         $quotation = new Quotation($config);
-        $this->assertSame($result['id'], $quotation->getId());
+        $this->assertSame($result['footballerID'], $quotation->getFootballerId());
     }
 
     /**
@@ -92,6 +119,66 @@ class QuotationTest extends PHPUnit_Framework_TestCase {
     public function testGetVoteMethod($config, $result) {
         $quotation = new Quotation($config);
         $this->assertSame($result['vote'], $quotation->getVote());
+    }
+
+    /**
+     * @dataProvider goodConfigProvider
+     * @param array $config
+     * @param array $result
+     */
+    public function testGetGoalMethod($config, $result) {
+        $quotation = new Quotation($config);
+        $this->assertSame($result['goal'], $quotation->getGoal());
+    }
+
+    /**
+     * @dataProvider goodConfigProvider
+     * @param array $config
+     * @param array $result
+     */
+    public function testGetCautionMethod($config, $result) {
+        $quotation = new Quotation($config);
+        $this->assertSame($result['caution'], $quotation->getCaution());
+    }
+
+    /**
+     * @dataProvider goodConfigProvider
+     * @param array $config
+     * @param array $result
+     */
+    public function testGetExpulsionMethod($config, $result) {
+        $quotation = new Quotation($config);
+        $this->assertSame($result['expulsion'], $quotation->getExpulsion());
+    }
+
+    /**
+     * @dataProvider goodConfigProvider
+     * @param array $config
+     * @param array $result
+     */
+    public function testGetPenaltyMethod($config, $result) {
+        $quotation = new Quotation($config);
+        $this->assertSame($result['penalty'], $quotation->getPenalty());
+    }
+
+    /**
+     * @dataProvider goodConfigProvider
+     * @param array $config
+     * @param array $result
+     */
+    public function testGetAutoGoalMethod($config, $result) {
+        $quotation = new Quotation($config);
+        $this->assertSame($result['autoGoal'], $quotation->getAutoGoal());
+    }
+
+    /**
+     * @dataProvider goodConfigProvider
+     * @param array $config
+     * @param array $result
+     */
+    public function testGetAssistMethod($config, $result) {
+        $quotation = new Quotation($config);
+        $this->assertSame($result['assist'], $quotation->getAssist());
     }
 
     /**
