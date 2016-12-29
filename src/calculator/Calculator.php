@@ -12,8 +12,8 @@
  * @version 0.2.1
  */
 
-namespace FFC
-{
+namespace FFC {
+
     use \FFC\CalculatorInterface as CalculatorInterface;
     use \FFC\FormationFactory as FormationFactory;
     use \FFC\QuotationFactory as QuotationFactory;
@@ -26,20 +26,6 @@ namespace FFC
      */
     class Calculator implements CalculatorInterface
     {
-        /**
-         * A container of all footballers quotations of the match day.
-         * @var Quotation[]
-         */
-        private $_quotations = array();
-
-        /**
-         * A container for all calculator options.
-         * Available keys:
-         * - 'defenseBonus' boolean
-         * @var array
-         */
-        private $_options;
-
         /**
          * An instance of the FormationFactory.
          * @var FormationFactory
@@ -65,44 +51,21 @@ namespace FFC
         private $_reportCard;
 
         /**
-         * Determines if the defense bonus options is allowed or not.
-         *
-         * @return boolean True if the defense bonus can be used
-         */
-        private function _isDefenseBonusAllowed()
-        {
-            return (bool) (array_key_exists('defenseBonus', $this->_options) && $this->_options['defenseBonus']);
-        }
-
-        /**
          * Returns a new instance of Calculator. To define a new instance, a list of quotations is needed.
          * Optionally it can be configured to calculate bonus.
          * @see Calculator::$_options
          * @see Quotation::_checkConfiguration
          * @param FormationFactory $formationFactory An instance of FormationFactory
-         * @param QuotationFactory $quotationFactory An instance of QuotationFactory
          * @param ModifierFactory $modifierFactory An instance of ModifierFactory
          * @param ConversionTableFactory $conversionTableFactory An instance of ConversionTableFactory
          * @param ReportCard $reportCard An instance of ReportCard
-         * @param array $quotations Contains arrays with properties that satisfy Quotation::_checkConfiguration
-         * @param array $options Contains properties as mentioned in Calculator::$_options
          */
         public function __construct(
             FormationFactory $formationFactory,
-            QuotationFactory $quotationFactory,
             ModifierFactory $modifierFactory,
             ConversionTableFactory $conversionTableFactory,
-            ReportCard $reportCard,
-            array $quotations,
-            array $options = array()
+            ReportCard $reportCard
         ) {
-            for ($i = 0; $i < count($quotations); $i++) {
-                $quotation = $quotationFactory->create($quotations[$i]);
-                // Fills $this->_quotations with Quotation instances
-                $this->_quotations[$quotation->getId()] = $quotation;
-            }
-
-            $this->_options = $options;
             $this->_formationFactory = $formationFactory;
             $this->_modifierFactory = $modifierFactory;
             $this->_conversionTableFactory = $conversionTableFactory;
@@ -201,14 +164,8 @@ namespace FFC
         public function getFormationDetails(array $footballers)
         {
             $formation = $this->_formationFactory->create($footballers);
-            $allFootballers = $formation->getFootballers();
-
-            $details = array();
-            for ($i = 0; $i < count($allFootballers); $i++) {
-                array_push($details, $this->_quotations[$allFootballers[$i]->getId()]->toArray());
-            }
-
-            return $details;
+            $footballers = $formation->getFootballers();
+            return $this->_reportCard->getDetails($footballers);
         }
 
         /**

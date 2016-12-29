@@ -15,13 +15,12 @@ namespace FFC {
     use \FFC\CalculatorFactoryInterface as CalculatorFactoryInterface;
     use \FFC\Calculator as Calculator;
     use \FFC\FormationFactory as FormationFactory;
-    use \FFC\QuotationFactory as QuotationFactory;
     use \FFC\ModifierFactory as ModifierFactory;
     use \FFC\ConversionTableFactory as ConversionTableFactory;
     use \FFC\ReportCard as ReportCard;
 
     /**
-     * Defines a QuotationFactory.
+     * Defines a CalculatorFactory.
      * @codeCoverageIgnore
      */
     class CalculatorFactory implements CalculatorFactoryInterface
@@ -30,18 +29,15 @@ namespace FFC {
          * Returns a new instance of the Calculator class.
          * @inheritDoc
          * @param Quotation[] $quotations An array of Quotation instances
-         * @param array $options Used to config the calculator instance.
          * @return Calculator
          */
-        public function create(array $quotations, $options = array()) {
+        public function create(array $quotations) {
+            $reportCardFactory = new ReportCardFactory();
             return new Calculator(
-                $quotations,
-                $options,
                 new FormationFactory(),
-                new QuotationFactory(),
                 new ModifierFactory(),
                 new ConversionTableFactory(),
-                ReportCard::getInstance()
+                $reportCardFactory->create($quotations)
             );
         }
     }
