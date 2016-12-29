@@ -149,6 +149,52 @@ class ReportCardTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function indemnifyDataProvider()
+    {
+        return array(
+            [
+                // Votes
+                [5, 6, 7, 8],
+                // Reserves
+                [9, 10, 11, 12],
+                // Expected result
+                [5, 6, 7, 8],
+            ],
+            [
+                // Votes
+                [5, 6, null, 8],
+                // Reserves
+                [9, 10, 11, 12],
+                // Expected result
+                [5, 6, 9, 8],
+            ],
+            [
+                // Votes
+                [null, 6, null, 8],
+                // Reserves
+                [9, 10, 11, 12],
+                // Expected result
+                [9, 6, 10, 8],
+            ],
+            [
+                // Votes
+                [null, 6, null, null],
+                // Reserves
+                [9, 10, 11, 12],
+                // Expected result
+                [9, 6, 10, 11],
+            ],
+            [
+                // Votes
+                [null, 6, null, null],
+                // Reserves
+                [9, 10],
+                // Expected result
+                [9, 6, 10, null],
+            ],
+        );
+    }
+
     private function _createFootballersMock($footballers)
     {
         $footballersMock = array();
@@ -233,5 +279,17 @@ class ReportCardTest extends PHPUnit_Framework_TestCase
         $footballers = $this->_createFootballersMock($footballersConfig);
         $reportCard = new ReportCard($this->_quotations(), $this->_createQuotationFactoryMock($this->_quotations()));
         $this->assertSame($result, $reportCard->getVotes($footballers));
+    }
+
+    /**
+     * @dataProvider indemnifyDataProvider
+     * @param array $votes
+     * @param array $reserves
+     * @param array $result
+     */
+    public function testIndemnifyMethod($votes, $reserves, $result)
+    {
+        $reportCard = new ReportCard($this->_quotations(), $this->_createQuotationFactoryMock($this->_quotations()));
+        $this->assertSame($result, $reportCard->indemnify($votes, $reserves));
     }
 }

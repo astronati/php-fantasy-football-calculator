@@ -47,5 +47,13 @@ namespace FFC {
          */
         public function getVotes(array $footballers);
 
+        /**
+         * Replace all NULL votes with values provided by the reserves ones.
+         *
+         * @param float[] $votes
+         * @param float[] $reserves
+         * @return float[]
+         */
+        public function indemnify(array $votes, array $reserves);
     }
 }
