@@ -102,5 +102,24 @@ namespace FFC {
             }
             return $votes;
         }
+
+        /**
+         * Replace NULL values in $votes with the ones provided by $reserves. The order of $reserves value is the same
+         * used to take the first value to use in $votes.
+         *
+         * @param array $votes
+         * @param array $reserves
+         * @return array
+         */
+        public function indemnify(array $votes, array $reserves)
+        {
+            $index = 0;
+            foreach ($votes as &$vote) {
+                if (is_null($vote) && $index < count($reserves)) {
+                    $vote = $reserves[$index++];
+                }
+            }
+            return $votes;
+        }
     }
 }
