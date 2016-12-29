@@ -73,73 +73,48 @@ namespace FFC {
         }
 
         /**
-         * Returns the sum of the magic points of the footballers of the formation.
-         * It is calculated taking into account that there are a number of reserves by each role.
-         *
-         * @inheritDoc
-         * @param array $footballers A list of array containing needed data to instantiate a Footballer
-         * @return float The sum of points of the team keeping into account only 11 playing footballers.
-         */
-        public function getSum(array $footballers)
-        {
-            $formation = $this->_formationFactory->create($footballers);
-
-            return array_sum($this->_reportCard->getVotes(
-                    $this->_quotations,
-                    $formation->filterGoalkeepers()->filterFirstStrings()->getFootballers(),
-                    $formation->filterGoalkeepers()->filterReserves()->getFootballers()
-                )) +
-                array_sum($this->_reportCard->getVotes(
-                    $this->_quotations,
-                    $formation->filterDefenders()->filterFirstStrings()->getFootballers(),
-                    $formation->filterDefenders()->filterReserves()->getFootballers()
-                )) +
-                array_sum($this->_reportCard->getVotes(
-                    $this->_quotations,
-                    $formation->filterMidfielders()->filterFirstStrings()->getFootballers(),
-                    $formation->filterMidfielders()->filterReserves()->getFootballers()
-                )) +
-                array_sum($this->_reportCard->getVotes(
-                    $this->_quotations,
-                    $formation->filterForwards()->filterFirstStrings()->getFootballers(),
-                    $formation->filterForwards()->filterReserves()->getFootballers()
-                ));
-        }
-
-        /**
-         * Returns the defense bonus of the formation.
-         * The defense bonus is calculated using the goalkeeper votes and the ones of the best 3 defenders.
-         * To apply this bonus the formation needs to have 4 defenders at least.
-         *
+         * Returns bonus of the formation and the malus of the opponent one.
          * @inheritDoc
          * @param array $footballers A $footballers element is a 'footballer' that to be instantiated needs to satisfy
          * Footballer::_checkConfiguration
-         * @return integer The defense bonus if allowed.
+         * @param array $opponentFootballers A $footballers element is a 'footballer' that to be instantiated needs to
+         * satisfy Footballer::_checkConfiguration
+         * @return array The container of all bonus
          */
-        public function getDefenseBonus(array $footballers)
+        public function getBonus(array $footballers, array $opponentFootballers = null)
         {
-            if ($this->_isDefenseBonusAllowed()) {
-                $formation = $this->_formationFactory->create($footballers);
-                $goalkeeperVotes = $this->_reportCard->getVotes(
-                    $this->_quotations,
-                    $formation->filterGoalkeepers()->filterFirstStrings()->getFootballers(),
-                    $formation->filterGoalkeepers()->filterReserves()->getFootballers(),
-                    false
-                );
-                $defenderVotes = $this->_reportCard->getVotes(
-                    $this->_quotations,
-                    $formation->filterDefenders()->filterFirstStrings()->getFootballers(),
-                    $formation->filterDefenders()->filterReserves()->getFootballers(),
-                    false
-                );
-                return $this->_modifierFactory
+            $formation = $this->_formationFactory->create($footballers);
+            $bonus = [
+                'bestDefenders' => $this->_modifierFactory
                     ->createBestDefendersModifier()
                     ->getBonus([
-                        'goalkeeper' => $goalkeeperVotes[0],
-                        'defenders' => $defenderVotes
-                    ]);
+                        'goalkeeper' => $this->_indemnify($formation, 'Goalkeepers')[0],
+                        'defenders' => $this->_indemnify($formation, 'Defenders')
+                    ])
+            ];
+
+            if ($opponentFootballers) {
+                $opponentFormation = $this->_formationFactory->create($opponentFootballers);
+                return array_merge($bonus, [
+                    'defense' => $this->_modifierFactory
+                        ->createDefenseModifier()
+                        ->getBonus([
+                            'defenders' => $this->_indemnify($formation, 'Defenders')
+                        ]),
+                    'midfield' => $this->_modifierFactory
+                        ->createMidfieldModifier()
+                        ->getBonus([
+                            'home' => $this->_indemnify($formation, 'Midfielders'),
+                            'away' => $this->_indemnify($opponentFormation, 'Midfielders')
+                        ]),
+                    'forward' => $this->_modifierFactory
+                        ->createForwardModifier()
+                        ->getBonus([
+                            'forwards' => $this->_indemnify($formation, 'Forwards')
+                        ])
+                ]);
             }
-            return 0;
+            return $bonus;
         }
 
         /**
@@ -180,6 +155,45 @@ namespace FFC {
             return $this->_conversionTableFactory
                 ->createGoalsConversionTable()
                 ->getConvertedValue($magicPointsSum);
+        }
+
+        /**
+         * Returns the sum of the magic points of the footballers of the formation.
+         * It is calculated taking into account that there are a number of reserves by each role.
+         *
+         * @inheritDoc
+         * @param array $footballers A list of array containing needed data to instantiate a Footballer
+         * @return float The sum of points of the team keeping into account only 11 playing footballers.
+         */
+        public function getSum(array $footballers)
+        {
+            $formation = $this->_formationFactory->create($footballers);
+            return array_sum($this->_indemnify($formation, 'Goalkeepers', 'MagicPoints')) +
+                array_sum($this->_indemnify($formation, 'Defenders', 'MagicPoints')) +
+                array_sum($this->_indemnify($formation, 'Midfielders', 'MagicPoints')) +
+                array_sum($this->_indemnify($formation, 'Forwards', 'MagicPoints'));
+        }
+
+        /**
+         * Returns the indemnified array of votes of footballers by role.
+         *
+         * @param Formation $formation
+         * @param string $role
+         * @param string $reportCard
+         * @return array
+         */
+        private function _indemnify(Formation $formation, $role, $reportCard = 'Votes')
+        {
+            $roleFilter = 'filter' . $role;
+            $reportCardFilter = 'get' . $reportCard;
+            return $this->_reportCard->indemnify(
+                $this->_reportCard->$reportCardFilter(
+                    $formation->$roleFilter()->filterFirstStrings()->getFootballers()
+                ),
+                $this->_reportCard->$reportCardFilter(
+                    $formation->$roleFilter()->filterReserves()->getFootballers()
+                )
+            );
         }
     }
 }

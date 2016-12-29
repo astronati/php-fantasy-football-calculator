@@ -7,78 +7,23 @@ use \FFC\Calculator as Calculator;
  */
 class CalculatorTest extends PHPUnit_Framework_TestCase
 {
-    public function dataProvider()
+    private $_footballers = array(
+        ['id' => 1, 'type' => 'T', 'order' => '3', 'role' => 'D'],
+        ['id' => 2, 'type' => 'R', 'order' => '3', 'role' => 'D'],
+        ['id' => 3, 'type' => 'T', 'order' => '3', 'role' => 'D'],
+        ['id' => 4, 'type' => 'T', 'order' => '3', 'role' => 'D'],
+        ['id' => 5, 'type' => 'T', 'order' => '3', 'role' => 'D'],
+        ['id' => 6, 'type' => 'R', 'order' => '3', 'role' => 'C'],
+        ['id' => 7, 'type' => 'T', 'order' => '3', 'role' => 'P']
+    );
+
+    public function goalsProvider()
     {
         return [
-            [
-                [
-                    ['id' => 1, 'vote' => 1, 'magicPoints' => 2],
-                    ['id' => 2, 'vote' => 2, 'magicPoints' => 3],
-                    ['id' => 3, 'vote' => 3, 'magicPoints' => 4],
-                    ['id' => 4, 'vote' => 4, 'magicPoints' => 5],
-                    ['id' => 5, 'vote' => 5, 'magicPoints' => 6],
-                    ['id' => 6, 'vote' => 6, 'magicPoints' => 7],
-                    ['id' => 7, 'vote' => 7, 'magicPoints' => 8],
-                    ['id' => 8, 'vote' => 7, 'magicPoints' => 8],
-                ],
-                [
-                    ['id' => 1, 'type' => 'T', 'order' => '3', 'role' => 'D'],
-                    ['id' => 2, 'type' => 'R', 'order' => '3', 'role' => 'D'],
-                    ['id' => 3, 'type' => 'T', 'order' => '3', 'role' => 'D'],
-                    ['id' => 4, 'type' => 'T', 'order' => '3', 'role' => 'D'],
-                    ['id' => 5, 'type' => 'T', 'order' => '3', 'role' => 'D'],
-                    ['id' => 6, 'type' => 'R', 'order' => '3', 'role' => 'C'],
-                    ['id' => 7, 'type' => 'T', 'order' => '3', 'role' => 'P'],
-                ],
-                true,
-                3,
-                [6, 4, 5, 7],
-                [
-                    'getSum' => 88,
-                    'getDefenseBonus' => 1,
-                    'details' => [
-                        ['id' => 1, 'vote' => 1, 'magicPoints' => 2],
-                        ['id' => 2, 'vote' => 2, 'magicPoints' => 3],
-                        ['id' => 3, 'vote' => 3, 'magicPoints' => 4],
-                        ['id' => 4, 'vote' => 4, 'magicPoints' => 5],
-                        ['id' => 5, 'vote' => 5, 'magicPoints' => 6],
-                        ['id' => 6, 'vote' => 6, 'magicPoints' => 7],
-                        ['id' => 7, 'vote' => 7, 'magicPoints' => 8],
-                    ],
-                    'goals' => 3
-                ]
-            ]
+            [66, 1],
+            [72, 2],
+            [78, 3],
         ];
-    }
-
-    private function _createQuotationFactoryMock($quotations)
-    {
-        // Creates mock for the Quotation Factory
-        $quotationFactoryMock = $this->getMockBuilder('FFC\QuotationFactory')
-            ->setMethods(['create'])
-            ->getMock();
-        // From given quotations creates an array of quotation mocks
-        $quotationsMocksMap = array();
-        foreach ($quotations as $index => $quotation) {
-            $quotationsMocksMap[$index] = [$quotation, $this->_createQuotationMock($quotation)];
-        }
-        // The quotation factory mock will return a quotation mock
-        $quotationFactoryMock->method('create')->will($this->returnValueMap($quotationsMocksMap));
-        return $quotationFactoryMock;
-    }
-
-    private function _createQuotationMock($quotation)
-    {
-        $quotationMock = $this->getMockBuilder('Quotation')
-            ->disableOriginalConstructor()
-            ->setMethods([
-                'getId',
-                'toArray'
-            ])
-            ->getMock();
-        $quotationMock->method('getId')->will($this->returnValue($quotation['id']));
-        $quotationMock->method('toArray')->will($this->returnValue($quotation));
-        return $quotationMock;
     }
 
     private function _createFootballerMock($footballer)
@@ -94,20 +39,22 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
         return $footballerMock;
     }
 
-    private function _createFormationFactoryMock($footballers)
+    private function _createFormationFactoryMock()
     {
         // Creates mock for the Formation Factory
         $formationFactoryMock = $this->getMockBuilder('FFC\FormationFactory')
             ->setMethods(['create'])
             ->getMock();
-        $formationFactoryMock->method('create')->will($this->returnValue($this->_createFormationMock($footballers)));
+        $formationFactoryMock->method('create')->will($this->returnValue(
+            $this->_createFormationMock($this->_footballers)
+        ));
         return $formationFactoryMock;
     }
 
     private function _createFormationMock($footballers)
     {
         // Creates a mock for the Formation
-        $formationMock = $this->getMockBuilder('Formation')
+        $formationMock = $this->getMockBuilder('FFC\Formation')
             ->disableOriginalConstructor()
             ->setMethods([
                 'filterFirstStrings',
@@ -142,23 +89,21 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->setMethods([
                 'createBestDefendersModifier',
+                'createDefenseModifier',
+                'createMidfieldModifier',
+                'createForwardModifier',
                 'getBonus',
             ])
             ->getMock();
         $modifierFactoryMock->method('createBestDefendersModifier')->will($this->returnValue($modifierFactoryMock));
-        $modifierFactoryMock->method('getBonus')->will($this->returnValueMap([
-            [
-                [
-                    'goalkeeper' => 6,
-                    'defenders' => [6,4,5,7]
-                ],
-                1
-            ]
-        ]));
+        $modifierFactoryMock->method('createDefenseModifier')->will($this->returnValue($modifierFactoryMock));
+        $modifierFactoryMock->method('createMidfieldModifier')->will($this->returnValue($modifierFactoryMock));
+        $modifierFactoryMock->method('createForwardModifier')->will($this->returnValue($modifierFactoryMock));
+        $modifierFactoryMock->method('getBonus')->will($this->returnValue(1));
         return $modifierFactoryMock;
     }
 
-    private function _createConversionTableFactoryMock($value)
+    private function _createConversionTableFactoryMock()
     {
         // Creates a mock for the Formation
         $conversionTableFactoryMock = $this->getMockBuilder('FFC\ConversionTableFactory')
@@ -171,164 +116,82 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
         $conversionTableFactoryMock->method('createGoalsConversionTable')
             ->will($this->returnValue($conversionTableFactoryMock));
         $conversionTableFactoryMock->method('getConvertedValue')
-            ->will($this->returnValue($value));
+            ->will($this->returnValueMap([
+                [66, 1],
+                [72, 2],
+                [78, 3],
+            ]));
         return $conversionTableFactoryMock;
     }
 
-    private function _createReportCardMock($values)
+    private function _createReportCardMock()
     {
         $reportCardMock = $this->getMockBuilder('FFC\ReportCard')
-            ->setMethods(['getVotes'])
+            ->disableOriginalConstructor()
+            ->setMethods([
+                'getMagicPoints',
+                'getVotes',
+                'getDetails',
+                'indemnify',
+            ])
             ->getMock();
-        $reportCardMock->method('getVotes')->will($this->returnValue($values));
+        $reportCardMock->method('getMagicPoints')->will($this->returnValue([6,5,5,5]));
+        $reportCardMock->method('getVotes')->will($this->returnValue([4,5,5,5]));
+        $reportCardMock->method('getDetails')->will($this->returnValue([6,5,5,6]));
+        $reportCardMock->method('indemnify')->will($this->returnValue([5,5,5,5]));
         return $reportCardMock;
     }
 
-    private function _createCalculatorMock($quotations, $footballers, $isDefenseBonusEnabled, $convertedValue, $reports)
+    private function _createCalculatorMock()
     {
-        $quotationFactoryMock = $this->_createQuotationFactoryMock($quotations);
-        $formationFactoryMock = $this->_createFormationFactoryMock($footballers);
+        $formationFactoryMock = $this->_createFormationFactoryMock();
         $modifierFactoryMock = $this->_createModifierFactoryMock();
-        $conversionTableFactoryMock = $this->_createConversionTableFactoryMock($convertedValue);
-        $reportCardMock = $this->_createReportCardMock($reports);
+        $conversionTableFactoryMock = $this->_createConversionTableFactoryMock();
+        $reportCardMock = $this->_createReportCardMock();
 
         return new Calculator(
             $formationFactoryMock,
-            $quotationFactoryMock,
             $modifierFactoryMock,
             $conversionTableFactoryMock,
-            $reportCardMock,
-            $quotations,
-            ['defenseBonus' => $isDefenseBonusEnabled]
+            $reportCardMock
         );
     }
 
-    /**
-     * @dataProvider dataProvider
-     * @param array $quotations
-     * @param array $footballers
-     * @param boolean $isDefenseBonusEnabled
-     * @param float $convertedValue
-     * @param float[] $reports
-     */
-    public function testConstructMethod($quotations, $footballers, $isDefenseBonusEnabled, $convertedValue, $reports)
+    public function testConstructMethod()
     {
-        $this->_createCalculatorMock($quotations, $footballers, $isDefenseBonusEnabled, $convertedValue, $reports);
+        $this->_createCalculatorMock();
+    }
+
+    public function testGetBonusMethod() {
+        $calculator = $this->_createCalculatorMock();
+        $this->assertSame($calculator->getBonus([]), [
+            'bestDefenders' => 1
+        ]);
+        $this->assertSame($calculator->getBonus([], [1]), [
+            'bestDefenders' => 1,
+            'defense' => 1,
+            'midfield' => 1,
+            'forward' => 1
+        ]);
+    }
+
+    public function testGetSumMethod() {
+        $calculator = $this->_createCalculatorMock();
+        $this->assertSame($calculator->getSum([]), 80);
+    }
+
+    public function testGetFormationDetailsMethod() {
+        $calculator = $this->_createCalculatorMock();
+        $this->assertSame($calculator->getFormationDetails([]), [6,5,5,6]);
     }
 
     /**
-     * @dataProvider dataProvider
-     * @param array $quotations
-     * @param array $footballers
-     * @param boolean $isDefenseBonusEnabled
-     * @param float $convertedValue
-     * @param float[] $reports
-     * @param array $result
+     * @dataProvider goalsProvider
+     * @param integer $sum
+     * @param integer $result
      */
-    public function testGetSumMethod(
-        $quotations,
-        $footballers,
-        $isDefenseBonusEnabled,
-        $convertedValue,
-        $reports,
-        $result
-    ) {
-        $calculator = $this->_createCalculatorMock(
-            $quotations,
-            $footballers,
-            $isDefenseBonusEnabled,
-            $convertedValue,
-            $reports
-        );
-        $this->assertSame($result['getSum'], $calculator->getSum($footballers));
-    }
-
-    /**
-     * @dataProvider dataProvider
-     * @param array $quotations
-     * @param array $footballers
-     * @param boolean $isDefenseBonusEnabled
-     * @param float $convertedValue
-     * @param float[] $reports
-     * @param array $result
-     */
-    public function testGetDefenseBonusMethod(
-        $quotations,
-        $footballers,
-        $isDefenseBonusEnabled,
-        $convertedValue,
-        $reports,
-        $result
-    ) {
-        $calculator = $this->_createCalculatorMock(
-            $quotations,
-            $footballers,
-            $isDefenseBonusEnabled,
-            $convertedValue,
-            $reports
-        );
-        $this->assertSame($result['getDefenseBonus'], $calculator->getDefenseBonus($footballers));
-        $calculator = $this->_createCalculatorMock(
-            $quotations,
-            $footballers,
-            false,
-            $convertedValue,
-            $reports
-        );
-        $this->assertSame(0, $calculator->getDefenseBonus($footballers));
-    }
-
-    /**
-     * @dataProvider dataProvider
-     * @param array $quotations
-     * @param array $footballers
-     * @param boolean $isDefenseBonusEnabled
-     * @param float $convertedValue
-     * @param float[] $reports
-     * @param array $result
-     */
-    public function testGetFormationDetailsMethod(
-        $quotations,
-        $footballers,
-        $isDefenseBonusEnabled,
-        $convertedValue,
-        $reports,
-        $result
-    ) {
-        $calculator = $this->_createCalculatorMock(
-            $quotations,
-            $footballers,
-            $isDefenseBonusEnabled,
-            $convertedValue,
-            $reports
-        );
-        $this->assertSame($result['details'], $calculator->getFormationDetails($footballers));
-    }
-
-    /**
-     * @dataProvider dataProvider
-     * @param array $quotations
-     * @param array $footballers
-     * @param boolean $isDefenseBonusEnabled
-     * @param float $convertedValue
-     * @param float[] $reports
-     * @param array $result
-     */
-    public function testGetGoalsMethod(
-        $quotations,
-        $footballers,
-        $isDefenseBonusEnabled,
-        $convertedValue,
-        $reports,
-        $result
-    ) {
-        $calculator = $this->_createCalculatorMock(
-            $quotations,
-            $footballers,
-            $isDefenseBonusEnabled,
-            $convertedValue,
-            $reports
-        );
-        $this->assertSame($result['goals'], $calculator->getGoals($footballers));
+    public function testGetGoalsMethod($sum, $result) {
+        $calculator = $this->_createCalculatorMock();
+        $this->assertSame($calculator->getGoals($sum), $result);
     }
 }
