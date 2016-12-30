@@ -69,6 +69,32 @@ class QuotationTest extends PHPUnit_Framework_TestCase {
                     'assist' => 2,
                 ],
             ],
+            [
+                // Config
+                [
+                    'footballerID' => '1',
+                    'magicPoints' => null,
+                    'vote' => null,
+                    'goal' => null,
+                    'caution' => null,
+                    'expulsion' => null,
+                    'penalty' => null,
+                    'autoGoal' => null,
+                    'assist' => null,
+                ],
+                // Result
+                [
+                    'footballerID' => 1,
+                    'magicPoints' => null,
+                    'vote' => null,
+                    'goal' => null,
+                    'caution' => null,
+                    'expulsion' => null,
+                    'penalty' => null,
+                    'autoGoal' => null,
+                    'assist' => null,
+                ],
+            ],
         ];
     }
 
