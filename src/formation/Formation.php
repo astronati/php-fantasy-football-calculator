@@ -24,13 +24,13 @@ namespace FFC {
          * A container of all formation footballers
          * @var array
          */
-        private $_footballers = array();
+        private $_footballers = [];
 
         /**
          * A container of (filtered) footballers
          * @var array
          */
-        private $_filteredFootballers = array();
+        private $_filteredFootballers = [];
 
         /**
          * Filters footballer by given method to apply on the Footballer instance.
@@ -40,7 +40,7 @@ namespace FFC {
         private function _filter($footballerMethod) {
             $footballers = $this->_getFilteredFootballers();
 
-            $filteredFootballers = array();
+            $filteredFootballers = [];
             foreach ($footballers as $footballer) {
                 if ($footballer->$footballerMethod()) {
                     array_push($filteredFootballers, $footballer);
@@ -127,7 +127,7 @@ namespace FFC {
          */
         public function getFootballers() {
             $footballers = $this->_getFilteredFootballers();
-            $this->_filteredFootballers = array();
+            $this->_filteredFootballers = [];
             return $footballers;
         }
     }

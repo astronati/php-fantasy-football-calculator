@@ -10,7 +10,7 @@ class ReportCardTest extends PHPUnit_Framework_TestCase
 
     private function _quotations()
     {
-        return array(
+        return [
             ['footballerID' => 1, 'vote' => 5, 'magicPoints' => 6],
             ['footballerID' => 2, 'vote' => 6, 'magicPoints' => 7],
             ['footballerID' => 3, 'vote' => 7, 'magicPoints' => 8],
@@ -22,12 +22,12 @@ class ReportCardTest extends PHPUnit_Framework_TestCase
             ['footballerID' => 9, 'vote' => null, 'magicPoints' => null],
             ['footballerID' => 10, 'vote' => null, 'magicPoints' => null],
             ['footballerID' => 11, 'vote' => 5, 'magicPoints' => 6.5],
-        );
+        ];
     }
 
     public function detailsDataProvider()
     {
-        return array(
+        return [
             [
                 // Footballers
                 [
@@ -72,12 +72,12 @@ class ReportCardTest extends PHPUnit_Framework_TestCase
                     11 => ['footballerID' => 11, 'vote' => 5, 'magicPoints' => 6.5],
                 ],
             ],
-        );
+        ];
     }
 
     public function magicPointsDataProvider()
     {
-        return array(
+        return [
             [
                 // Footballers
                 [
@@ -109,12 +109,12 @@ class ReportCardTest extends PHPUnit_Framework_TestCase
                 // Expected result
                 [5.5, 6.5],
             ],
-        );
+        ];
     }
 
     public function votesDataProvider()
     {
-        return array(
+        return [
             [
                 // Footballers
                 [
@@ -146,12 +146,12 @@ class ReportCardTest extends PHPUnit_Framework_TestCase
                 // Expected result
                 [6, 5],
             ],
-        );
+        ];
     }
 
     public function indemnifyDataProvider()
     {
-        return array(
+        return [
             [
                 // Votes
                 [5, 6, 7, 8],
@@ -192,12 +192,12 @@ class ReportCardTest extends PHPUnit_Framework_TestCase
                 // Expected result
                 [9, 6, 10, null],
             ],
-        );
+        ];
     }
 
     private function _createFootballersMock($footballers)
     {
-        $footballersMock = array();
+        $footballersMock = [];
         foreach ($footballers as $footballer) {
             $footballerMock = $this->getMockBuilder('Footballer')
                 ->disableOriginalConstructor()
@@ -236,7 +236,7 @@ class ReportCardTest extends PHPUnit_Framework_TestCase
             ->setMethods(['create'])
             ->getMock();
         // From given quotations creates an array of quotation mocks
-        $quotationsMocksMap = array();
+        $quotationsMocksMap = [];
         foreach ($quotations as $index => $quotation) {
             $quotationsMocksMap[$index] = [$quotation, $this->_createQuotationMock($quotation)];
         }

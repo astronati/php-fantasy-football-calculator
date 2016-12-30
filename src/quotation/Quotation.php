@@ -79,7 +79,7 @@ namespace FFC {
          * Needed fields to define a valid quotation
          * @var array
          */
-        private $_fields = array(
+        private $_fields = [
             'footballerID',
             'magicPoints',
             'vote',
@@ -89,7 +89,7 @@ namespace FFC {
             'penalty',
             'autoGoal',
             'assist',
-        );
+        ];
 
         /**
          * Checks if the configuration array has all needed parameters.
@@ -210,7 +210,7 @@ namespace FFC {
          * @inheritDoc
          */
         public function toArray() {
-            $quotationArray = array();
+            $quotationArray = [];
             // e.g. ['code', 'player', ...]
             foreach ($this->_fields as $field) {
                 // e.g. 'getCode', 'getPlayer'

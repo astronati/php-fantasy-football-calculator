@@ -32,7 +32,7 @@ namespace FFC {
          *   ...
          * ]
          */
-        private $_quotations = array();
+        private $_quotations = [];
 
         /**
          * Associates quotations to the ReportCard instance
@@ -55,7 +55,7 @@ namespace FFC {
          */
         public function getDetails(array $footballers)
         {
-            $details = array();
+            $details = [];
             for ($i = 0; $i < count($footballers); $i++) {
                 $details[$footballers[$i]->getId()] = $this->_quotations[$footballers[$i]->getId()]->toArray();
             }
@@ -72,7 +72,7 @@ namespace FFC {
          */
         public function getMagicPoints(array $footballers)
         {
-            $magicPoints = array();
+            $magicPoints = [];
             for ($i = 0; $i < count($footballers); $i++) {
                 array_push($magicPoints, $this->_quotations[$footballers[$i]->getId()]->getMagicPoints());
             }
@@ -90,7 +90,7 @@ namespace FFC {
          */
         public function getVotes(array $footballers)
         {
-            $votes = array();
+            $votes = [];
             for ($i = 0; $i < count($footballers); $i++) {
                 $vote = $this->_quotations[$footballers[$i]->getId()]->getVote();
                 // It could happen that a footballer has magic points only. This happens when a match is not played and

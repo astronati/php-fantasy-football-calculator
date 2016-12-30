@@ -10,7 +10,7 @@ class FormationTest extends PHPUnit_Framework_TestCase {
     /**
      * @var array
      */
-    private $_footballers = array(
+    private $_footballers = [
         ['id' => 1, 'type' => 'T', 'order' => '1', 'role' => 'P'],
         ['id' => 2, 'type' => 'T', 'order' => '1', 'role' => 'D'],
         ['id' => 3, 'type' => 'R', 'order' => '2', 'role' => 'D'],
@@ -22,15 +22,15 @@ class FormationTest extends PHPUnit_Framework_TestCase {
         ['id' => 9, 'type' => 'T', 'order' => '2', 'role' => 'A'],
         ['id' => 10, 'type' => 'T', 'order' => '3', 'role' => 'A'],
         ['id' => 11, 'type' => 'R', 'order' => '4', 'role' => 'P'],
-    );
+    ];
 
     private function _createFootballersMock($footballers) {
-        $footballerMocks = array();
+        $footballerMocks = [];
 
         foreach ($footballers as $footballer) {
             $footballerMock = $this->getMockBuilder('Footballer')
                 ->disableOriginalConstructor()
-                ->setMethods(array(
+                ->setMethods([
                     'getId',
                     'isFirstString',
                     'isReserve',
@@ -38,7 +38,7 @@ class FormationTest extends PHPUnit_Framework_TestCase {
                     'isDefender',
                     'isMidfielder',
                     'isForward',
-                ))
+                ])
                 ->getMock();
 
             $footballerMock->method('getId')->will($this->returnValue($footballer['id']));

@@ -7,7 +7,7 @@ use \FFC\Calculator as Calculator;
  */
 class CalculatorTest extends PHPUnit_Framework_TestCase
 {
-    private $_footballers = array(
+    private $_footballers = [
         ['id' => 1, 'type' => 'T', 'order' => '3', 'role' => 'D'],
         ['id' => 2, 'type' => 'R', 'order' => '3', 'role' => 'D'],
         ['id' => 3, 'type' => 'T', 'order' => '3', 'role' => 'D'],
@@ -15,7 +15,7 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
         ['id' => 5, 'type' => 'T', 'order' => '3', 'role' => 'D'],
         ['id' => 6, 'type' => 'R', 'order' => '3', 'role' => 'C'],
         ['id' => 7, 'type' => 'T', 'order' => '3', 'role' => 'P']
-    );
+    ];
 
     public function goalsProvider()
     {
@@ -74,7 +74,7 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
         $formationMock->method('filterForwards')->will($this->returnValue($formationMock));
 
         // Creates a container for all Footballer mocks
-        $footballersMock = array();
+        $footballersMock = [];
         foreach ($footballers as $footballer) {
             array_push($footballersMock, $this->_createFootballerMock($footballer));
         }

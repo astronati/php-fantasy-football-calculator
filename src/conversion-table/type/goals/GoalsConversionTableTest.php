@@ -9,7 +9,7 @@ class GoalsConversionTableTest extends PHPUnit_Framework_TestCase
 {
     public function goalsProvider()
     {
-        return array(
+        return [
             [0, 0],
             [65.9, 0],
             [66, 1],
@@ -32,7 +32,7 @@ class GoalsConversionTableTest extends PHPUnit_Framework_TestCase
             [119.9, 9],
             [120, 10],
             [130, 10],
-        );
+        ];
     }
 
     /**

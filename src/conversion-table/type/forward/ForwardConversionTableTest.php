@@ -9,7 +9,7 @@ class ForwardConversionTableTest extends PHPUnit_Framework_TestCase
 {
     public function forwardVoteProvider()
     {
-        return array(
+        return [
             [0, 0],
             [6.49, 0],
             [6.5, 0.5],
@@ -20,7 +20,7 @@ class ForwardConversionTableTest extends PHPUnit_Framework_TestCase
             [7.99, 1.5],
             [8, 2],
             [9, 2],
-        );
+        ];
     }
 
     /**

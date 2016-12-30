@@ -29,7 +29,7 @@ namespace FFC {
          * @return Formation
          */
         public function create($container = array()) {
-            $footballers = array();
+            $footballers = [];
 
             foreach ($container as $config) {
                 array_push($footballers, new Footballer($config));
