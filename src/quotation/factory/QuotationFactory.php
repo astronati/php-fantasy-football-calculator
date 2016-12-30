@@ -27,7 +27,7 @@ namespace FFC {
          * @return Quotation
          */
         public function create(array $config) {
-          return new Quotation($config);
+            return new Quotation($config);
         }
     }
 }

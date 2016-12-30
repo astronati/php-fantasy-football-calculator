@@ -28,7 +28,7 @@ namespace FFC {
          * @param array $container
          * @return Formation
          */
-        public function create($container = array()) {
+        public function create($container = []) {
             $footballers = [];
 
             foreach ($container as $config) {

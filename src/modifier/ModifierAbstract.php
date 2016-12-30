@@ -41,7 +41,7 @@ namespace FFC
          * @inheritDoc
          * @param array $config
          */
-        abstract function getBonus(array $config);
+        abstract public function getBonus(array $config);
 
         /**
          * A ModifierAbstract needs a ConversionTableAbstract in order to return the right bonus/malus.

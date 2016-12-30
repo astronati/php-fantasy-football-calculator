@@ -91,9 +91,9 @@ namespace FFC {
          */
         private function _checkConfiguration(array $config) {
             foreach ($this->_fields as $param) {
-              if (!array_key_exists($param, $config)) {
-                return false;
-              }
+                if (!array_key_exists($param, $config)) {
+                    return false;
+                }
             }
             return true;
         }
