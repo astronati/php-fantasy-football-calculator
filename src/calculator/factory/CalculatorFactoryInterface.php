@@ -20,9 +20,8 @@ namespace FFC {
          * Implements the Factory pattern.
          *
          * @param array $quotations
-         * @param array $options
          * @return Calculator
          */
-        public function create(array $quotations, $options = array());
+        public function create(array $quotations);
     }
 }

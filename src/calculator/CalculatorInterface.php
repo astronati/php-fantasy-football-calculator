@@ -20,27 +20,17 @@ namespace FFC
     interface CalculatorInterface
     {
         /**
-         * Returns the sum of the magic points of the footballers of the formation.
-         * It is calculated taking into account that there are a number of reserves by each role.
+         * Returns all bonus/malus of the formation.
+         * Bonus or malus can depend by the same formation or by the opponent formation.
          *
          * @see Footballer::_checkConfiguration
          * @param array $footballers A $footballers element is a 'footballer' that to be instantiated needs to satisfy
          * Footballer::_checkConfiguration
-         * @return float The sum of all magic points of the given formation
+         * @param array $opponentFootballers A $otherFootballers element is a 'footballer' that to be instantiated needs
+         * to satisfy Footballer::_checkConfiguration
+         * @return array All bonus. If a bonus is not allowed, then 0 (zero) will be returned as value.
          */
-        public function getSum(array $footballers);
-
-        /**
-         * Returns the defense bonus of the formation.
-         * The defense bonus is calculated using the goalkeeper votes and the ones of the best 3 defenders.
-         * To apply this bonus the formation needs to have 4 defenders at least.
-         *
-         * @see Footballer::_checkConfiguration
-         * @param array $footballers A $footballers element is a 'footballer' that to be instantiated needs to satisfy
-         * Footballer::_checkConfiguration
-         * @return integer The defense bonus if allowed.
-         */
-        public function getDefenseBonus(array $footballers);
+        public function getBonus(array $footballers, array $opponentFootballers = null);
 
         /**
          * Returns the entire formation with the vote and the magic points for each footballer.
@@ -70,5 +60,16 @@ namespace FFC
          * @return integer The number of goals.
          */
         public function getGoals($magicPointsSum);
+
+        /**
+         * Returns the sum of the magic points of the footballers of the formation.
+         * It is calculated taking into account that there are a number of reserves by each role.
+         *
+         * @see Footballer::_checkConfiguration
+         * @param array $footballers A $footballers element is a 'footballer' that to be instantiated needs to satisfy
+         * Footballer::_checkConfiguration
+         * @return float The sum of all magic points of the given formation
+         */
+        public function getSum(array $footballers);
     }
 }
