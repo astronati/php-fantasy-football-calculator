@@ -9,7 +9,7 @@ class DefenseConversionTableTest extends PHPUnit_Framework_TestCase
 {
     public function defenseAverageProvider()
     {
-        return array(
+        return [
             [0, 4],
             [4.9, 4],
             [5, 3],
@@ -30,7 +30,7 @@ class DefenseConversionTableTest extends PHPUnit_Framework_TestCase
             [6.99, -4],
             [7, -5],
             [8, -5],
-        );
+        ];
     }
 
     /**

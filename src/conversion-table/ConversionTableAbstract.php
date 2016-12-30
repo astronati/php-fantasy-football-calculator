@@ -24,7 +24,7 @@ namespace FFC {
          * Ranges are ordered by descendant value.
          * @type array
          */
-        protected $_map = array();
+        protected $_map = [];
 
         /**
          * Returns the converted value, given a value in a range.

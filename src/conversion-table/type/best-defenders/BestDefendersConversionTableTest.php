@@ -9,7 +9,7 @@ class BestDefendersConversionTableTest extends PHPUnit_Framework_TestCase
 {
     public function bestDefendersAverageProvider()
     {
-        return array(
+        return [
             [0, 0],
             [5.9, 0],
             [6, 1],
@@ -18,7 +18,7 @@ class BestDefendersConversionTableTest extends PHPUnit_Framework_TestCase
             [6.99, 3],
             [7, 6],
             [7.5, 6],
-        );
+        ];
     }
 
     /**

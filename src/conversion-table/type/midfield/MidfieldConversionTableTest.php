@@ -9,7 +9,7 @@ class MidfieldConversionTableTest extends PHPUnit_Framework_TestCase
 {
     public function midfieldDifferenceProvider()
     {
-        return array(
+        return [
             [0, 0],
             [0.9, 0],
             [1, 0.5],
@@ -28,7 +28,7 @@ class MidfieldConversionTableTest extends PHPUnit_Framework_TestCase
             [7.9, 3.5],
             [8, 4],
             [8.9, 4],
-        );
+        ];
     }
 
     /**

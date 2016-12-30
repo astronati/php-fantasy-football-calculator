@@ -75,13 +75,13 @@ namespace FFC {
          * An array containing all needed properties to define a footballer.
          * @var array
          */
-        private $_fields = array(
+        private $_fields = [
             'id',
             'type',
             // TODO Should be sorted by order
             'order',
             'role',
-        );
+        ];
 
         /**
          * Checks if the configuration array has all needed parameters.
