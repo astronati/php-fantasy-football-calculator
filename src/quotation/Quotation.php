@@ -15,6 +15,8 @@ namespace FFC {
 
     /**
      * A quotation allows to return vote and other properties of a footballer after a soccer match.
+     * If footballer didn't receive 'vote' and 'magic points' then all fields will be null. Other fields can have not
+     * null values only when the footballer receive a 'vote' or 'magic points' at least.
      * @inheritDoc
      */
     class Quotation implements QuotationInterface {
@@ -115,14 +117,14 @@ namespace FFC {
             }
 
             $this->_footballerID = (int) $config['footballerID'];
-            $this->_magicPoints = $config['magicPoints'] === '' ? null : (float) $config['magicPoints'];
-            $this->_vote = $config['vote'] === '' ? null : (float) $config['vote'];
-            $this->_goal = (int) $config['goal'];
-            $this->_caution = (float) $config['caution'];
-            $this->_expulsion = (int) $config['expulsion'];
-            $this->_penalty = (int) $config['penalty'];
-            $this->_autoGoal = (int) $config['autoGoal'];
-            $this->_assist = (int) $config['assist'];
+            $this->_magicPoints = is_null($config['magicPoints']) ? null : (float) $config['magicPoints'];
+            $this->_vote = is_null($config['vote']) ? null : (float) $config['vote'];
+            $this->_goal = is_null($config['goal']) ? null : (int) $config['goal'];
+            $this->_caution = is_null($config['caution']) ? null : (float) $config['caution'];
+            $this->_expulsion = is_null($config['expulsion']) ? null : (int) $config['expulsion'];
+            $this->_penalty = is_null($config['penalty']) ? null : (int) $config['penalty'];
+            $this->_autoGoal = is_null($config['autoGoal']) ? null : (int) $config['autoGoal'];
+            $this->_assist = is_null($config['assist']) ? null : (int) $config['assist'];
         }
 
         /**
