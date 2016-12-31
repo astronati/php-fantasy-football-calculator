@@ -9,7 +9,7 @@
  * @author Andrea Stronati <astronati@vendini.com>
  * @license MIT http://opensource.org/licenses/MIT
  * @copyright 2016 Andrea Stronati
- * @version 0.2.1
+ * @version 0.3.0
  */
 
 namespace FFC {
@@ -130,9 +130,10 @@ namespace FFC {
          *
          * [
          *  [
-         *    id: {number}
+         *    footballerID: {number}
          *    magicPoints: {float}
          *    vote: {float}
+         *    ...
          *  ]
          * ]
          */
