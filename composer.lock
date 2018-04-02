@@ -4,8 +4,117 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c11cd519762d00b0d429277011b37da0",
-    "packages": [],
+    "content-hash": "357934066f1a50a453ccd8b8ac5c6ebe",
+    "packages": [
+        {
+            "name": "astronati/fantasy-football-quotations-parser",
+            "version": "2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/astronati/php-fantasy-football-quotations-parser.git",
+                "reference": "bf60aa17f7217524aebb872213478867f6d6b0e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/astronati/php-fantasy-football-quotations-parser/zipball/bf60aa17f7217524aebb872213478867f6d6b0e7",
+                "reference": "bf60aa17f7217524aebb872213478867f6d6b0e7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0",
+                "phpoffice/phpexcel": "^1.8"
+            },
+            "require-dev": {
+                "codacy/coverage": "^1.4",
+                "consolidation/robo": "~1",
+                "phpstan/phpstan": "^0.9.1",
+                "phpunit/php-code-coverage": "^5.3",
+                "phpunit/phpunit": "^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FFQP\\": "src"
+                },
+                "classmap": [
+                    "src/"
+                ],
+                "exclude-from-classmap": [
+                    "/tests/**/*.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrea Stronati",
+                    "email": "astronati@vendini.com"
+                }
+            ],
+            "description": "This library allows user to retrieve quotations from those documents that are provided from the most important sport newspapers. Quotations contains votes of each soccer player of a specific championship match day.",
+            "time": "2018-03-31T12:05:07+00:00"
+        },
+        {
+            "name": "phpoffice/phpexcel",
+            "version": "1.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPOffice/PHPExcel.git",
+                "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
+                "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
+                "shasum": ""
+            },
+            "require": {
+                "ext-xml": "*",
+                "ext-xmlwriter": "*",
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHPExcel": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Maarten Balliauw",
+                    "homepage": "http://blog.maartenballiauw.be"
+                },
+                {
+                    "name": "Mark Baker"
+                },
+                {
+                    "name": "Franck Lefevre",
+                    "homepage": "http://blog.rootslabs.net"
+                },
+                {
+                    "name": "Erik Tilt"
+                }
+            ],
+            "description": "PHPExcel - OpenXML - Read, Create and Write Spreadsheet documents in PHP - Spreadsheet engine",
+            "homepage": "http://phpexcel.codeplex.com",
+            "keywords": [
+                "OpenXML",
+                "excel",
+                "php",
+                "spreadsheet",
+                "xls",
+                "xlsx"
+            ],
+            "abandoned": "phpoffice/phpspreadsheet",
+            "time": "2015-05-01T07:00:55+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "codacy/coverage",
