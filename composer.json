@@ -19,7 +19,8 @@
     "phpstan/phpstan": "^0.9.1"
   },
   "require": {
-    "php": ">=7.1.0"
+    "php": ">=7.1.0",
+    "astronati/fantasy-football-quotations-parser": "^2.2"
   },
   "autoload": {
     "psr-4": {
