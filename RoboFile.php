@@ -12,23 +12,31 @@ class RoboFile extends \Robo\Tasks
     public function test()
     {
         $cmd = [];
-        array_push($cmd, './vendor/phpunit/phpunit/phpunit ./src');
-        array_push($cmd, '--coverage-html test/report/html');
-        array_push($cmd, '--coverage-xml test/report/xml');
-        array_push($cmd, '--whitelist ./src');
+        $cmd[] = './vendor/bin/phpunit tests';
+        $cmd[] = '--coverage-html coverage/html';
+        $cmd[] = '--coverage-clover coverage/xml';
+        $cmd[] = '--whitelist ./src';
         $this->_exec(implode(' ', $cmd));
     }
 
     /**
-     * Generates documentation of the project
+     * Sends coverage result to Codacy
      */
-    public function docs()
-    {
-        $cmd = array();
-        array_push($cmd, './vendor/phpdocumentor/phpdocumentor/bin/phpdoc');
-        array_push($cmd, '-d ./src');
-        array_push($cmd, '-t ./docs/api');
-        array_push($cmd, '--ignore="**/*Test.php"');
-        $this->_exec(implode(' ', $cmd));
+    public function coverageSend() {
+        $this->_exec('./vendor/bin/codacycoverage clover coverage/xml');
+    }
+
+    /**
+     * Opens coverage
+     */
+    public function coverageOpen() {
+        $this->_exec('open coverage/html/index.html');
+    }
+
+    /**
+     * Performs static analysis
+     */
+    public function analysis() {
+        $this->_exec('vendor/bin/phpstan analyse src --level=7');
     }
 }

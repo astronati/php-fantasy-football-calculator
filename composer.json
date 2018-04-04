@@ -1,8 +1,8 @@
 {
   "name": "astronati/fantasy-football-calculator",
-  "description": "This library allows user to calculate the points that a team has reached after a soccer match. The total can be altered through some bonus like the defense one.",
+  "description": "This library allows user to calculate the points/magic points that a team has reached after a soccer match. The total can be altered through some bonus like the defense one.",
   "license": "MIT",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "authors": [
     {
       "name": "Andrea Stronati",
@@ -12,25 +12,30 @@
   "minimum-stability": "stable",
   "prefer-stable": true,
   "require-dev": {
-    "codacy/coverage": "dev-master",
+    "codacy/coverage": "^1.4",
     "consolidation/robo": "~1",
-    "phpdocumentor/phpdocumentor": "^2.9.0",
-    "phpunit/phpunit": "^5.6.0",
-    "phpunit/php-code-coverage": "^4.0.3"
+    "phpunit/phpunit": "^6.5",
+    "phpunit/php-code-coverage": "^5.3",
+    "phpstan/phpstan": "^0.9.1"
   },
   "require": {
-    "php": ">=5.6.0"
+    "php": ">=7.1.0",
+    "astronati/fantasy-football-quotations-parser": "^2.2"
   },
   "autoload": {
-    "exclude-from-classmap": [
-      "/src/**/*Test.php"
-    ],
+    "psr-4": {
+      "FFC\\": "src"
+    },
     "classmap": [
       "src/"
+    ],
+    "exclude-from-classmap": [
+      "/tests/**/*.php"
     ]
   },
   "scripts": {
-    "docs": "./vendor/bin/robo docs",
+    "analysis": "./vendor/bin/robo analysis",
+    "coverage": "./vendor/bin/robo coverage:open",
     "test": "./vendor/bin/robo test"
   }
 }
