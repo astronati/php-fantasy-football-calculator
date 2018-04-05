@@ -31,6 +31,9 @@ Rules can be applied to a single team or in a match context: take a look at foll
 
 Each rule can be added to the Calculator configuration as shown in the example as follows.
 
+**NOTE:**
+To request another rule please file a new [issue](https://github.com/astronati/php-fantasy-football-calculator/issues/new).
+
 #### Formation and Footballers
 Calculator needs one or two formations: so developer has to provide [Formation](https://github.com/astronati/php-fantasy-football-calculator/blob/master/src/Formation/Formation.php)
 instances.
