@@ -10,5 +10,5 @@ abstract class TeamRuleAbstract extends RuleAbstract
      * @param FootballerAbstract[] $footballers
      * @return float
      */
-    abstract function getBonus($footballers): float;
+    abstract public function getBonus($footballers): float;
 }

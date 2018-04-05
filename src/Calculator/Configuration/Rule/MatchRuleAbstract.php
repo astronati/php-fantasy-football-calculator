@@ -11,5 +11,5 @@ abstract class MatchRuleAbstract extends RuleAbstract
      * @param FootballerAbstract[]|null $opponents
      * @return float
      */
-    abstract function getBonus(array $footballers = null, array $opponents  = null): float;
+    abstract public function getBonus(array $footballers = null, array $opponents = null): float;
 }

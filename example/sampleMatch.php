@@ -48,5 +48,5 @@ foreach ($reservesB as $reserve) {
 $matchResult = $calculator->getMatchResult($formationA, $formationB);
 $homeResult = $matchResult->getHomeResult();
 $awayResult = $matchResult->getAwayResult();
-echo 'A: (' . $homeResult->getMagicPoints() . ' ' . $homeResult->getBonus() . ') '. $matchResult->getHomeGoals() . PHP_EOL;
-echo 'B: (' . $awayResult->getMagicPoints() . ' ' . $awayResult->getBonus() . ') '. $matchResult->getAwayGoals() . PHP_EOL;
+echo '(' . $homeResult->getMagicPoints() . ' ' . $homeResult->getBonus() . ') '. $matchResult->getHomeGoals() . PHP_EOL;
+echo '(' . $awayResult->getMagicPoints() . ' ' . $awayResult->getBonus() . ') '. $matchResult->getAwayGoals() . PHP_EOL;

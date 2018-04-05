@@ -25,7 +25,7 @@ abstract class RuleAbstract
      */
     protected function getVotesByRole(array $footballers, string $role): array
     {
-        $votes = array();
+        $votes = [];
         foreach ($footballers as $footballer) {
             $footballerQuotation = $footballer->getQuotation();
             if ($footballerQuotation->getSecondaryRole() === $role) {

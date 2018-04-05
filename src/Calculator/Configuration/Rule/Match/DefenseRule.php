@@ -12,7 +12,7 @@ class DefenseRule extends MatchRuleAbstract
      * vote average.
      * @inheritdoc
      */
-    public function getBonus(array $footballers = null, array $opponents  = null): float
+    public function getBonus(array $footballers = null, array $opponents = null): float
     {
         $defendersVotes = $this->getVotesByRole($opponents, Row::DEFENDER);
 

@@ -27,7 +27,11 @@ class ResultFactory
      * @param Configuration $configuration
      * @return MatchResult
      */
-    public function createMatchResult(array $homeFootballers, array $awayFootballers, Configuration $configuration): MatchResult
+    public function createMatchResult(
+      array $homeFootballers,
+      array $awayFootballers,
+      Configuration $configuration
+    ): MatchResult
     {
         return new MatchResult(
           new Result(

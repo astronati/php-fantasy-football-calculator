@@ -20,7 +20,7 @@ class Calculator implements CalculatorInterface
     /**
      * @var Quotation[] $quotations
      */
-    private $quotations = array();
+    private $quotations = [];
 
     /**
      * @var Configuration $configuration

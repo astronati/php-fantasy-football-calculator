@@ -9,7 +9,7 @@ abstract class ConversionTableAbstract implements ConversionTableInterface
     /**
      * @var ConversionTableRow[]
      */
-    protected $table = array();
+    protected $table = [];
 
     /**
      * @inheritdoc

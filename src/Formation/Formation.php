@@ -9,12 +9,12 @@ class Formation implements FormationInterface
     /**
      * @var FootballerAbstract[]
      */
-    private $firstStrings = array();
+    private $firstStrings = [];
 
     /**
      * @var FootballerAbstract[]
      */
-    private $reserves = array();
+    private $reserves = [];
 
     /**
      * @inheritdoc
@@ -53,7 +53,7 @@ class Formation implements FormationInterface
      */
     public function getWhoPlayed(): array
     {
-        $footballers = array();
+        $footballers = [];
         foreach ($this->firstStrings as $firstString) {
             if ($firstString->getQuotation()->hasPlayed()) {
                 $firstString->enterTheGame();

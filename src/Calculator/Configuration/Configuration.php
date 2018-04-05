@@ -9,10 +9,11 @@ class Configuration
     /**
      * @var RuleAbstract[]
      */
-    private $rules = array();
+    private $rules = [];
 
     /**
      * @param RuleAbstract $rule
+     * @return Configuration
      */
     public function addRule(RuleAbstract $rule)
     {
