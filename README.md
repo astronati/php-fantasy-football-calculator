@@ -14,17 +14,76 @@ You can install the library and its dependencies using `composer` running:
 $ composer require fantasy-football-calculator
 ```
 
-## Documentation
-The documentation is generated using [phpDocumentor](http://www.phpdoc.org/) and you can find it in
-[docs/api](http://astronati.github.io/php-fantasy-football-calculator/docs/api).
+### Usage
+The library returns a result:
 
-### Calculator
-Run the following command to instantiate a calculator:
+- A [MatchResult](https://github.com/astronati/php-fantasy-football-calculator/blob/master/src/Calculator/Result/MatchResult.php)
+when a fantasyteam is against another one
+- A simple [Result](https://github.com/astronati/php-fantasy-football-calculator/blob/master/src/Calculator/Result/Result.php)
+when a fantasyteam plays against all others
+
+#### Rules
+Calculator can be configured with different rules in order to apply different bonus/malus to the final result.
+Rules can be applied to a single team or in a match context: take a look at following folders to see which bonus are supported:
+
+- [Match Rules](https://github.com/astronati/php-fantasy-football-calculator/blob/master/src/Calculator/Configuration/Rule/Match)
+- [Team Rules](https://github.com/astronati/php-fantasy-football-calculator/blob/master/src/Calculator/Configuration/Rule/Team)
+
+Each rule can be added to the Calculator configuration as shown in the example as follows.
+
+#### Formation and Footballers
+Calculator needs one or two formations: so developer has to provide [Formation](https://github.com/astronati/php-fantasy-football-calculator/blob/master/src/Formation/Formation.php)
+instances.
+
 ```php
-$calculator = CalculatorFactory::create($quotations, $options);
+// Prepare formation
+$formation = new Formation();
+$formation->addFirstString(new Footballer())...
 ```
-See [CalculatorFactory API](http://astronati.github.io/php-fantasy-football-calculator/docs/api/classes/FFC.CalculatorFactory.html)
-for more details.
+
+**NOTE**
+Footballer abstract class needs to be extended by developer that has to set the *code* property.
+The *code* property is the one provided by the [Quotation(s)](https://github.com/astronati/php-fantasy-football-quotations-parser/blob/master/src/Model/QuotationInterface.php)
+instances.
+
+Take a look at the [Footballer](https://github.com/astronati/php-fantasy-football-calculator/blob/master/example/Footballer.php)
+class that has been implemented in the example folder.
+
+#### Example
+A couple of examples are provided in order to figure out better how this library can be integrated in the own system.
+
+```php
+// Configure calculator
+$configuration = new Configuration();
+$configuration
+  ->addRule(RuleFactory::create(RuleFactory::BEST_DEFENDERS_RULE))
+  ->addRule(RuleFactory::create(RuleFactory::HOME_RULE))
+;
+$calculator = new Calculator($quotations, $configuration);
+```
+
+##### Match Result
+The following snippet is extracted from the
+[example/sample.php](https://github.com/astronati/php-fantasy-football-calculator/blob/master/example/sampleMatch.php)
+file and shows how configuring a calculator in a match.
+
+```php
+// Show match results...
+$matchResult = $calculator->getMatchResult($formationA, $formationB);
+$homeResult = $matchResult->getHomeResult();
+echo '(' . $homeResult->getMagicPoints() . ' ' . $homeResult->getBonus() . ') '. $matchResult->getHomeGoals();
+```
+
+##### Result
+The following snippet is extracted from the
+[example/sample.php](https://github.com/astronati/php-fantasy-football-calculator/blob/master/example/sample.php)
+file and shows how configuring a calculator when a fantasyteam plays alone or against all others.
+
+```php
+// Show single result...
+$singleResult = $calculator->getSingleResult($formation);
+echo $singleResult->getMagicPoints() . ' ' . $singleResult->getBonus();
+```
 
 ## Development
 The environment requires [phpunit](https://phpunit.de/), that has been already included in the `dev-dependencies` of the
@@ -37,19 +96,17 @@ To install all modules you just need to run following command:
 $ composer install
 ```
 
-### Documentation
-Please use the following command to generate the project documentation:
-```sh
-$ composer docs
-```
-
 ### Testing
-Tests files are created next to related file as follows:
+Tests files are created in dedicates folders that replicate the
+[src](https://github.com/astronati/php-fantasy-football-calculator/tree/master/src) structure as follows:
 ```
 .
 +-- src
 |   +-- [folder-name]
 |   |   +-- [file-name].php
+|   ...
++-- tests
+|   +-- [folder-name]
 |   |   +-- [file-name]Test.php
 ```
 
@@ -58,8 +115,10 @@ Execute following command to run the tests suite:
 $ composer test
 ```
 
-See [Code Coverage](http://astronati.github.io/php-fantasy-football-calculator/test/report/html/index.html) for more
-details.
+Run what follows to see the code coverage:
+```sh
+$ composer coverage
+```
 
 ## License
 This package is released under the [MIT license](LICENSE.md).
