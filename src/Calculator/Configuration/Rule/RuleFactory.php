@@ -20,8 +20,8 @@ class RuleFactory
     const DEFENSE_RULE = 2;
     const FORWARD_RULE = 3;
     const GOAL_BONUS_SINCE_2017_RULE = 4;
-    const HOME_RULE = 4;
-    const MIDFIELD_RULE = 5;
+    const HOME_RULE = 5;
+    const MIDFIELD_RULE = 6;
 
     /**
      * @param int $type
