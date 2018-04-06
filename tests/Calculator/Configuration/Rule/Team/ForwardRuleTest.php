@@ -15,7 +15,9 @@ class ForwardRuleTest extends TestCase
           ->setMethods(['getQuotation'])
           ->disableOriginalConstructor()
           ->getMock();
-        $footballer->method('getQuotation')->willReturn($this->getQuotationInstance($role, $isWithoutVote, $vote, $goals));
+        $footballer->method('getQuotation')->willReturn(
+          $this->getQuotationInstance($role, $isWithoutVote, $vote, $goals)
+        );
         return $footballer;
     }
 

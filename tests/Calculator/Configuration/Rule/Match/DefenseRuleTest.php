@@ -15,7 +15,9 @@ class DefenseRuleTest extends TestCase
           ->setMethods(['getQuotation'])
           ->disableOriginalConstructor()
           ->getMock();
-        $footballer->method('getQuotation')->willReturn($this->getQuotationInstance($role, $isWithoutVote, $vote));
+        $footballer->method('getQuotation')->willReturn(
+          $this->getQuotationInstance($role, $isWithoutVote, $vote)
+        );
         return $footballer;
     }
 
@@ -73,6 +75,6 @@ class DefenseRuleTest extends TestCase
               $quotation['vote']
             );
         }
-        $this->assertEquals($expectedBonus, $rule->getBonus(array(), $footballers));
+        $this->assertEquals($expectedBonus, $rule->getBonus([], $footballers));
     }
 }

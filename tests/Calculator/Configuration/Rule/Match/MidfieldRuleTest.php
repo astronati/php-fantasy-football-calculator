@@ -4,6 +4,7 @@ namespace Test\Calculator\Configuration\Rule\Match;
 
 use FFC\Calculator\Configuration\Rule\Match\MidfieldRule;
 use FFC\Calculator\ConversionTable\MidfieldConversionTable;
+use FFC\Formation\Footballer\FootballerAbstract;
 use PHPUnit\Framework\TestCase;
 
 class MidfieldRuleTest extends TestCase
@@ -14,7 +15,9 @@ class MidfieldRuleTest extends TestCase
           ->setMethods(['getQuotation'])
           ->disableOriginalConstructor()
           ->getMock();
-        $footballer->method('getQuotation')->willReturn($this->getQuotationInstance($role, $isWithoutVote, $vote));
+        $footballer->method('getQuotation')->willReturn(
+          $this->getQuotationInstance($role, $isWithoutVote, $vote)
+        );
         return $footballer;
     }
 
