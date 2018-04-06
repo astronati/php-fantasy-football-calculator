@@ -17,9 +17,18 @@ abstract class ConversionTableAbstract implements ConversionTableInterface
     public function convert($value)
     {
         foreach ($this->table as $row) {
-            if ($value >= $row->getValue()) {
-                return $row->getConvertedValue();
+            switch (gettype($row->getValue())) {
+                case 'string':
+                    if ($value == $row->getValue()) {
+                        return $row->getConvertedValue();
+                    }
+                    break;
+                default:
+                    if ($value >= $row->getValue()) {
+                        return $row->getConvertedValue();
+                    }
             }
+
         }
         return 0;
     }
