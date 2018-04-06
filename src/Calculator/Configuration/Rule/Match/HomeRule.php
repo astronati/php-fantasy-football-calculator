@@ -9,7 +9,7 @@ class HomeRule extends MatchRuleAbstract
     /**
      * @inheritdoc
      */
-    public function getBonus(array $footballers = null, array $opponents = null): float
+    public function getBonus(array $footballers = array(), array $opponents = array()): float
     {
         return 2;
     }

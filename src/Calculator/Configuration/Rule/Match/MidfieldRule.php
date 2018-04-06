@@ -14,7 +14,7 @@ class MidfieldRule extends MatchRuleAbstract
      * NOTE: This method applies only the bonus/malus to the given footballers, not to the opponents one.
      * @inheritdoc
      */
-    public function getBonus(array $footballers = null, array $opponents = null): float
+    public function getBonus(array $footballers = array(), array $opponents = array()): float
     {
         $midfielders = $this->getVotesByRole($footballers, Row::MIDFIELDER);
         $opponentsMidfielders = $this->getVotesByRole($opponents, Row::MIDFIELDER);

@@ -37,9 +37,9 @@ abstract class RuleAbstract
 
     /**
      * @param Quotation $quotation
-     * @return float
+     * @return float|null
      */
-    protected function getVote(Quotation $quotation): float
+    protected function getVote(Quotation $quotation): ?float
     {
         return $quotation->isWithoutVote() ? $quotation->getOriginalMagicPoints() : $quotation->getVote();
     }
