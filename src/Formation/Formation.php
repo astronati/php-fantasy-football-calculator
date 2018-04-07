@@ -9,12 +9,12 @@ class Formation implements FormationInterface
     /**
      * @var FootballerAbstract[]
      */
-    private $firstStrings = [];
+    protected $firstStrings = [];
 
     /**
      * @var FootballerAbstract[]
      */
-    private $reserves = [];
+    protected $reserves = [];
 
     /**
      * @inheritdoc
