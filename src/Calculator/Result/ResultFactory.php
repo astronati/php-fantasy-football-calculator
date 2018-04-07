@@ -92,7 +92,7 @@ class ResultFactory
     {
         $bonus = 0;
         foreach ($configuration->getRules() as $rule) {
-            if ($rule instanceof MatchRuleAbstract) {
+            if ($rule instanceof MatchRuleAbstract && !($rule instanceof HomeRule)) {
                 $bonus += $rule->getBonus($footballers, $opponents);
             }
         }
