@@ -84,7 +84,11 @@ class CalculatorTest extends TestCase
 
         $quotations = [];
         foreach ($quotationsData as $quotationData) {
-            $quotations[] = $this->getQuotationInstance($quotationData['code'], $quotationData['magicPoints'], $quotationData['role']);
+            $quotations[] = $this->getQuotationInstance(
+              $quotationData['code'],
+              $quotationData['magicPoints'],
+              $quotationData['role']
+            );
         }
         $calculator = new Calculator($quotations, $configuration);
 
