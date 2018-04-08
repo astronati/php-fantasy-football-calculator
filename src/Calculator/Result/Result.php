@@ -35,4 +35,12 @@ class Result implements ResultInterface
     {
         return $this->bonus;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function getTotal(): float
+    {
+        return $this->getMagicPoints() + $this->getBonus();
+    }
 }
