@@ -10,7 +10,7 @@ class ResultTest extends TestCase
     public function dataProvider()
     {
         return [
-          [6.5, 2],
+          [6.5, 2, 8.5],
         ];
     }
 
@@ -18,8 +18,9 @@ class ResultTest extends TestCase
      * @dataProvider dataProvider
      * @param float $magicPoints
      * @param float $bonus
+     * @param float $total
      */
-    public function testGetBonus($magicPoints, $bonus)
+    public function testGetBonus($magicPoints, $bonus, $total)
     {
         $result = new Result($magicPoints, $bonus);
         $this->assertEquals($bonus, $result->getBonus());
@@ -29,10 +30,23 @@ class ResultTest extends TestCase
      * @dataProvider dataProvider
      * @param float $magicPoints
      * @param float $bonus
+     * @param float $total
      */
-    public function testGetMagicPoints($magicPoints, $bonus)
+    public function testGetMagicPoints($magicPoints, $bonus, $total)
     {
         $result = new Result($magicPoints, $bonus);
         $this->assertEquals($magicPoints, $result->getMagicPoints());
+    }
+
+    /**
+     * @dataProvider dataProvider
+     * @param float $magicPoints
+     * @param float $bonus
+     * @param float $total
+     */
+    public function testGetTotal($magicPoints, $bonus, $total)
+    {
+        $result = new Result($magicPoints, $bonus);
+        $this->assertEquals($total, $result->getTotal());
     }
 }

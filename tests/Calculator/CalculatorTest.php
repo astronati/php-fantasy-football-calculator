@@ -101,4 +101,120 @@ class CalculatorTest extends TestCase
         $this->assertEquals($expectedMagicPoints, $result->getMagicPoints());
         $this->assertEquals($expectedBonus, $result->getBonus());
     }
+
+    public function matchDataProvider()
+    {
+        return [
+          [
+            [
+              ['code' => 1, 'role' => 'P', 'magicPoints' => 6],
+              ['code' => 2, 'role' => 'D', 'magicPoints' => 6],
+              ['code' => 3, 'role' => 'D', 'magicPoints' => 6],
+              ['code' => 4, 'role' => 'D', 'magicPoints' => 6],
+              ['code' => 5, 'role' => 'D', 'magicPoints' => 6],
+              ['code' => 6, 'role' => 'C', 'magicPoints' => 6],
+              ['code' => 7, 'role' => 'C', 'magicPoints' => 6],
+              ['code' => 8, 'role' => 'C', 'magicPoints' => 6],
+              ['code' => 9, 'role' => 'A', 'magicPoints' => 6],
+              ['code' => 10, 'role' => 'A', 'magicPoints' => 6],
+              ['code' => 11, 'role' => 'A', 'magicPoints' => 6],
+              ['code' => 21, 'role' => 'P', 'magicPoints' => 6.5],
+              ['code' => 22, 'role' => 'D', 'magicPoints' => 6.5],
+              ['code' => 23, 'role' => 'D', 'magicPoints' => 6.5],
+              ['code' => 24, 'role' => 'D', 'magicPoints' => 6.5],
+              ['code' => 25, 'role' => 'D', 'magicPoints' => 6.5],
+              ['code' => 26, 'role' => 'C', 'magicPoints' => 6.5],
+              ['code' => 27, 'role' => 'C', 'magicPoints' => 6.5],
+              ['code' => 28, 'role' => 'C', 'magicPoints' => 6.5],
+              ['code' => 29, 'role' => 'A', 'magicPoints' => 6.5],
+              ['code' => 30, 'role' => 'A', 'magicPoints' => 6.5],
+              ['code' => 31, 'role' => 'A', 'magicPoints' => 6.5],
+            ],
+            [
+              ['code' => 1],
+              ['code' => 2],
+              ['code' => 3],
+              ['code' => 4],
+              ['code' => 5],
+              ['code' => 6],
+              ['code' => 7],
+              ['code' => 8],
+              ['code' => 9],
+              ['code' => 10],
+              ['code' => 11],
+            ],
+            [
+              ['code' => 21],
+              ['code' => 22],
+              ['code' => 23],
+              ['code' => 24],
+              ['code' => 25],
+              ['code' => 26],
+              ['code' => 27],
+              ['code' => 28],
+              ['code' => 29],
+              ['code' => 30],
+              ['code' => 31],
+            ],
+            66,
+            3,
+            71.5,
+            3
+          ],
+        ];
+    }
+
+    /**
+     * @dataProvider matchDataProvider
+     * @param array $quotationsData
+     * @param array $footballers
+     * @param array $opponents
+     * @param float $expectedHomeMagicPoints
+     * @param float $expectedHomeBonus
+     * @param float $expectedAwayMagicPoints
+     * @param float $expectedAwayBonus
+     */
+    public function testGetMatchResult(
+      $quotationsData,
+      $footballers,
+      $opponents,
+      $expectedHomeMagicPoints,
+      $expectedHomeBonus,
+      $expectedAwayMagicPoints,
+      $expectedAwayBonus
+    )
+    {
+        $configuration = new Configuration();
+        $configuration
+          ->addRule(RuleFactory::create(RuleFactory::BEST_DEFENDERS_RULE))
+          ->addRule(RuleFactory::create(RuleFactory::HOME_RULE))
+        ;
+
+        $quotations = [];
+        foreach ($quotationsData as $quotationData) {
+            $quotations[] = $this->getQuotationInstance(
+              $quotationData['code'],
+              $quotationData['magicPoints'],
+              $quotationData['role']
+            );
+        }
+        $calculator = new Calculator($quotations, $configuration);
+
+        $homeFormation = new Formation();
+        foreach ($footballers as $footballer) {
+            $homeFormation->addFirstString($this->getFootballerInstance($footballer['code']));
+        }
+
+        $awayFormation = new Formation();
+        foreach ($opponents as $footballer) {
+            $awayFormation->addFirstString($this->getFootballerInstance($footballer['code']));
+        }
+        $result = $calculator->getMatchResult($homeFormation, $awayFormation);
+
+        $this->assertEquals($expectedHomeMagicPoints, $result->getHomeResult()->getMagicPoints());
+        $this->assertEquals($expectedHomeBonus, $result->getHomeResult()->getBonus());
+
+        $this->assertEquals($expectedAwayMagicPoints, $result->getAwayResult()->getMagicPoints());
+        $this->assertEquals($expectedAwayBonus, $result->getAwayResult()->getBonus());
+    }
 }
