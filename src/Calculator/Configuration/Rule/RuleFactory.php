@@ -13,6 +13,7 @@ use FFC\Calculator\ConversionTable\DefenseConversionTable;
 use FFC\Calculator\ConversionTable\ForwardConversionTable;
 use FFC\Calculator\ConversionTable\GoalBonusSince2017ConversionTable;
 use FFC\Calculator\ConversionTable\MidfieldConversionTable;
+use FFC\Exception\NotFoundRuleTypeException;
 
 class RuleFactory
 {
@@ -26,7 +27,7 @@ class RuleFactory
     /**
      * @param int $type
      * @return RuleAbstract
-     * @throws \Exception
+     * @throws NotFoundRuleTypeException
      */
     public static function create($type): RuleAbstract
     {
@@ -44,7 +45,7 @@ class RuleFactory
             case self::MIDFIELD_RULE:
                 return new MidfieldRule(new MidfieldConversionTable());
             default:
-                throw new \Exception('Rule not found: ' . $type);
+                throw new NotFoundRuleTypeException('Rule not found: ' . $type);
         }
     }
 }
