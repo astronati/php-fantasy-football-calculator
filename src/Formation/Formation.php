@@ -2,24 +2,24 @@
 
 namespace FFC\Formation;
 
-use FFC\Formation\Footballer\FootballerAbstract;
+use FFC\Formation\Footballer\FootballerInterface;
 
 class Formation implements FormationInterface
 {
     /**
-     * @var FootballerAbstract[]
+     * @var FootballerInterface[]
      */
     protected $firstStrings = [];
 
     /**
-     * @var FootballerAbstract[]
+     * @var FootballerInterface[]
      */
     protected $reserves = [];
 
     /**
      * @inheritdoc
      */
-    public function addFirstString(FootballerAbstract $footballer): FormationInterface
+    public function addFirstString(FootballerInterface $footballer): FormationInterface
     {
         $this->firstStrings[] = $footballer;
         return $this;
@@ -28,7 +28,7 @@ class Formation implements FormationInterface
     /**
      * @inheritdoc
      */
-    public function addReserve(FootballerAbstract $footballer): FormationInterface
+    public function addReserve(FootballerInterface $footballer): FormationInterface
     {
         $this->reserves[] = $footballer;
         return $this;
