@@ -39,43 +39,43 @@ class MidfieldRuleTest extends TestCase
         return [
           [
             [
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6],
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6],
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6],
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6.0],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6.0],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6.0],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6.0],
             ],
             [
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7],
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7],
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7.0],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7.0],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7.0],
             ],
             0
           ],
           [
             [
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7],
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7],
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7],
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7.0],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7.0],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7.0],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7.0],
             ],
             [
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6],
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6],
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6.0],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6.0],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6.0],
             ],
             0.5
           ],
           [
             [
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6],
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6],
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6.0],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6.0],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6.0],
             ],
             [
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7],
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7],
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7],
-              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7.0],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7.0],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7.0],
+              ['role' => 'C', 'isWithoutVote' => true, 'vote' => 7.0],
             ],
             -0.5
           ],

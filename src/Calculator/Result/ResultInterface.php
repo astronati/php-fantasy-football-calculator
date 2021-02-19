@@ -15,7 +15,7 @@ interface ResultInterface
     public function getBonus(): float;
 
     /**
-     * @return flaot
+     * @return float
      */
     public function getTotal(): float;
 }

@@ -39,20 +39,20 @@ class DefenseRuleTest extends TestCase
         return [
           [
             [
-              ['role' => 'P', 'isWithoutVote' => true, 'vote' => 6],
-              ['role' => 'D', 'isWithoutVote' => true, 'vote' => 6],
+              ['role' => 'P', 'isWithoutVote' => true, 'vote' => 6.0],
+              ['role' => 'D', 'isWithoutVote' => true, 'vote' => 6.0],
               ['role' => 'D', 'isWithoutVote' => true, 'vote' => 6.5],
               ['role' => 'D', 'isWithoutVote' => true, 'vote' => 6.5],
-              ['role' => 'D', 'isWithoutVote' => false, 'vote' => 6],
-              ['role' => 'D', 'isWithoutVote' => true, 'vote' => 7],
+              ['role' => 'D', 'isWithoutVote' => false, 'vote' => 6.0],
+              ['role' => 'D', 'isWithoutVote' => true, 'vote' => 7.0],
             ],
             -3
           ],
           [
             [
-              ['role' => 'D', 'isWithoutVote' => true, 'vote' => 7],
-              ['role' => 'D', 'isWithoutVote' => true, 'vote' => 7],
-              ['role' => 'D', 'isWithoutVote' => true, 'vote' => 7],
+              ['role' => 'D', 'isWithoutVote' => true, 'vote' => 7.0],
+              ['role' => 'D', 'isWithoutVote' => true, 'vote' => 7.0],
+              ['role' => 'D', 'isWithoutVote' => true, 'vote' => 7.0],
             ],
             -4
           ],

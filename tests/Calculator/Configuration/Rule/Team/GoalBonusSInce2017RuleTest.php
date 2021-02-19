@@ -40,8 +40,8 @@ class GoalBonusSInce2017RuleTest extends TestCase
         return [
           [
             [
-              ['role' => 'A', 'isWithoutVote' => true, 'vote' => 7, 'goals' => 1],
-              ['role' => 'D', 'isWithoutVote' => true, 'vote' => 6, 'goals' => 1],
+              ['role' => 'A', 'isWithoutVote' => true, 'vote' => 7.0, 'goals' => 1],
+              ['role' => 'D', 'isWithoutVote' => true, 'vote' => 6.0, 'goals' => 1],
               ['role' => 'C', 'isWithoutVote' => true, 'vote' => 6.5, 'goals' => 1],
             ],
             2.5

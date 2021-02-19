@@ -47,15 +47,15 @@ class FormationTest extends TestCase
           [
             // First Strings
             [
-              ['code' => 1, 'hasPlayed' => false],
-              ['code' => 2, 'hasPlayed' => false],
-              ['code' => 3, 'hasPlayed' => false],
-              ['code' => 4, 'hasPlayed' => true],
+              ['code' => '1', 'hasPlayed' => false],
+              ['code' => '2', 'hasPlayed' => false],
+              ['code' => '3', 'hasPlayed' => false],
+              ['code' => '4', 'hasPlayed' => true],
             ],
             // Reserves
             [
-              ['code' => 5, 'hasPlayed' => true],
-              ['code' => 6, 'hasPlayed' => true],
+              ['code' => '5', 'hasPlayed' => true],
+              ['code' => '6', 'hasPlayed' => true],
             ],
             [5,6,4]
           ],

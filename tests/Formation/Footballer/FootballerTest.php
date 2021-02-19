@@ -20,7 +20,7 @@ class FootballerTest extends TestCase
         return $quotation;
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->footballerInstance = new class extends FootballerAbstract {};
     }
