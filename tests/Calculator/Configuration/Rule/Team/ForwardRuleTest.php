@@ -40,17 +40,17 @@ class ForwardRuleTest extends TestCase
         return [
           [
             [
-              ['role' => 'A', 'isWithoutVote' => true, 'vote' => 7, 'goals' => 1],
-              ['role' => 'A', 'isWithoutVote' => true, 'vote' => 6, 'goals' => 1],
+              ['role' => 'A', 'isWithoutVote' => true, 'vote' => 7.0, 'goals' => 1],
+              ['role' => 'A', 'isWithoutVote' => true, 'vote' => 6.0, 'goals' => 1],
               ['role' => 'A', 'isWithoutVote' => true, 'vote' => 6.5, 'goals' => 1],
             ],
             0
           ],
           [
             [
-              ['role' => 'A', 'isWithoutVote' => true, 'vote' => 8, 'goals' => 0],
-              ['role' => 'A', 'isWithoutVote' => true, 'vote' => 6, 'goals' => 0],
-              ['role' => 'A', 'isWithoutVote' => true, 'vote' => 7, 'goals' => 0],
+              ['role' => 'A', 'isWithoutVote' => true, 'vote' => 8.0, 'goals' => 0],
+              ['role' => 'A', 'isWithoutVote' => true, 'vote' => 6.0, 'goals' => 0],
+              ['role' => 'A', 'isWithoutVote' => true, 'vote' => 7.0, 'goals' => 0],
             ],
             3
           ],
